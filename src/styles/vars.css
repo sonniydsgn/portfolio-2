@@ -1,26 +1,97 @@
 :root {
-	/* base */
-	--ff-primary: 'Inter', system-ui, sans-serif;
-	--content-width: 1170px;
-	--container-offset: 15px;
-	--grid-columns: 12;
+	color-scheme: light dark;
+
+	/* BASE */
+	--content-width: 1376px;
+	--container-offset: 32px;
+	--grid-columns: 2;
 	--grid-gap: 24px;
 
-	/* line-height */
-	--lh-primary: 1;
+	/* FONT FAMILIES */
+	--ff-primary: SuisseIntl, Inter, Roboto, 'Helvetica Neue', system-ui, sans-serif;
+	--ff-secondary: JetBrainsMono, ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono',
+		monospace;
 
-	/* fonts */
-	--font-primary: 16px;
+	/* FONT SIZES */
+	--font-lg: 24px;
+	--font-primary: 18px;
+	--font-sm: 16px;
+	--font-xs: 14px;
 
-	/* colors */
-	--clr-bg: #fff;
-	--clr-text: #2b2b2b;
+	/* LINE HEIGHTS */
+	--lh-lg: 1.5;
+	--lh-primary: 1.4;
+	--lh-sm: 1.2;
 
-	/* radiuses */
-	--br-primary: 12px;
+	/* COLORS */
+	@media (prefers-color-scheme: light) {
+		/* tokens */
+		--bg-primary: rgb(255 255 255);
+		--bg-secondary: rgb(247 247 245);
+		--bg-tertiary: rgb(232 232 227);
+		--border-accent: rgb(54 54 49);
+		--border-primary: rgb(219 219 215);
+		--border-secondary: rgb(232 232 227);
+		--text-primary-0: rgb(54 54 49);
+		--text-primary-20: rgb(102 102 97);
+		--text-secondary-0: rgb(131 131 117);
+		--text-secondary-20: rgb(163 163 159);
+		--text-tertiary: rgb(204 204 199);
 
-	/* transitions */
+		/* aliases */
+		--button-primary-bg: var(--bg-primary);
+		--button-primary-border: var(--border-secondary);
+		--button-primary-text-primary: var(--text-primary-0);
+		--button-primary-text-secondary: var(--text-tertiary);
+		--button-secondary-bg: var(--bg-tertiary);
+		--button-secondary-border: var(--border-primary);
+		--button-secondary-text: var(--text-primary-0);
+	}
+
+	@media (prefers-color-scheme: dark) {
+		/* tokens */
+		--bg-elevate: rgb(53 53 49 / 0.85);
+		--bg-elevate-secondary: rgb(75 75 68 / 0.8);
+		--bg-primary: rgb(53 53 49);
+		--bg-secondary: rgb(43 43 39);
+		--bg-tertiary: rgb(75 75 68);
+		--border-accent: rgb(32 32 29);
+		--border-primary: rgb(93 93 85);
+		--border-secondary: rgb(75 75 68);
+		--text-primary-0: rgb(231 231 228);
+		--text-primary-20: rgb(211 211 207);
+		--text-secondary-0: rgb(171 171 160);
+		--text-secondary-20: rgb(125 125 120);
+		--text-tertiary: rgb(115 115 105);
+
+		/* aliases */
+		--button-primary-bg: var(--bg-elevate);
+		--button-primary-border: var(--border-secondary);
+		--button-primary-text-primary: var(--text-primary-0);
+		--button-primary-text-secondary: var(--text-secondary-0);
+		--button-secondary-bg: var(--bg-elevate-secondary);
+		--button-secondary-border: var(--border-primary);
+		--button-secondary-text: var(--text-primary-0);
+	}
+
+	/* RADIUSES */
+	--br-lg: 24px;
+	--br-md: 16px;
+	--br-primary: 8px;
+	--br-sm: 4px;
+
+	/* EFFECTS */
+	--blur-sm: blur(3px);
+	--shadow-sm: 0px 4px 12px rgba(124, 124, 124, 0.15);
+
+	/* TRANSITIONS */
 	@media (prefers-reduced-motion: no-preference) {
 		--tr-primary: 0.2s ease;
+	}
+
+	/* MOBILE SIZES */
+	@media (width <= 1024) {
+		--container-offset: 12px;
+		--grid-columns: 0;
 	}
 }

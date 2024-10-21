@@ -1,15 +1,15 @@
 ---
-import Preview from '@/assets/preview.jpg'
-import Section from '@/components/ui/Section.astro'
-import Layout from '@/layouts/Layout.astro'
-import { Image } from 'astro:assets'
+import Section from '@/components/atoms/Section.astro'
+import MainLayout from '@/layouts/MainLayout.astro'
 ---
 
-<Layout title="sonniy's Astro Starter">
+<MainLayout
+	title="Алексей Калинин"
+	description="Дизайнер интерфейсов, который классно верстает. Превращаю сложное в простое и обожаю системность"
+>
 	<Section>
 		<div class="container">
-			<h1>Тестовый текст</h1>
-			<Image src={Preview} alt="Обложка" loading="eager" />
+			<h1 class="text-h1">Дизайнер интерфейсов который классно верстает</h1>
 		</div>
 	</Section>
-</Layout>
+</MainLayout>

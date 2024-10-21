@@ -1,11 +1,15 @@
 .page {
+	background-color: var(--bg-secondary);
 	height: 100%;
-	font-family: var(--ff-primary);
+	scroll-behavior: smooth;
+	color: var(--text-primary-20);
 	font-size: var(--font-primary);
 	line-height: var(--lh-primary);
-	color: var(--clr-text);
-	background-color: var(--clr-bg);
-	scroll-behavior: smooth;
+	font-family: var(--ff-primary);
+
+	@media (width <= 1024) {
+		font-size: var(--font-sm);
+	}
 }
 
 .page__body {
@@ -21,8 +25,21 @@
 }
 
 .container {
-	width: min(var(--content-width), 100% - calc(var(--container-offset) * 2));
 	margin-inline: auto;
+	width: min(var(--content-width), 100% - calc(var(--container-offset) * 2));
+}
+
+.container--fluid {
+	margin-inline: 24px;
+	width: 100%;
+
+	@media (width >= 1440) {
+		margin-inline: 40px;
+	}
+
+	@media (width <= 1024) {
+		margin-inline: 12px;
+	}
 }
 
 .grid {

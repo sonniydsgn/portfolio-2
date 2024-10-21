@@ -17,17 +17,66 @@
 }
 
 /* заголовки */
-h1,
-h2,
-h3 {
-	color: var(--clr-text);
-	font-weight: 700;
+.text-h1,
+.text-h3,
+.text-h3-small,
+.subtitle {
+	color: var(--text-primary-0);
+	font-weight: 400;
 	text-wrap: balance;
 }
 
-h1 {
-	color: darkgoldenrod;
-	font-size: 56px;
-	line-height: 0.95;
+.text-h1 {
+	font-size: 64px;
+	line-height: 0.9;
 	letter-spacing: -0.05em;
+
+	@media (width <= 1024) {
+		font-size: 26px;
+		letter-spacing: -0.03em;
+	}
+}
+
+.text-h2 {
+	color: var(--text-secondary-0);
+	font-size: var(--font-sm);
+	line-height: var(--lh-sm);
+	font-family: var(--ff-secondary);
+
+	@media (width <= 1024) {
+		font-size: var(--font-xs);
+	}
+}
+
+.text-h3 {
+	font-size: 40px;
+	line-height: 1.1;
+	letter-spacing: -0.03em;
+
+	@media (width <= 1024) {
+		font-size: 21px;
+		line-height: var(--lh-sm);
+		letter-spacing: -0.02em;
+	}
+}
+
+.text-h3-small {
+	font-size: 24px;
+	line-height: var(--lh-sm);
+	letter-spacing: -0.02em;
+
+	@media (width <= 1024) {
+		font-size: 21px;
+	}
+}
+
+.subtitle {
+	font-size: 24px;
+	line-height: var(--lh-sm);
+	letter-spacing: -0.02em;
+
+	@media (width <= 1024) {
+		font-size: var(--font-sm);
+		letter-spacing: 0;
+	}
 }
