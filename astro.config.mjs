@@ -5,7 +5,7 @@ import { defineConfig } from 'astro/config'
 // гайд по конфигу — https://astro.build/config
 export default defineConfig({
 	compressHTML: true,
-	site: 'https://nova-ug.ru',
+	site: 'https://sonniydesign.ru',
 	vite: {
 		css: {
 			transformer: 'lightningcss',
