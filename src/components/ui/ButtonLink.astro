@@ -1,0 +1,64 @@
+---
+import type { ButtonLink } from '@/types'
+type Props = ButtonLink
+
+const { link, class: className, type = 'button', ...rest } = Astro.props
+---
+
+{
+	link ? (
+		<a href={link} class:list={['link', className]} {...rest}>
+			<slot />
+		</a>
+	) : (
+		<button class:list={['btn-reset', className]} {type} {...rest}>
+			<slot />
+		</button>
+	)
+}
+
+<style is:global>
+	.btn-reset {
+		border: none;
+		padding: 0;
+		background-color: transparent;
+		cursor: pointer;
+		font-family: var(--ff-primary);
+	}
+
+	.btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		font-weight: 600;
+		font-size: var(--font-sm);
+		line-height: var(--lh-sm);
+
+		/* transition:
+			background-color var(--tr-primary) ease,
+			opacity var(--tr-primary) ease,
+			transform var(--tr-primary) ease; */
+	}
+
+	.btn:disabled {
+		opacity: 0.6;
+		cursor: not-allowed;
+	}
+
+	.link {
+		--default-color: var(--clr-text);
+		--hover-color: var(--clr-text);
+
+		transition: color var(--tr-primary);
+		color: var(--default-color);
+		font-weight: 600;
+		font-size: var(--font-primary);
+		line-height: var(--lh-primary);
+
+		@media (hover) {
+			&:hover {
+				color: var(--hover-color);
+			}
+		}
+	}
+</style>

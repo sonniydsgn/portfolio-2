@@ -1,0 +1,26 @@
+:root {
+	/* base */
+	--ff-primary: 'Inter', system-ui, sans-serif;
+	--content-width: 1170px;
+	--container-offset: 15px;
+	--grid-columns: 12;
+	--grid-gap: 24px;
+
+	/* line-height */
+	--lh-primary: 1;
+
+	/* fonts */
+	--font-primary: 16px;
+
+	/* colors */
+	--clr-bg: #fff;
+	--clr-text: #2b2b2b;
+
+	/* radiuses */
+	--br-primary: 12px;
+
+	/* transitions */
+	@media (prefers-reduced-motion: no-preference) {
+		--tr-primary: 0.2s ease;
+	}
+}

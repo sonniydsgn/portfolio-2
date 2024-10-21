@@ -1,0 +1,74 @@
+html {
+	box-sizing: border-box;
+	text-size-adjust: 100%;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+	object-fit: cover;
+}
+
+fieldset {
+	border: none;
+}
+
+input::placeholder {
+	opacity: 1;
+}
+
+a {
+	text-decoration: none;
+}
+
+b {
+	font-weight: 700;
+}
+
+address {
+	font-style: normal;
+}
+
+dialog {
+	display: block;
+	position: fixed;
+	margin: auto;
+	inset: 0;
+	border: none;
+	width: fit-content;
+	height: fit-content;
+}
+
+/* ручной сброс */
+.list-reset {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.is-hidden {
+	display: none !important;
+}
+
+.visually-hidden {
+	position: absolute;
+	margin: -1px;
+	border: 0;
+	padding: 0;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip: rect(0 0 0 0);
+}
+
+.disable-scroll {
+	overflow: hidden;
+}

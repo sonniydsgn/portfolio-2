@@ -1,0 +1,15 @@
+{
+	"editor.formatOnSave": true,
+	"prettier.documentSelectors": ["**/*.astro", "**/*.svelte"],
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"[astro]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"editor.codeActionsOnSave": {
+		"source.fixAll": "explicit"
+	},
+	"eslint.validate": ["javascript", "typescript", "javascriptreact", "astro"],
+	"[markdown]": {
+		"editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
+	}
+}
