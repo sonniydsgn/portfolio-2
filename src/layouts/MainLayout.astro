@@ -1,24 +1,50 @@
 ---
 import Head from '@/components/Head.astro'
 import Footer from '@/components/organisms/Footer.astro'
+import Header from '@/components/organisms/Header.astro'
+import Hero from '@/components/organisms/Hero.astro'
+import Sidebar from '@/components/organisms/Sidebar.astro'
 
 interface Props {
 	title: string
 	description?: string
 	image?: string
+	hero_title?: string
+	hero_title_secondary?: string
+	hero_subtitle?: string
 }
 
-const { title, description, image } = Astro.props
+const { title, description, image, hero_title = title, hero_subtitle = description, hero_title_secondary } = Astro.props
 ---
 
 <html lang="ru" class="page">
 	<Head {title} {description} {image} />
 	<body class="page__body">
 		<div class="site-container">
-			<main class="main">
-				<slot />
-			</main>
+			<div class="container container--main">
+				<Sidebar />
+				<main class="main">
+					<Hero title={hero_title} title_secondary={hero_title_secondary} subtitle={hero_subtitle} />
+					<slot />
+				</main>
+				<Header toggles />
+			</div>
 			<Footer />
 		</div>
 	</body>
 </html>
+
+<style>
+	.page {
+		--main-padding: 56px;
+	}
+
+	.main {
+		padding-block-start: var(--main-padding);
+	}
+
+	.container--main {
+		display: grid;
+		grid-template-columns: 210px 1fr 210px;
+	}
+</style>

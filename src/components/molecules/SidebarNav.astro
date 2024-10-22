@@ -1,0 +1,22 @@
+---
+import LinkItem from '@/components/atoms/LinkItem.astro'
+---
+
+<nav class="sidebar-nav">
+	<ul class="list-reset sidebar-nav__list">
+		<LinkItem class="sidebar-nav__item" link="/" active>Проекты</LinkItem>
+		<LinkItem class="sidebar-nav__item" link="/about">Обо мне</LinkItem>
+	</ul>
+</nav>
+
+<style>
+	.sidebar-nav {
+		display: flex;
+	}
+
+	.sidebar-nav__list {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+	}
+</style>

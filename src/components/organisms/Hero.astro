@@ -1,0 +1,42 @@
+---
+import Section from '@/components/atoms/Section.astro'
+
+interface Props {
+	title: string
+	title_secondary?: string
+	subtitle: string
+	centered?: boolean
+}
+
+const { title, title_secondary, subtitle, centered = false } = Astro.props
+---
+
+<Section class:list={['hero', { 'hero--centered': centered }]}>
+	<h1 class="text-h1 hero__title">
+		<slot name="title">{title}</slot>
+		{title_secondary && <span class="text-h1 text-h1--secondary">{title_secondary}</span>}
+	</h1>
+	<p class="text-subtitle hero__subtitle">
+		{subtitle}
+	</p>
+</Section>
+
+<style>
+	.hero {
+		display: flex;
+		flex-direction: column;
+		gap: 24px;
+
+		&.hero--centered {
+			align-items: center;
+			text-align: center;
+		}
+	}
+
+	.hero__title {
+	}
+
+	.hero__subtitle {
+		max-width: 424px;
+	}
+</style>

@@ -19,10 +19,9 @@
 /* заголовки */
 .text-h1,
 .text-h3,
-.text-h3-small,
-.subtitle {
+.text-h3-small {
 	color: var(--text-primary-0);
-	font-weight: 400;
+	font-weight: 300;
 	text-wrap: balance;
 }
 
@@ -30,6 +29,10 @@
 	font-size: 64px;
 	line-height: 0.9;
 	letter-spacing: -0.05em;
+
+	&.text-h1--secondary {
+		color: var(--text-tertiary);
+	}
 
 	@media (width <= 1024) {
 		font-size: 26px;
@@ -39,6 +42,7 @@
 
 .text-h2 {
 	color: var(--text-secondary-0);
+	font-weight: 500;
 	font-size: var(--font-sm);
 	line-height: var(--lh-sm);
 	font-family: var(--ff-secondary);
@@ -70,10 +74,11 @@
 	}
 }
 
-.subtitle {
+.text-subtitle {
 	font-size: 24px;
 	line-height: var(--lh-sm);
 	letter-spacing: -0.02em;
+	text-wrap: balance;
 
 	@media (width <= 1024) {
 		font-size: var(--font-sm);

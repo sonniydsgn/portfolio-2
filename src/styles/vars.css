@@ -4,7 +4,7 @@
 	/* BASE */
 	--content-width: 1376px;
 	--container-offset: 32px;
-	--grid-columns: 2;
+	--grid-columns: 12;
 	--grid-gap: 24px;
 
 	/* FONT FAMILIES */
@@ -50,7 +50,7 @@
 
 	@media (prefers-color-scheme: dark) {
 		/* tokens */
-		--bg-elevate: rgb(53 53 49 / 0.85);
+		--bg-elevate: rgb(53 53 49 / 0.9);
 		--bg-elevate-secondary: rgb(75 75 68 / 0.8);
 		--bg-primary: rgb(53 53 49);
 		--bg-secondary: rgb(43 43 39);
