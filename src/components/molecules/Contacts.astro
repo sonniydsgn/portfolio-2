@@ -1,5 +1,7 @@
 ---
+import { Icon } from 'astro-icon/components'
 import ButtonLink from '../atoms/ButtonLink.astro'
+import DataList from '../atoms/DataList.astro'
 
 interface Props {
 	class?: string
@@ -9,5 +11,96 @@ const { class: className, ...rest } = Astro.props
 ---
 
 <div class:list={['contacts', className]} {...rest}>
-	<ButtonLink link="#">ссылка</ButtonLink>
+	<div class="contacts__list">
+		<ButtonLink class="contacts__link" link="mailto:sonniy.design@gmail.com">E-mail</ButtonLink>
+		<ButtonLink class="contacts__link" link="#">CV·Резюме</ButtonLink>
+		<ButtonLink
+			class="contacts__link contacts__link--icon"
+			link="https://www.linkedin.com/in/sonniydsgn/"
+			target="_blank"
+			referrerpolicy="no-referrer"
+		>
+			<Icon class="icon" name="linkedin-icon" />
+		</ButtonLink>
+		<ButtonLink
+			class="contacts__link contacts__link--icon"
+			link="https://t.me/sonniyboii"
+			target="_blank"
+			referrerpolicy="no-referrer"
+		>
+			<Icon class="icon" name="telegram-icon" />
+		</ButtonLink>
+		<ButtonLink
+			class="contacts__link contacts__link--icon"
+			link="https://github.com/sonniydsgn"
+			target="_blank"
+			referrerpolicy="no-referrer"
+		>
+			<Icon class="icon" name="github-icon" />
+		</ButtonLink>
+	</div>
+	<DataList class="contacts__location" term="ПЕРМЬ, РОССИЯ">
+		<time datetime="" data-current-time>00:00</time>
+	</DataList>
 </div>
+
+<style>
+	.contacts {
+		display: flex;
+		flex-direction: column;
+		gap: 48px;
+	}
+
+	.contacts__list {
+		display: grid;
+		grid-template-columns: repeat(3, auto);
+		column-gap: 12px;
+		row-gap: 24px;
+		align-content: start;
+		justify-content: start;
+	}
+
+	.contacts__link {
+		&:not(.contacts__link--icon) {
+			grid-column: span 3;
+		}
+	}
+
+	.contacts__link--icon {
+		--size: 40px;
+
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		transition:
+			transform var(--tr-primary),
+			box-shadow var(--tr-primary);
+		border-radius: var(--br-primary);
+		background-color: var(--bg-tertiary);
+		width: var(--size);
+		height: var(--size);
+
+		@media (hover) {
+			&:hover {
+				transform: scale(1.15);
+			}
+		}
+	}
+</style>
+
+<script>
+	const currentTimeEl = document.querySelector('[data-current-time]')
+
+	const currentTime = (options: {}) => {
+		return new Date().toLocaleTimeString('ru-RU', { ...options })
+	}
+
+	const optionsEl = {
+		hour: '2-digit',
+		minute: '2-digit',
+		timeZone: 'Asia/Yekaterinburg',
+	}
+
+	currentTimeEl.textContent = currentTime(optionsEl)
+	currentTimeEl.setAttribute('datetime', currentTime({ ...optionsEl, timeZoneName: 'longOffset' }).replace(' GMT', ''))
+</script>

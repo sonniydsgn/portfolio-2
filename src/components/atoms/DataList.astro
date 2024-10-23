@@ -1,0 +1,34 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+
+interface Props extends HTMLAttributes<'dl'> {
+	term: string
+	class?: string
+}
+
+const { term, class: className, ...rest } = Astro.props
+---
+
+<dl class:list={['data-list', className]} {...rest}>
+	<dt class="text-h2 data-list__term">{term}</dt>
+	<dd class="data-list__desc"><slot /></dd>
+</dl>
+
+<style>
+	.data-list {
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+	}
+
+	.data-list__term {
+	}
+
+	.data-list__desc {
+		color: var(--text-primary-0);
+		font-weight: 500;
+		font-size: var(--font-sm);
+		line-height: var(--lh-primary);
+		font-family: var(--ff-secondary);
+	}
+</style>
