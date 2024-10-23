@@ -1,5 +1,12 @@
 ---
+import ContentList from '@/components/atoms/ContentList.astro'
+import Section from '@/components/atoms/Section.astro'
+import ProjectItem from '@/components/molecules/ProjectItem.astro'
 import MainLayout from '@/layouts/MainLayout.astro'
+import getProjects from '@/scripts/getters/get-projects'
+// import { getCollection } from 'astro:content'
+
+const projects = await getProjects()
 ---
 
 <MainLayout
@@ -9,5 +16,16 @@ import MainLayout from '@/layouts/MainLayout.astro'
 	hero_title_secondary="который классно верстает"
 	hero_subtitle="Превращаю сложное в простое и обожаю системность"
 >
-	123
+	<Section class="projects">
+		<ContentList class="projects__list">
+			{
+				projects.map(project => (
+					<li class="projects__list-item">
+						<ProjectItem {project} />
+					</li>
+				))
+			}
+		</ContentList>
+	</Section>
+	<!-- следующая страница -->
 </MainLayout>

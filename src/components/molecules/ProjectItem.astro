@@ -1,0 +1,166 @@
+---
+import type { ImageMetadata } from 'astro'
+import { Icon } from 'astro-icon/components'
+import { Image, Picture } from 'astro:assets'
+import type { CollectionEntry } from 'astro:content'
+
+interface Props {
+	project: CollectionEntry<'projects'>
+}
+
+const { project } = Astro.props
+
+const cover = project.data.cover as ImageMetadata
+const coverColor = '#' + project.data.color
+
+const addImage = project.data.additional_image as ImageMetadata
+const placeLogo = project.data.place_work.logo as ImageMetadata
+---
+
+<article class="project-item">
+	<div class="project-item__cover">
+		<Picture
+			class="project-item__image"
+			src={cover}
+			alt="Обложка проекта"
+			formats={['avif', 'webp']}
+			width={728}
+			height={481}
+		/>
+	</div>
+
+	<Picture
+		class="project-item__add-image"
+		src={addImage}
+		alt="Обложка проекта"
+		formats={['avif', 'webp']}
+		width={addImage.width}
+		height={addImage.height}
+	/>
+
+	<div class="project-item__content">
+		<h2 class="text-h3-small project-item__title">
+			<a href={'/projects/' + project.slug} class="project-item__link">
+				{project.data.name}
+			</a>
+		</h2>
+		<p class="project-item__description">{project.data.desc}</p>
+		<div class="project-item__meta">
+			<div class="project-item__place">
+				<Image class="project-item__place-logo" src={placeLogo} alt="" />
+				<span class="project-item__place-name">{project.data.place_work.name}</span>
+			</div>
+			<span class="project-item__year">{project.data.year}</span>
+			<div class="project-item__icon">
+				<Icon name="arrow-right-icon" class="icon" />
+			</div>
+		</div>
+	</div>
+</article>
+
+<style define:vars={{ coverColor }}>
+	.project-item {
+		--cover-color: var(--coverColor);
+
+		display: flex;
+		position: relative;
+		flex-direction: column;
+		border: 1px solid var(--border-secondary);
+		border-radius: var(--br-lg);
+		background-color: var(--bg-primary);
+		padding: 24px 24px 32px;
+		width: 100%;
+	}
+
+	.project-item__cover {
+		margin-block-end: 24px;
+		border-radius: var(--br-primary);
+		background-color: var(--cover-color);
+		width: 100%;
+	}
+
+	.project-item__image {
+		display: flex;
+		transform: scale(0.85);
+		background-color: var(--bg-secondary);
+		width: 100%;
+	}
+
+	.project-item__add-image {
+		display: flex;
+		position: absolute;
+		right: -130px;
+		bottom: 120px;
+	}
+
+	.project-item__content {
+		display: flex;
+		flex-direction: column;
+		padding-inline: 8px;
+	}
+
+	.project-item__title {
+		margin-block-end: 8px;
+	}
+
+	.project-item__link {
+		color: currentcolor;
+
+		&::after {
+			position: absolute;
+			inset: 0;
+			content: '';
+		}
+	}
+
+	.project-item__description {
+		margin-block-end: 16px;
+		max-width: 580px;
+	}
+
+	.project-item__meta {
+		display: flex;
+		align-items: center;
+		font-size: var(--font-sm);
+		line-height: var(--lh-lg);
+		font-family: var(--ff-secondary);
+	}
+
+	.project-item__place {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		margin-inline-end: 16px;
+	}
+
+	.project-item__place-logo {
+		--size: 24px;
+
+		border: 1px solid var(--border-secondary);
+		border-radius: 100%;
+		width: var(--size);
+		height: var(--size);
+	}
+
+	.project-item__place-name {
+		color: var(--text-primary-0);
+		font-weight: 500;
+	}
+
+	.project-item__year {
+		color: var(--text-secondary-0);
+		font-weight: 400;
+	}
+
+	.project-item__icon {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin-inline-start: auto;
+		border: 1px solid var(--border-primary);
+		border-radius: 24px;
+		padding-inline: 12px;
+		padding-block: 4px;
+		color: var(--text-primary-0);
+	}
+</style>
