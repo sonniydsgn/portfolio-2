@@ -17,9 +17,11 @@ import SidebarNav from '../molecules/SidebarNav.astro'
 <style>
 	.sidebar {
 		display: flex;
+		position: sticky;
+		top: 0;
 		flex-direction: column;
 		padding-block: var(--main-padding);
-		min-height: 100vh;
+		height: 100vh;
 	}
 
 	.sidebar__about {

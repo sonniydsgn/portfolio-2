@@ -91,16 +91,25 @@ const { class: className, ...rest } = Astro.props
 <script>
 	const currentTimeEl = document.querySelector('[data-current-time]')
 
-	const currentTime = (options: {}) => {
-		return new Date().toLocaleTimeString('ru-RU', { ...options })
-	}
-
 	const optionsEl = {
 		hour: '2-digit',
 		minute: '2-digit',
 		timeZone: 'Asia/Yekaterinburg',
 	}
 
-	currentTimeEl.textContent = currentTime(optionsEl)
-	currentTimeEl.setAttribute('datetime', currentTime({ ...optionsEl, timeZoneName: 'longOffset' }).replace(' GMT', ''))
+	function updateTime() {
+		const currentTime = (options: {}) => {
+			return new Date().toLocaleTimeString('ru-RU', { ...options })
+		}
+
+		currentTimeEl.textContent = currentTime(optionsEl)
+		currentTimeEl.setAttribute(
+			'datetime',
+			currentTime({ ...optionsEl, timeZoneName: 'longOffset' }).replace(' GMT', ''),
+		)
+	}
+
+	updateTime()
+
+	setInterval(updateTime, 1000 * 5)
 </script>
