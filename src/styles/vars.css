@@ -75,8 +75,9 @@
 	}
 
 	/* RADIUSES */
-	--br-lg: 24px;
-	--br-md: 16px;
+	--br-xl: 24px;
+	--br-lg: 16px;
+	--br-md: 12px;
 	--br-primary: 8px;
 	--br-sm: 4px;
 
