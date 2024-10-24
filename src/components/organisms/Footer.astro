@@ -1,3 +1,131 @@
+---
+import Avatar from '@/assets/avatar.jpg'
+import { Image } from 'astro:assets'
+import ButtonLink from '../atoms/ButtonLink.astro'
+import DataList from '../atoms/DataList.astro'
+import Contacts from '../molecules/Contacts.astro'
+
+const currentDate = new Date()
+const lastBuildDate = new Intl.DateTimeFormat('ru-RU', {
+	year: 'numeric',
+	month: 'long',
+	day: 'numeric',
+})
+	.format(currentDate)
+	.replace(' г.', '')
+
+console.log(currentDate)
+---
+
 <footer class="footer">
-	<div class="container"></div>
+	<div class="container">
+		<div class="footer__inner grid">
+			<div class="footer__copyright">
+				<Image src={Avatar} class="footer__copyright-image" alt="Моё фото" width={48} height={48} />
+				<span class="footer__copyright-name">Алексей Калинин</span>
+				<span class="footer__copyright-desc">Сделано с душой и кофе (85% кофе, 15% сливок)</span>
+			</div>
+			<DataList class="footer__list footer__list--nav" term="Навигация">
+				<nav class="footer__nav">
+					<ul class="list-reset footer__nav-list">
+						<li class="footer__nav-item">
+							<ButtonLink class="footer__nav-link" link="/">Проекты</ButtonLink>
+						</li>
+						<li class="footer__nav-item">
+							<ButtonLink class="footer__nav-link" link="/about">Обо мне</ButtonLink>
+						</li>
+					</ul>
+				</nav>
+			</DataList>
+			<DataList class="footer__list footer__list--update" term="Последнее обновление">
+				<time datetime={currentDate.toISOString()}>{lastBuildDate}</time>
+			</DataList>
+			<DataList class="footer__list footer__list--contacts" term="Контакты">
+				<Contacts class="footer__contacts" />
+			</DataList>
+		</div>
+	</div>
 </footer>
+
+<style>
+	.footer {
+		gap: 8px;
+
+		margin-block-start: 140px;
+		border-top: 1px dashed var(--border-primary);
+		padding-block: 48px;
+	}
+
+	.footer__inner {
+		grid-template-rows: auto auto;
+	}
+
+	/* копирайт */
+	.footer__copyright {
+		display: flex;
+		grid-row: 1 / span 2;
+		grid-column: 3 / span 3;
+		flex-direction: column;
+	}
+
+	.footer__copyright-image {
+		margin-block-end: 16px;
+		border-radius: var(--br-primary);
+	}
+
+	.footer__copyright-name {
+		margin-block-end: 8px;
+		color: var(--text-primary-0);
+		font-weight: 700;
+		font-size: var(--font-sm);
+		line-height: var(--lh-lg);
+		font-family: var(--ff-secondary);
+	}
+
+	.footer__copyright-desc {
+		max-width: 220px;
+		font-size: var(--font-sm);
+		font-family: var(--ff-secondary);
+	}
+
+	/* секции футера */
+	.footer__list {
+	}
+
+	.footer__list--nav {
+		grid-row: 1 / span 1;
+		grid-column: 6 / span 3;
+	}
+
+	.footer__list--update {
+		grid-row: 2 / span 1;
+		grid-column: 6 / span 3;
+		align-self: end;
+	}
+
+	.footer__list--contacts {
+		grid-row: 1 / span 2;
+		grid-column: 9 / span 2;
+	}
+
+	.footer__list--nav,
+	.footer__list--contacts {
+		gap: 16px;
+	}
+
+	/* навигация */
+	.footer__nav {
+	}
+
+	.footer__nav-list {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+	}
+
+	.footer__nav-item {
+	}
+
+	.footer__nav-link {
+	}
+</style>

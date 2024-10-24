@@ -45,7 +45,7 @@
 .grid {
 	display: grid;
 	grid-template-columns: repeat(var(--grid-columns), 1fr);
-	gap: var(--grid-gap);
+	column-gap: var(--grid-gap);
 
 	@media (width <= 1024) {
 		grid-template-columns: 1fr;
