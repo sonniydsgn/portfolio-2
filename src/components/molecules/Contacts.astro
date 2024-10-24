@@ -89,7 +89,7 @@ const { class: className, ...rest } = Astro.props
 </style>
 
 <script>
-	const currentTimeEl = document.querySelector('[data-current-time]')
+	const currentTimeElements = document.querySelectorAll('[data-current-time]')
 
 	const optionsEl = {
 		hour: '2-digit',
@@ -102,11 +102,10 @@ const { class: className, ...rest } = Astro.props
 			return new Date().toLocaleTimeString('ru-RU', { ...options })
 		}
 
-		currentTimeEl.textContent = currentTime(optionsEl)
-		currentTimeEl.setAttribute(
-			'datetime',
-			currentTime({ ...optionsEl, timeZoneName: 'longOffset' }).replace(' GMT', ''),
-		)
+		currentTimeElements.forEach(el => {
+			el.textContent = currentTime(optionsEl)
+			el.setAttribute('datetime', currentTime({ ...optionsEl, timeZoneName: 'longOffset' }).replace(' GMT', ''))
+		})
 	}
 
 	updateTime()
