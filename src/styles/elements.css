@@ -46,6 +46,7 @@
 	font-size: var(--font-sm);
 	line-height: var(--lh-sm);
 	font-family: var(--ff-secondary);
+	text-transform: uppercase;
 
 	@media (width <= 1024) {
 		font-size: var(--font-xs);
