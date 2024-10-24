@@ -31,19 +31,46 @@ const { link, class: className, type = 'button', ...rest } = Astro.props
 		display: inline-flex;
 		justify-content: center;
 		align-items: center;
+		gap: 4px;
+		transition: transform var(--tr-primary);
 		font-weight: 500;
 		font-size: var(--font-sm);
-		line-height: var(--lh-sm);
-
-		/* transition:
-			background-color var(--tr-primary) ease,
-			opacity var(--tr-primary) ease,
-			transform var(--tr-primary) ease; */
+		line-height: var(--lh-lg);
+		font-family: var(--ff-secondary);
+		text-transform: uppercase;
 	}
 
 	.btn:disabled {
 		opacity: 0.6;
 		cursor: not-allowed;
+	}
+
+	.btn--primary {
+		border: 1px solid var(--button-primary-border);
+		border-radius: var(--br-md);
+		background-color: var(--button-primary-bg);
+		padding-inline: 16px;
+		padding-block: 8px;
+
+		&.btn--only-icon {
+			padding: 8px;
+		}
+
+		&.btn--icon {
+			--size: 16px;
+
+			padding-inline-start: 12px;
+		}
+
+		@media (hover) {
+			&:hover {
+				transform: scale(1.15);
+			}
+		}
+
+		&:active {
+			transform: scale(0.95);
+		}
 	}
 
 	/* ссылка */
