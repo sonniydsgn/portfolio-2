@@ -1,0 +1,65 @@
+---
+import { Icon } from 'astro-icon/components'
+import ButtonLink from '../atoms/ButtonLink.astro'
+
+// todo: add check system color scheme
+// todo: change aria label
+// todo: change aria pressed
+---
+
+<ButtonLink
+	class="btn btn--primary btn--only-icon theme-switcher"
+	aria-label="Включить тёмную тему"
+	aria-pressed="false"
+	data-theme-container
+>
+	<Icon name="sun-icon" class="icon theme-switcher__icon theme-switcher__icon--active" data-theme-icon="light" />
+	<Icon name="moon-icon" class="icon theme-switcher__icon" data-theme-icon="dark" />
+</ButtonLink>
+
+<style>
+	html[data-theme='light'] [data-theme-icon='light'] {
+		color: var(--button-primary-text-primary);
+	}
+
+	html[data-theme='dark'] [data-theme-icon='dark'] {
+		color: var(--button-primary-text-primary);
+	}
+
+	.theme-switcher__icon {
+		transition: color var(--tr-primary);
+		color: var(--button-primary-text-secondary);
+	}
+</style>
+
+<script>
+	const THEME_OWNER = document.documentElement
+	const THEME_STORAGE_KEY = 'theme'
+
+	const cachedTheme = localStorage.getItem(THEME_STORAGE_KEY)
+
+	if (cachedTheme) {
+		THEME_OWNER.dataset[THEME_STORAGE_KEY] = cachedTheme
+	}
+
+	document.addEventListener('DOMContentLoaded', () => {
+		const themePicker = document.querySelector('[data-theme-container]') as HTMLElement
+		if (!themePicker) return
+
+		themePicker.addEventListener('click', () => {
+			const theme = themePicker.dataset.themeContainer
+
+			if (theme === 'light') {
+				THEME_OWNER.dataset[THEME_STORAGE_KEY] = 'dark'
+				localStorage.setItem(THEME_STORAGE_KEY, 'dark')
+				themePicker.dataset.themeContainer = 'dark'
+			} else {
+				THEME_OWNER.dataset[THEME_STORAGE_KEY] = 'light'
+				localStorage.setItem(THEME_STORAGE_KEY, 'light')
+				themePicker.dataset.themeContainer = 'light'
+			}
+
+			console.log(theme)
+		})
+	})
+</script>

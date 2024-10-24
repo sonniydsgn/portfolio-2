@@ -1,1 +1,38 @@
-<header></header>
+---
+// import LangSwitcher from '../molecules/LangSwitcher.astro'
+import ThemeSwitcher from '../molecules/ThemeSwitcher.astro'
+---
+
+<header class="header">
+	<div class="container">
+		<div class="header__inner">
+			<slot />
+			<div class="header__utils">
+				<!-- <LangSwitcher /> -->
+				<ThemeSwitcher />
+			</div>
+		</div>
+	</div>
+</header>
+
+<style>
+	.header {
+		position: fixed;
+		z-index: 10;
+		inset-inline: 0;
+		padding-block-start: 32px;
+	}
+
+	.header__inner {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.header__utils {
+		display: flex;
+		align-items: center;
+		gap: 4px;
+		margin-inline-start: auto;
+	}
+</style>
