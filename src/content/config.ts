@@ -6,6 +6,12 @@ const projectsCollection = defineCollection({
 			name: z.string(),
 			desc: z.string(),
 			cover: image(),
+			video_cover: z
+				.object({
+					mp4: z.string(),
+					webm: z.string(),
+				})
+				.optional(),
 			additional_image: image().optional(),
 			color: z.string(),
 			year: z.number(),

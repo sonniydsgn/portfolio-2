@@ -10,32 +10,63 @@ interface Props {
 
 const { project } = Astro.props
 
-const cover = project.data.cover as ImageMetadata
-const coverColor = '#' + project.data.color
+// images
+const coverImage = project.data.cover as ImageMetadata
+const additionalImage = project.data.additional_image as ImageMetadata
+const placeWorkLogo = project.data.place_work.logo as ImageMetadata
 
-const addImage = project.data.additional_image as ImageMetadata
-const placeLogo = project.data.place_work.logo as ImageMetadata
+// video
+const allVideosMP4 = import.meta.glob('/src/content/projects/media/**/**/*.mp4', {
+	eager: true,
+})
+
+const allVideosWEBM = import.meta.glob('/src/content/projects/media/**/**/*.webm', {
+	eager: true,
+})
+
+const coverVideoMP4 = Object.entries(allVideosMP4)
+	.filter((video: any) => {
+		return video[0].includes(project.data.video_cover?.mp4.slice(1))
+	})
+	.map((video: any) => video[1].default) as unknown as string
+
+const coverVideoWEBM = Object.entries(allVideosWEBM)
+	.filter((video: any) => {
+		return video[0].includes(project.data.video_cover?.mp4.slice(1))
+	})
+	.map((video: any) => video[1].default) as unknown as string
+
+console.log(coverVideoMP4)
 ---
 
-<article class="project-page">
+<article class="project-page" style={'--cover-color: ' + '#' + project.data.color}>
 	<div class="project-page__cover">
-		<Picture
-			class="project-page__image"
-			src={cover}
-			alt="Обложка проекта"
-			formats={['avif', 'webp']}
-			width={728}
-			height={481}
-		/>
+		{
+			coverVideoMP4.length > 0 ? (
+				<video class="project-page__image" autoplay preload="auto" loop muted playsinline width={728} height={481}>
+					<source src={coverVideoMP4} type="video/mp4" />
+					<source src={coverVideoWEBM} type="video/webm" />
+				</video>
+			) : (
+				<Picture
+					class="project-page__image"
+					src={coverImage}
+					alt="Обложка проекта"
+					formats={['avif', 'webp']}
+					width={728}
+					height={481}
+				/>
+			)
+		}
 	</div>
 
 	<Picture
 		class="project-page__add-image"
-		src={addImage}
+		src={additionalImage}
 		alt="Обложка проекта"
 		formats={['avif', 'webp']}
-		width={addImage.width}
-		height={addImage.height}
+		width={additionalImage.width}
+		height={additionalImage.height}
 	/>
 
 	<div class="project-page__content">
@@ -47,7 +78,7 @@ const placeLogo = project.data.place_work.logo as ImageMetadata
 		<p class="project-page__description">{project.data.desc}</p>
 		<div class="project-page__meta">
 			<div class="project-page__place">
-				<Image class="project-page__place-logo" src={placeLogo} alt="" />
+				<Image class="project-page__place-logo" src={placeWorkLogo} alt="" />
 				<span class="project-page__place-name">{project.data.place_work.name}</span>
 			</div>
 			<span class="project-page__year">{project.data.year}</span>
@@ -58,10 +89,8 @@ const placeLogo = project.data.place_work.logo as ImageMetadata
 	</div>
 </article>
 
-<style define:vars={{ coverColor }}>
+<style>
 	.project-page {
-		--cover-color: var(--coverColor);
-
 		display: flex;
 		position: relative;
 		flex-direction: column;
