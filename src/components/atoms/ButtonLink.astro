@@ -75,9 +75,6 @@ const { link, class: className, type = 'button', ...rest } = Astro.props
 
 	/* ссылка */
 	.link {
-		transition:
-			text-decoration-color var(--tr-primary),
-			color var(--tr-primary);
 		color: var(--text-primary-0);
 		font-weight: 500;
 		font-size: var(--font-sm);
@@ -89,6 +86,7 @@ const { link, class: className, type = 'button', ...rest } = Astro.props
 
 		@media (hover) {
 			&:hover {
+				transition: text-decoration-color var(--tr-primary);
 				text-decoration-color: transparent;
 			}
 		}

@@ -11,34 +11,39 @@ const { class: className, ...rest } = Astro.props
 ---
 
 <div class:list={['contacts', className]} {...rest}>
-	<div class="contacts__list">
-		<ButtonLink class="contacts__link" link="mailto:sonniy.design@gmail.com">E-mail</ButtonLink>
-		<ButtonLink class="contacts__link" link="#">CV·Резюме</ButtonLink>
-		<ButtonLink
-			class="contacts__link contacts__link--icon"
-			link="https://www.linkedin.com/in/sonniydsgn/"
-			target="_blank"
-			referrerpolicy="no-referrer"
-		>
-			<Icon class="icon" name="linkedin-icon" />
-		</ButtonLink>
-		<ButtonLink
-			class="contacts__link contacts__link--icon"
-			link="https://t.me/sonniyboii"
-			target="_blank"
-			referrerpolicy="no-referrer"
-		>
-			<Icon class="icon" name="telegram-icon" />
-		</ButtonLink>
-		<ButtonLink
-			class="contacts__link contacts__link--icon"
-			link="https://github.com/sonniydsgn"
-			target="_blank"
-			referrerpolicy="no-referrer"
-		>
-			<Icon class="icon" name="github-icon" />
-		</ButtonLink>
-	</div>
+	<ul class="list-reset contacts__list">
+		<li class="contacts__item">
+			<ButtonLink class="contacts__link" link="mailto:sonniy.design@gmail.com">E-mail</ButtonLink>
+		</li>
+		<li class="contacts__item">
+			<ButtonLink class="contacts__link" link="#">CV·Резюме</ButtonLink>
+		</li>
+		<li class="contacts__item contacts__item--icon">
+			<ButtonLink
+				class="contacts__link"
+				link="https://www.linkedin.com/in/sonniydsgn/"
+				target="_blank"
+				referrerpolicy="no-referrer"
+			>
+				<Icon class="icon" name="linkedin-icon" />
+			</ButtonLink>
+		</li>
+		<li class="contacts__item contacts__item--icon">
+			<ButtonLink class="contacts__link" link="https://t.me/sonniyboii" target="_blank" referrerpolicy="no-referrer">
+				<Icon class="icon" name="telegram-icon" />
+			</ButtonLink>
+		</li>
+		<li class="contacts__item contacts__item--icon">
+			<ButtonLink
+				class="contacts__link"
+				link="https://github.com/sonniydsgn"
+				target="_blank"
+				referrerpolicy="no-referrer"
+			>
+				<Icon class="icon" name="github-icon" />
+			</ButtonLink>
+		</li>
+	</ul>
 	<DataList class="contacts__location" term="Пермь, Россия">
 		<time class="contacts__time" datetime="00:00+02:00" data-current-time>00:00</time>
 	</DataList>
@@ -60,13 +65,13 @@ const { class: className, ...rest } = Astro.props
 		justify-content: start;
 	}
 
-	.contacts__link {
-		&:not(.contacts__link--icon) {
+	.contacts__item {
+		&:not(.contacts__item--icon) {
 			grid-column: span 3;
 		}
 	}
 
-	.contacts__link--icon {
+	.contacts__item--icon .contacts__link {
 		--size: 40px;
 
 		display: flex;
