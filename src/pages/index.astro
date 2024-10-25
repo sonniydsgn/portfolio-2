@@ -1,11 +1,13 @@
 ---
+import AboutCover from '@/assets/about-cover.jpg'
 import ContentList from '@/components/atoms/ContentList.astro'
 import Section from '@/components/atoms/Section.astro'
-import ProjectItem from '@/components/molecules/ProjectItem.astro'
+import NextPage from '@/components/organisms/NextPage.astro'
+import ProjectItem from '@/components/organisms/ProjectPage.astro'
 import MainLayout from '@/layouts/MainLayout.astro'
-import getProjects from '@/scripts/getters/get-projects'
-// import { getCollection } from 'astro:content'
 
+// получаю все проекты
+import getProjects from '@/scripts/getters/get-projects'
 const projects = await getProjects()
 ---
 
@@ -27,5 +29,5 @@ const projects = await getProjects()
 			}
 		</ContentList>
 	</Section>
-	<!-- следующая страница -->
+	<NextPage title="Обо мне" link="/about" cover={AboutCover} />
 </MainLayout>

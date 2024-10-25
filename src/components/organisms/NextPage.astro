@@ -1,0 +1,106 @@
+---
+import type { ImageMetadata } from 'astro'
+import { Icon } from 'astro-icon/components'
+import { Picture } from 'astro:assets'
+
+interface Props {
+	title: string
+	link: string | URL
+	cover: ImageMetadata
+}
+
+const { title, link, cover } = Astro.props
+---
+
+<article class="next-page">
+	<div class="next-page__info">
+		<span class="text-h2 next-page__subtitle">Читайте также</span>
+		<h2 class="text-h3 next-page__title">
+			<a class="next-page__link" href={link}>
+				{title}
+			</a>
+		</h2>
+		<div class="next-page__icon">
+			<Icon name="arrow-right-icon" class="icon" aria-hidden="true" />
+		</div>
+	</div>
+	<div class="next-page__cover">
+		<Picture
+			class="next-page__image"
+			src={cover}
+			alt="Обложка страницы"
+			formats={['avif', 'webp']}
+			width={cover.width}
+			height={cover.height}
+		/>
+	</div>
+</article>
+
+<style>
+	.next-page {
+		display: grid;
+		position: relative;
+		grid-template-columns: 1fr 400px;
+		gap: 24px;
+		margin-block-start: 8px;
+		border: 1px solid var(--border-secondary);
+		border-radius: var(--br-xl);
+		background-color: var(--bg-primary);
+		padding: 24px;
+
+		@media (hover) {
+			&:hover {
+				.next-page__image {
+					transform: scale(1.15);
+				}
+			}
+		}
+	}
+
+	.next-page__info {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+		padding-inline-start: 16px;
+		padding-block-start: 32px;
+		padding-block-end: 24px;
+	}
+
+	.next-page__subtitle {
+	}
+
+	.next-page__title {
+	}
+
+	.next-page__link {
+		&::after {
+			position: absolute;
+			inset: 0;
+			content: '';
+		}
+	}
+
+	.next-page__icon {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin-inline-start: auto;
+		margin-block-start: auto;
+		border: 1px solid var(--border-primary);
+		border-radius: 24px;
+		padding-inline: 12px;
+		padding-block: 4px;
+		color: var(--text-primary-0);
+	}
+
+	.next-page__cover {
+		border-radius: var(--br-primary);
+		overflow: hidden;
+	}
+
+	.next-page__image {
+		display: flex;
+		transition: transform 0.3s ease;
+		pointer-events: none;
+	}
+</style>

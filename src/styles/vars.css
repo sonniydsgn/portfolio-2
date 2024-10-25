@@ -62,6 +62,7 @@
 		--text-tertiary: rgb(204 204 199);
 
 		/* aliases */
+		--button-primary-blur: unset;
 		--button-primary-bg: var(--bg-primary);
 		--button-primary-border: var(--border-secondary);
 		--button-primary-text-primary: var(--text-primary-0);
@@ -92,6 +93,7 @@
 		--text-tertiary: rgb(115 115 105);
 
 		/* aliases */
+		--button-primary-blur: var(--blur-sm);
 		--button-primary-bg: var(--bg-elevate);
 		--button-primary-border: var(--border-secondary);
 		--button-primary-text-primary: var(--text-primary-0);
@@ -119,6 +121,7 @@
 	--text-tertiary: rgb(204 204 199);
 
 	/* aliases */
+	--button-primary-blur: unset;
 	--button-primary-bg: var(--bg-primary);
 	--button-primary-border: var(--border-secondary);
 	--button-primary-text-primary: var(--text-primary-0);
@@ -147,6 +150,7 @@
 	--text-tertiary: rgb(115 115 105);
 
 	/* aliases */
+	--button-primary-blur: var(--blur-sm);
 	--button-primary-bg: var(--bg-elevate);
 	--button-primary-border: var(--border-secondary);
 	--button-primary-text-primary: var(--text-primary-0);

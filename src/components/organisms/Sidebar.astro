@@ -7,7 +7,14 @@ import SidebarNav from '../molecules/SidebarNav.astro'
 
 <aside class="sidebar">
 	<div class="sidebar__about">
-		<Picture class="sidebar__avatar" src={Avatar} alt="Аватар" width="56" height="56" />
+		<Picture
+			class="sidebar__avatar"
+			src={Avatar}
+			alt="Моя фотография"
+			width="56"
+			height="56"
+			formats={['avif', 'webp']}
+		/>
 		<span class="sidebar__author">Алексей Калинин</span>
 	</div>
 	<SidebarNav />

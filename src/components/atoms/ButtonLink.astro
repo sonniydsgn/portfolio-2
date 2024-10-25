@@ -46,6 +46,7 @@ const { link, class: className, type = 'button', ...rest } = Astro.props
 	}
 
 	.btn--primary {
+		backdrop-filter: var(--button-primary-blur);
 		border: 1px solid var(--button-primary-border);
 		border-radius: var(--br-md);
 		background-color: var(--button-primary-bg);

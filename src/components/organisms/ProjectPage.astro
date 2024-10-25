@@ -17,10 +17,10 @@ const addImage = project.data.additional_image as ImageMetadata
 const placeLogo = project.data.place_work.logo as ImageMetadata
 ---
 
-<article class="project-item">
-	<div class="project-item__cover">
+<article class="project-page">
+	<div class="project-page__cover">
 		<Picture
-			class="project-item__image"
+			class="project-page__image"
 			src={cover}
 			alt="Обложка проекта"
 			formats={['avif', 'webp']}
@@ -30,7 +30,7 @@ const placeLogo = project.data.place_work.logo as ImageMetadata
 	</div>
 
 	<Picture
-		class="project-item__add-image"
+		class="project-page__add-image"
 		src={addImage}
 		alt="Обложка проекта"
 		formats={['avif', 'webp']}
@@ -38,28 +38,28 @@ const placeLogo = project.data.place_work.logo as ImageMetadata
 		height={addImage.height}
 	/>
 
-	<div class="project-item__content">
-		<h2 class="text-h3-small project-item__title">
-			<a href={'/projects/' + project.slug} class="project-item__link">
+	<div class="project-page__content">
+		<h2 class="text-h3-small project-page__title">
+			<a href={'/projects/' + project.slug} class="project-page__link">
 				{project.data.name}
 			</a>
 		</h2>
-		<p class="project-item__description">{project.data.desc}</p>
-		<div class="project-item__meta">
-			<div class="project-item__place">
-				<Image class="project-item__place-logo" src={placeLogo} alt="" />
-				<span class="project-item__place-name">{project.data.place_work.name}</span>
+		<p class="project-page__description">{project.data.desc}</p>
+		<div class="project-page__meta">
+			<div class="project-page__place">
+				<Image class="project-page__place-logo" src={placeLogo} alt="" />
+				<span class="project-page__place-name">{project.data.place_work.name}</span>
 			</div>
-			<span class="project-item__year">{project.data.year}</span>
-			<div class="project-item__icon">
-				<Icon name="arrow-right-icon" class="icon" />
+			<span class="project-page__year">{project.data.year}</span>
+			<div class="project-page__icon">
+				<Icon name="arrow-right-icon" class="icon" aria-hidden="true" />
 			</div>
 		</div>
 	</div>
 </article>
 
 <style define:vars={{ coverColor }}>
-	.project-item {
+	.project-page {
 		--cover-color: var(--coverColor);
 
 		display: flex;
@@ -70,40 +70,51 @@ const placeLogo = project.data.place_work.logo as ImageMetadata
 		background-color: var(--bg-primary);
 		padding: 24px 24px 32px;
 		width: 100%;
+
+		@media (hover) {
+			&:hover {
+				.project-page__image {
+					transform: scale(1);
+				}
+			}
+		}
 	}
 
-	.project-item__cover {
+	.project-page__cover {
 		margin-block-end: 24px;
 		border-radius: var(--br-primary);
 		background-color: var(--cover-color);
 		width: 100%;
+		overflow: hidden;
 	}
 
-	.project-item__image {
+	.project-page__image {
 		display: flex;
 		transform: scale(0.85);
+		transition: transform 0.3s ease;
 		background-color: var(--bg-secondary);
 		width: 100%;
+		pointer-events: none;
 	}
 
-	.project-item__add-image {
+	.project-page__add-image {
 		display: flex;
 		position: absolute;
 		right: -130px;
 		bottom: 120px;
 	}
 
-	.project-item__content {
+	.project-page__content {
 		display: flex;
 		flex-direction: column;
 		padding-inline: 8px;
 	}
 
-	.project-item__title {
+	.project-page__title {
 		margin-block-end: 8px;
 	}
 
-	.project-item__link {
+	.project-page__link {
 		color: currentcolor;
 
 		&::after {
@@ -113,12 +124,12 @@ const placeLogo = project.data.place_work.logo as ImageMetadata
 		}
 	}
 
-	.project-item__description {
+	.project-page__description {
 		margin-block-end: 16px;
 		max-width: 580px;
 	}
 
-	.project-item__meta {
+	.project-page__meta {
 		display: flex;
 		align-items: center;
 		font-size: var(--font-sm);
@@ -126,14 +137,14 @@ const placeLogo = project.data.place_work.logo as ImageMetadata
 		font-family: var(--ff-secondary);
 	}
 
-	.project-item__place {
+	.project-page__place {
 		display: flex;
 		align-items: center;
 		gap: 8px;
 		margin-inline-end: 16px;
 	}
 
-	.project-item__place-logo {
+	.project-page__place-logo {
 		--size: 24px;
 
 		border: 1px solid var(--border-secondary);
@@ -142,17 +153,17 @@ const placeLogo = project.data.place_work.logo as ImageMetadata
 		height: var(--size);
 	}
 
-	.project-item__place-name {
+	.project-page__place-name {
 		color: var(--text-primary-0);
 		font-weight: 500;
 	}
 
-	.project-item__year {
+	.project-page__year {
 		color: var(--text-secondary-0);
 		font-weight: 400;
 	}
 
-	.project-item__icon {
+	.project-page__icon {
 		display: flex;
 		justify-content: center;
 		align-items: center;
