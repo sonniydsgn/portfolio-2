@@ -1,11 +1,19 @@
 ---
 import LinkItem from '@/components/atoms/LinkItem.astro'
+import nav from '@/data/main-nav.js'
+
+const currentPage = Astro.url.pathname
 ---
 
 <nav class="sidebar-nav">
 	<ul class="list-reset sidebar-nav__list">
-		<LinkItem class="sidebar-nav__item" link="/" active>Проекты</LinkItem>
-		<LinkItem class="sidebar-nav__item" link="/about">Обо мне</LinkItem>
+		{
+			nav.map(({ link, title }) => (
+				<LinkItem class="sidebar-nav__item" link={link} active={currentPage === link}>
+					{title}
+				</LinkItem>
+			))
+		}
 	</ul>
 </nav>
 

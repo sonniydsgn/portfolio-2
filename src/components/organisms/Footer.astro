@@ -1,5 +1,6 @@
 ---
 import Avatar from '@/assets/avatar.jpg'
+import nav from '@/data/main-nav.js'
 import { Image } from 'astro:assets'
 import ButtonLink from '../atoms/ButtonLink.astro'
 import DataList from '../atoms/DataList.astro'
@@ -26,12 +27,15 @@ const lastBuildDate = new Intl.DateTimeFormat('ru-RU', {
 			<DataList class="footer__list footer__list--nav" term="Навигация">
 				<nav class="footer__nav">
 					<ul class="list-reset footer__nav-list">
-						<li class="footer__nav-item">
-							<ButtonLink class="footer__nav-link" link="/">Проекты</ButtonLink>
-						</li>
-						<li class="footer__nav-item">
-							<ButtonLink class="footer__nav-link" link="/about">Обо мне</ButtonLink>
-						</li>
+						{
+							nav.map(({ link, title }) => (
+								<li class="footer__nav-item">
+									<ButtonLink class="footer__nav-link" link={link}>
+										{title}
+									</ButtonLink>
+								</li>
+							))
+						}
 					</ul>
 				</nav>
 			</DataList>
