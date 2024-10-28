@@ -3,14 +3,15 @@ import type { HTMLAttributes } from 'astro/types'
 
 interface Props extends HTMLAttributes<'ul'> {
 	class?: string
+	tag?: 'ul' | 'ol' | 'div'
 }
 
-const { class: className, ...rest } = Astro.props
+const { tag: Element = 'ul', class: className, ...rest } = Astro.props
 ---
 
-<ul class:list={['list-reset', 'content-list', className]} {...rest}>
+<Element class:list={[{ 'list-reset': Element !== 'div' }, 'content-list', className]} {...rest}>
 	<slot />
-</ul>
+</Element>
 
 <style>
 	.content-list {

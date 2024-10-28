@@ -1,0 +1,64 @@
+---
+import Section from '@/components/atoms/Section.astro'
+import slugify from '@/scripts/libs/slugify'
+import '@/styles/content.css'
+
+interface Props {
+	title: string
+	icon: string
+}
+
+const { title, icon = '◌' } = Astro.props
+
+const slug = slugify(title)
+
+// todo: добавить кастомный отступ после шапки
+// todo: гибкое заимствование классов (compose ?)
+// todo: стилизовать базовые элементы
+// todo: подумать над тем как добавлять аватарки с тултипами
+---
+
+<Section class="content-section" id={slug}>
+	<header class="content-section__header">
+		<span class="text-h2 content-section__icon">{icon}</span>
+		<h2 class="text-h2 content-section__title">{title}</h2>
+		<slot name="header" />
+	</header>
+	<div class="content-section__body">
+		<slot />
+	</div>
+</Section>
+
+<style>
+	.content-section {
+		display: flex;
+		flex-direction: column;
+		gap: 48px;
+		border: 1px solid var(--border-secondary);
+		border-radius: var(--br-lg);
+		background-color: var(--bg-primary);
+		padding-block-end: 48px;
+	}
+
+	.content-section__header {
+		display: flex;
+		border-bottom: 1px solid var(--border-secondary);
+		padding-inline: 24px;
+		padding-block-start: 16px;
+		padding-block-end: 12px;
+	}
+
+	.content-section__icon {
+		margin-inline-end: 8px;
+	}
+
+	.content-section__title {
+		margin-inline-end: auto;
+	}
+
+	.content-section__body {
+		display: flex;
+		flex-direction: column;
+		padding-inline: 24px;
+	}
+</style>

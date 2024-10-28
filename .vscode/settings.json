@@ -12,5 +12,8 @@
 	"eslint.validate": ["javascript", "typescript", "astro"],
 	"[markdown]": {
 		"editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
+	},
+	"[mdx]": {
+		"editor.defaultFormatter": "unifiedjs.vscode-mdx"
 	}
 }

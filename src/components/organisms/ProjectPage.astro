@@ -35,6 +35,8 @@ const coverVideoWEBM = Object.entries(allVideosWEBM)
 		return video[0].includes(project.data.video_cover?.mp4.slice(1))
 	})
 	.map((video: any) => video[1].default) as unknown as string
+
+// todo: добавить более кастомный вывод альтов для обложки
 ---
 
 <article class="project-page" style={'--cover-color: ' + '#' + project.data.color}>
