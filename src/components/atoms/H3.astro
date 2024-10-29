@@ -1,0 +1,10 @@
+---
+interface Props {
+	small?: boolean
+}
+const { small = false, ...props } = Astro.props
+
+const className = small ? 'text-h3-small' : 'text-h3'
+---
+
+<h3 {...props} class={className}><slot /></h3>
