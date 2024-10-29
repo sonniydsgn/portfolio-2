@@ -2,6 +2,7 @@ import mdx from '@astrojs/mdx'
 import sitemap from '@astrojs/sitemap'
 import icon from 'astro-icon'
 import { defineConfig } from 'astro/config'
+import rehypeUnwrapImages from 'rehype-unwrap-images'
 
 // гайд по конфигу — https://astro.build/config
 export default defineConfig({
@@ -33,6 +34,8 @@ export default defineConfig({
 				],
 			},
 		}),
-		mdx(),
+		mdx({
+			rehypePlugins: [rehypeUnwrapImages],
+		}),
 	],
 })

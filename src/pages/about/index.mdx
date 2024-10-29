@@ -8,8 +8,11 @@ layout: '../../layouts/MainLayout.astro'
 
 import ContentSection from '@/components/organisms/ContentSection.astro'
 import AboutCard from '@/components/molecules/AboutCard.astro'
+import Image from '@/components/atoms/Image.astro'
 import aboutVideoMP4 from './media/about-video.mp4'
 import aboutVideoWEBM from './media/about-video.webm'
+
+export const components = { img: Image }
 
 {/* контент */}
 
