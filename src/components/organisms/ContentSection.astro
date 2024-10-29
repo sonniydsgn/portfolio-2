@@ -1,7 +1,6 @@
 ---
 import Section from '@/components/atoms/Section.astro'
 import slugify from '@/scripts/libs/slugify'
-import '@/styles/content.css'
 
 interface Props {
 	title: string
@@ -13,8 +12,6 @@ const { title, icon = '◌' } = Astro.props
 const slug = slugify(title)
 
 // todo: добавить кастомный отступ после шапки
-// todo: гибкое заимствование классов (compose ?)
-// todo: стилизовать базовые элементы
 // todo: подумать над тем как добавлять аватарки с тултипами
 ---
 
@@ -60,5 +57,63 @@ const slug = slugify(title)
 		display: flex;
 		flex-direction: column;
 		padding-inline: 24px;
+	}
+</style>
+
+<style is:global>
+	.content-section {
+		hr {
+			margin: 0;
+			border: 1px solid var(--border-secondary);
+		}
+
+		ul {
+			display: flex;
+			flex-direction: column;
+			gap: 8px;
+			padding-inline-start: 32px;
+		}
+
+		h3 {
+			margin-block-end: 16px;
+		}
+
+		a {
+			color: var(--text-secondary-0);
+			line-height: var(--lh-sm);
+			text-decoration: underline;
+			text-decoration-color: var(--border-primary);
+			text-underline-offset: 0.15em;
+
+			@media (hover) {
+				&:hover {
+					transition:
+						text-decoration-color var(--tr-primary),
+						color var(--tr-primary);
+					color: var(--text-primary-0);
+					text-decoration-color: transparent;
+				}
+			}
+		}
+
+		figure + p {
+			margin-block-start: 24px;
+		}
+
+		p {
+			max-width: 790px;
+		}
+
+		p + p {
+			margin-block-start: 12px;
+		}
+
+		p + figure {
+			margin-block-start: 16px;
+		}
+
+		* ~ h3 {
+			margin-block-start: 40px;
+		}
 	}
 </style>

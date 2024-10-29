@@ -21,12 +21,17 @@ import ThemeSwitcher from '../molecules/ThemeSwitcher.astro'
 		z-index: 10;
 		inset-inline: 0;
 		padding-block-start: 32px;
+		pointer-events: none;
 	}
 
 	.header__inner {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+
+		& > * {
+			pointer-events: all;
+		}
 	}
 
 	.header__utils {

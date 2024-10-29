@@ -6,7 +6,7 @@ import SidebarNav from '../molecules/SidebarNav.astro'
 ---
 
 <aside class="sidebar">
-	<div class="sidebar__about">
+	<a href="/" class="sidebar__about">
 		<Picture
 			class="sidebar__avatar"
 			src={Avatar}
@@ -16,7 +16,7 @@ import SidebarNav from '../molecules/SidebarNav.astro'
 			formats={['avif', 'webp']}
 		/>
 		<span class="sidebar__author">Алексей Калинин</span>
-	</div>
+	</a>
 	<SidebarNav />
 	<Contacts class="sidebar__contacts" />
 </aside>
