@@ -74,6 +74,36 @@ const { link, class: className, type = 'button', ...rest } = Astro.props
 		}
 	}
 
+	.btn--secondary {
+		backdrop-filter: var(--button-secondary-blur);
+		border: 1px solid var(--button-secondary-border);
+		border-radius: var(--br-md);
+		background-color: var(--button-secondary-bg);
+		padding-inline: 16px;
+		padding-block: 8px;
+
+		&.btn--only-icon {
+			border-radius: 100%;
+			padding: 24px;
+		}
+
+		&.btn--icon {
+			--size: 16px;
+
+			padding-inline-start: 12px;
+		}
+
+		@media (hover) {
+			&:hover {
+				transform: scale(1.15);
+			}
+		}
+
+		&:active {
+			transform: scale(0.95);
+		}
+	}
+
 	/* ссылка */
 	.link {
 		color: var(--text-primary-0);

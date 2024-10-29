@@ -67,6 +67,7 @@
 		--button-primary-border: var(--border-secondary);
 		--button-primary-text-primary: var(--text-primary-0);
 		--button-primary-text-secondary: var(--text-tertiary);
+		--button-secondary-blur: unset;
 		--button-secondary-bg: var(--bg-tertiary);
 		--button-secondary-border: var(--border-primary);
 		--button-secondary-text: var(--text-primary-0);
@@ -98,6 +99,7 @@
 		--button-primary-border: var(--border-secondary);
 		--button-primary-text-primary: var(--text-primary-0);
 		--button-primary-text-secondary: var(--text-secondary-0);
+		--button-secondary-blur: var(--blur-sm);
 		--button-secondary-bg: var(--bg-elevate-secondary);
 		--button-secondary-border: var(--border-primary);
 		--button-secondary-text: var(--text-primary-0);
@@ -126,6 +128,7 @@
 	--button-primary-border: var(--border-secondary);
 	--button-primary-text-primary: var(--text-primary-0);
 	--button-primary-text-secondary: var(--text-tertiary);
+	--button-secondary-blur: unset;
 	--button-secondary-bg: var(--bg-tertiary);
 	--button-secondary-border: var(--border-primary);
 	--button-secondary-text: var(--text-primary-0);
@@ -155,6 +158,7 @@
 	--button-primary-border: var(--border-secondary);
 	--button-primary-text-primary: var(--text-primary-0);
 	--button-primary-text-secondary: var(--text-secondary-0);
+	--button-secondary-blur: var(--blur-sm);
 	--button-secondary-bg: var(--bg-elevate-secondary);
 	--button-secondary-border: var(--border-primary);
 	--button-secondary-text: var(--text-primary-0);

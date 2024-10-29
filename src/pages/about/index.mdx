@@ -4,10 +4,19 @@ description: Кто я такой и как стал дизайнером
 layout: '../../layouts/MainLayout.astro'
 ---
 
-import ContentSection from '@/components/organisms/ContentSection.astro'
+{/* импорты */}
 
+import ContentSection from '@/components/organisms/ContentSection.astro'
+import AboutCard from '@/components/molecules/AboutCard.astro'
+import aboutVideoMP4 from './media/about-video.mp4'
+import aboutVideoWEBM from './media/about-video.webm'
+
+{/* контент */}
 
 <ContentSection title="Визитка">
+
+<AboutCard mp4={aboutVideoMP4} webm={aboutVideoWEBM} />
+
   ---
 
   ### Что мне нравится

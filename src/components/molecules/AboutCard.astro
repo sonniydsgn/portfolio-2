@@ -1,0 +1,101 @@
+---
+import { Icon } from 'astro-icon/components'
+import ButtonLink from '../atoms/ButtonLink.astro'
+
+interface Props {
+	mp4: string
+	webm: string
+}
+
+const { mp4, webm } = Astro.props
+---
+
+<script>
+	const videoPlayer = document.querySelector('[data-about-player]') as HTMLVideoElement
+	const video = videoPlayer.querySelector('[data-about-video]') as HTMLVideoElement
+	const videoButton = videoPlayer.querySelector('[data-about-btn]') as HTMLButtonElement
+	const playButton = videoPlayer.querySelector('[data-about-play]') as HTMLButtonElement
+
+	const togglePlay = () => {
+		playButton.style.transform = 'scale(0)'
+		videoButton.setAttribute('aria-label', 'Поставить видео на паузу')
+	}
+
+	const togglePause = () => {
+		playButton.style.transform = ''
+		videoButton.setAttribute('aria-label', 'Включить видео')
+	}
+
+	videoButton.addEventListener('click', () => {
+		if (video.paused) video.play()
+		else video.pause()
+	})
+
+	video.addEventListener('play', togglePlay)
+	video.addEventListener('pause', togglePause)
+	video.addEventListener('ended', togglePause)
+</script>
+
+<div class="about-card">
+	<figure class="about-card__video-player" data-about-player>
+		<video class="about-card__video" width="250" height="250" playsinline data-about-video>
+			<source src={mp4} type="video/mp4" />
+			<source src={webm} type="video/webm" />
+		</video>
+		<ButtonLink class="about-card__btn" aria-label="Включить видео" aria-live="polite" data-about-btn />
+		<ButtonLink class="btn btn--secondary btn--only-icon about-card__play" aria-hidden="false" data-about-play>
+			<Icon name="play-icon" class="icon" />
+		</ButtonLink>
+		<figcaption class="visually-hidden">Видео обо мне</figcaption>
+	</figure>
+	<div class="about-card__content">
+		<h3 class="text-h3 about-card__title">Лёша, 20 лет</h3>
+		<p class="about-card__desc">Живёт в Перми, ответственный и проактивный, ищет работу в продуктовой компании</p>
+	</div>
+</div>
+
+<style>
+	.about-card {
+		display: flex;
+		align-items: center;
+		gap: 48px;
+		margin-block-end: 40px;
+	}
+
+	.about-card__video-player {
+		--size: 250px;
+
+		position: relative;
+		transition: background-color var(--tr-primary);
+		width: var(--size);
+		height: var(--size);
+	}
+
+	.about-card__video {
+		position: relative;
+		border-radius: 100%;
+		object-fit: cover;
+	}
+
+	.about-card__btn {
+		position: absolute;
+		inset: 0;
+
+		@media (hover) {
+			&:hover + .about-card__play {
+				transform: scale(1.15);
+			}
+		}
+	}
+
+	.about-card__play {
+		position: absolute;
+		right: 0;
+		bottom: 0;
+		pointer-events: none;
+	}
+
+	.about-card__desc {
+		max-width: 450px;
+	}
+</style>
