@@ -2,37 +2,19 @@
 import type { ImageMetadata } from 'astro'
 import { Picture } from 'astro:assets'
 
-interface Props extends ImageMetadata {
+interface Props {
+	src: ImageMetadata
 	alt: string
 }
 
-const { src, alt, ...props } = Astro.props
+const { src: img, alt, ...props } = Astro.props
 ---
 
-<figure>
-	<Picture src={src} alt={alt} formats={['webp', 'avif']} {...props} />
-	<figcaption>{alt}</figcaption>
-</figure>
+<Picture src={img} alt={alt} formats={['webp', 'avif']} {...props} />
 
 <style>
-	figure {
-	}
-
 	picture img {
 		display: flex;
 		border-radius: var(--br-primary);
-	}
-
-	figcaption {
-		--padding: 8px;
-
-		margin-block-start: 12px;
-		padding-inline: var(--padding);
-		max-width: calc(714px + 2 * var(--padding));
-		color: var(--text-secondary-0);
-		font-style: normal;
-		font-weight: 300;
-		font-size: var(--font-sm);
-		line-height: var(--lh-sm);
 	}
 </style>

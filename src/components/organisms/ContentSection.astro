@@ -96,11 +96,7 @@ const slug = slugify(title)
 			}
 		}
 
-		figure + p {
-			margin-block-start: 24px;
-		}
-
-		p {
+		p:not(:has(> picture)) {
 			max-width: 790px;
 		}
 
@@ -108,8 +104,27 @@ const slug = slugify(title)
 			margin-block-start: 12px;
 		}
 
-		p + figure {
+		p + figure,
+		p + picture {
 			margin-block-start: 16px;
+		}
+
+		figure + p,
+		picture + p {
+			margin-block-start: 24px;
+		}
+
+		figcaption {
+			--padding: 8px;
+
+			margin-block-start: 12px;
+			padding-inline: var(--padding);
+			max-width: calc(714px + 2 * var(--padding));
+			color: var(--text-secondary-0);
+			font-style: normal;
+			font-weight: 300;
+			font-size: var(--font-sm);
+			line-height: var(--lh-sm);
 		}
 
 		* ~ h3 {

@@ -11,8 +11,8 @@ interface Props {
 const { project } = Astro.props
 
 // images
-const coverImage = project.data.cover as ImageMetadata
-const additionalImage = project.data.additional_image as ImageMetadata
+const coverImage = project.data.cover.img as ImageMetadata
+const additionalImage = project.data.additional_image?.img as ImageMetadata
 const placeWorkLogo = project.data.place_work.logo as ImageMetadata
 
 // video
@@ -26,17 +26,15 @@ const allVideosWEBM = import.meta.glob('/src/content/projects/media/**/**/*.webm
 
 const coverVideoMP4 = Object.entries(allVideosMP4)
 	.filter((video: any) => {
-		return video[0].includes(project.data.video_cover?.mp4.slice(1))
+		return video[0].includes(project.data.cover?.mp4?.slice(1))
 	})
 	.map((video: any) => video[1].default) as unknown as string
 
 const coverVideoWEBM = Object.entries(allVideosWEBM)
 	.filter((video: any) => {
-		return video[0].includes(project.data.video_cover?.mp4.slice(1))
+		return video[0].includes(project.data.cover?.webm?.slice(1))
 	})
 	.map((video: any) => video[1].default) as unknown as string
-
-// todo: добавить более кастомный вывод альтов для обложки
 ---
 
 <article class="project-page" style={'--cover-color: ' + '#' + project.data.color}>
@@ -61,7 +59,7 @@ const coverVideoWEBM = Object.entries(allVideosWEBM)
 				<Picture
 					class="project-page__image"
 					src={coverImage}
-					alt=""
+					alt={project.data.cover?.alt}
 					formats={['avif', 'webp']}
 					width={728}
 					height={481}
@@ -70,14 +68,18 @@ const coverVideoWEBM = Object.entries(allVideosWEBM)
 		}
 	</div>
 
-	<Picture
-		class="project-page__add-image"
-		src={additionalImage}
-		alt=""
-		formats={['avif', 'webp']}
-		width={additionalImage.width}
-		height={additionalImage.height}
-	/>
+	{
+		additionalImage && (
+			<Picture
+				class="project-page__add-image"
+				src={additionalImage}
+				alt={project.data.additional_image?.alt}
+				formats={['avif', 'webp']}
+				width={additionalImage.width}
+				height={additionalImage.height}
+			/>
+		)
+	}
 
 	<div class="project-page__content">
 		<h2 class="text-h3-small project-page__title">

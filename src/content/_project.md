@@ -1,11 +1,12 @@
 ---
 name:
 desc:
-cover: './media/***/cover.jpg'
-additional_image: './media/***/additional_image.png'
-video_cover:
-  mp4: './media/***/video_cover.mp4'
-  webm: './media/***/video_cover.webm'
+cover:
+  img: './media/***/cover.jpg'
+  alt: ''
+additional_image:
+  img: './media/***/additional_image.png'
+  alt: ''
 color:
 year:
 place_work:

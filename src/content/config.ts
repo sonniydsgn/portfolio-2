@@ -5,14 +5,18 @@ const projectsCollection = defineCollection({
 		z.object({
 			name: z.string(),
 			desc: z.string(),
-			cover: image(),
-			video_cover: z
+			cover: z.object({
+				img: image(),
+				mp4: z.string().optional(),
+				webm: z.string().optional(),
+				alt: z.string(),
+			}),
+			additional_image: z
 				.object({
-					mp4: z.string(),
-					webm: z.string(),
+					img: image(),
+					alt: z.string(),
 				})
 				.optional(),
-			additional_image: image().optional(),
 			color: z.string(),
 			year: z.number(),
 			place_work: z.object({
