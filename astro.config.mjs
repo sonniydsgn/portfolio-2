@@ -1,5 +1,6 @@
 import mdx from '@astrojs/mdx'
 import sitemap from '@astrojs/sitemap'
+import remarkTypograf from '@mavrin/remark-typograf'
 import icon from 'astro-icon'
 import { defineConfig } from 'astro/config'
 import rehypeUnwrapImages from 'rehype-unwrap-images'
@@ -35,6 +36,7 @@ export default defineConfig({
 		}),
 		mdx({
 			rehypePlugins: [rehypeUnwrapImages],
+			remarkPlugins: [[remarkTypograf, { locale: 'ru' }]],
 		}),
 	],
 })
