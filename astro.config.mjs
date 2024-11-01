@@ -36,7 +36,7 @@ export default defineConfig({
 		}),
 		mdx({
 			rehypePlugins: [rehypeUnwrapImages],
-			remarkPlugins: [[remarkTypograf, { locale: 'ru' }]],
+			remarkPlugins: [[remarkTypograf, { locale: ['ru'] }]],
 		}),
 	],
 })
