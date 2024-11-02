@@ -4,18 +4,19 @@ import slugify from '@/scripts/libs/slugify'
 
 interface Props {
 	title: string
-	icon: string
+	icon?: string
+	size?: 's' | 'md'
 }
 
-const { title, icon = '◌' } = Astro.props
+const { title, icon = '◌', size = 'md' } = Astro.props
 
 const slug = slugify(title)
+const padding = size === 's' ? '24px' : '48px'
 
-// todo: добавить кастомный отступ после шапки
 // todo: подумать над тем как добавлять аватарки с тултипами
 ---
 
-<Section class="content-section" id={slug}>
+<Section class="content-section" id={slug} style={'--section-padding: ' + padding}>
 	<header class="content-section__header">
 		<span class="text-h2 content-section__icon">{icon}</span>
 		<h2 class="text-h2 content-section__title">{title}</h2>
@@ -30,7 +31,7 @@ const slug = slugify(title)
 	.content-section {
 		display: flex;
 		flex-direction: column;
-		gap: 48px;
+		gap: var(--section-padding);
 		border: 1px solid var(--border-secondary);
 		border-radius: var(--br-lg);
 		background-color: var(--bg-primary);

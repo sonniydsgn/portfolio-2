@@ -21,17 +21,7 @@ interface Props extends Page {
 	frontmatter?: Page
 }
 
-const {
-	frontmatter,
-	title = frontmatter.title,
-	desc = frontmatter?.desc,
-	image,
-	hero = {
-		title: title,
-		title_secondary: null,
-		desc: desc,
-	},
-} = Astro.props
+const { frontmatter, title = frontmatter.title, desc = frontmatter?.desc, image, hero } = Astro.props
 ---
 
 <html lang="ru" class="page">
@@ -43,7 +33,12 @@ const {
 				<div class="container container--main">
 					<Sidebar />
 					<main class="main base__main">
-						<Hero class="base__hero" title={hero.title} title_secondary={hero.title_secondary} desc={hero.desc} />
+						<Hero
+							class="base__hero"
+							title={hero?.title || title}
+							title_secondary={hero?.title_secondary}
+							desc={hero?.desc || desc}
+						/>
 						<ContentList class="base__list" tag="div">
 							<slot />
 						</ContentList>

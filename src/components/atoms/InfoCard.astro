@@ -1,0 +1,130 @@
+---
+import type { ImageMetadata } from 'astro'
+import { Icon } from 'astro-icon/components'
+import { Picture } from 'astro:assets'
+
+interface Props {
+	name: string
+	desc?: string
+	number?: number
+	icon?: string
+	image?: {
+		img: ImageMetadata
+		alt?: string
+	}
+	href?: string
+}
+
+const { name, desc, icon, number, href, image } = Astro.props
+
+// todo: add link handler
+---
+
+<li class:list={['info-card', { 'info-card--link': href }]}>
+	{number && <div class="info-card__number">{number}</div>}
+	{
+		icon && (
+			<div class="info-card__icon">
+				<Icon class="icon icon--16" name={icon} aria-hidden="true" />
+			</div>
+		)
+	}
+	{
+		image && (
+			<Picture
+				class="info-card__image"
+				src={image.img as ImageMetadata}
+				alt={image.alt || name}
+				formats={['avif', 'webp']}
+				width={32}
+				height={32}
+			/>
+		)
+	}
+	<span class="info-card__name">{name}</span>
+	{desc && <span class="info-card__desc">{desc}</span>}
+	{href && <a {href} class="info-card__link" target="_blank" referrerpolicy="no-referrer" />}
+</li>
+
+<style>
+	.info-card {
+		display: grid;
+		position: relative;
+		grid-template-rows: auto auto;
+		grid-template-columns: auto 1fr;
+		column-gap: 16px;
+		align-items: start;
+		justify-items: start;
+		border: 1px solid var(--border-primary);
+		border-radius: var(--br-lg);
+		padding: 24px 20px;
+		font-family: var(--ff-secondary);
+	}
+
+	.info-card--link {
+		transition: background-color var(--tr-primary);
+		background-color: var(--bg-secondary);
+
+		@media (hover) {
+			&:hover {
+				background-color: transparent;
+			}
+		}
+	}
+
+	.info-card__icon,
+	.info-card__number,
+	.info-card__image {
+		grid-column: 1 / 2;
+	}
+
+	.info-card__icon,
+	.info-card__number {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-color: var(--bg-tertiary);
+		color: var(--text-primary-0);
+	}
+
+	.info-card__icon {
+		border-radius: var(--br-primary);
+		padding: 8px;
+	}
+
+	.info-card__number {
+		--size: 24px;
+
+		border-radius: var(--br-sm);
+		width: var(--size);
+		height: var(--size);
+	}
+
+	.info-card__image {
+		display: flex;
+		border-radius: 100%;
+	}
+
+	.info-card__content {
+		display: flex;
+		flex-direction: column;
+		gap: 2px;
+	}
+
+	.info-card__name {
+		grid-column: 2 / 3;
+		color: var(--text-primary-0);
+		font-weight: 500;
+		line-height: var(--lh-lg);
+	}
+
+	.info-card__desc {
+		grid-column: 2 / 3;
+		font-weight: 400;
+	}
+
+	.info-card__link {
+		position: absolute;
+		inset: 0;
+	}
+</style>

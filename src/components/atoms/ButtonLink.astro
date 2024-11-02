@@ -35,7 +35,7 @@ const { href, class: className, type = 'button', ...rest } = Astro.props
 		transition: transform var(--tr-primary);
 		font-weight: 500;
 		font-size: var(--font-sm);
-		line-height: var(--lh-lg);
+		line-height: 1;
 		font-family: var(--ff-secondary);
 		text-transform: uppercase;
 	}
@@ -51,7 +51,8 @@ const { href, class: className, type = 'button', ...rest } = Astro.props
 		border-radius: var(--br-md);
 		background-color: var(--button-primary-bg);
 		padding-inline: 16px;
-		padding-block: 8px;
+		padding-block: 12px;
+		color: var(--text-primary-0);
 
 		&.btn--only-icon {
 			padding: 8px;
