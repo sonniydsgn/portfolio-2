@@ -6,7 +6,9 @@ import ThemeSwitcher from '../molecules/ThemeSwitcher.astro'
 <header class="header">
 	<div class="container">
 		<div class="header__inner">
-			<slot />
+			<div class="header__btns">
+				<slot />
+			</div>
 			<div class="header__utils">
 				<!-- <LangSwitcher /> -->
 				<ThemeSwitcher />

@@ -1,7 +1,9 @@
 ---
+import ButtonLink from '@/components/atoms/ButtonLink.astro'
 import Head from '@/components/Head.astro'
 import Footer from '@/components/organisms/Footer.astro'
 import Header from '@/components/organisms/Header.astro'
+import { Icon } from 'astro-icon/components'
 
 interface Props {
 	title: string
@@ -16,7 +18,12 @@ const { title, desc, image } = Astro.props
 	<Head {title} {desc} {image} />
 	<body class="page__body">
 		<div class="site-container">
-			<Header />
+			<Header>
+				<a href="/" class="btn-reset btn btn--primary btn--icon">
+					<Icon class="icon icon--16" name="arrow-left-icon" aria-hidden="true" />
+					Назад</a
+				>
+			</Header>
 			<div class="project">
 				<main class="main project__main">
 					<slot />
