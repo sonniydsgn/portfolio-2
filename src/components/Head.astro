@@ -8,11 +8,11 @@ import '@/styles/vars.css'
 interface Props {
 	title: string
 	url?: string
-	description?: string
+	desc?: string
 	image?: string
 }
 
-const { title, description, url = Astro.url, image = '/images/og.jpg' } = Astro.props
+const { title, desc, url = Astro.url, image = '/images/og.jpg' } = Astro.props
 ---
 
 <head>
@@ -30,10 +30,10 @@ const { title, description, url = Astro.url, image = '/images/og.jpg' } = Astro.
 	<title>{title}</title>
 	<meta property="og:site_name" content="Алексей Калинин" />
 	<meta property="og:title" content={title} />
-	<meta property="og:description" content={description} />
+	<meta property="og:description" content={desc} />
 	<meta property="og:url" content={url} />
 	<meta property="og:image" content={image} />
-	<meta name="description" content={description} />
+	<meta name="description" content={desc} />
 	<!-- шрифты -->
 	<link rel="preload" href="/fonts/SuisseIntl-Book.woff2" as="font" type="font/woff2" crossorigin />
 	<link rel="preload" href="/fonts/JetBrainsMono.woff2" as="font" type="font/woff2" crossorigin />

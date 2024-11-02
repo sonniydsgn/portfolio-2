@@ -2,8 +2,8 @@
 import AboutCover from '@/assets/about-cover.jpg'
 import ContentList from '@/components/atoms/ContentList.astro'
 import Section from '@/components/atoms/Section.astro'
-import NextPage from '@/components/organisms/NextPage.astro'
-import ProjectItem from '@/components/organisms/ProjectPage.astro'
+import NextCard from '@/components/organisms/NextCard.astro'
+import ProjectCard from '@/components/organisms/ProjectCard.astro'
 import MainLayout from '@/layouts/MainLayout.astro'
 
 // получаю все проекты
@@ -13,21 +13,23 @@ const projects = await getProjects()
 
 <MainLayout
 	title="Алексей Калинин"
-	description="Дизайнер интерфейсов, который классно верстает. Превращаю сложное в простое и обожаю системность"
-	hero_title="Дизайнер интерфейсов"
-	hero_title_secondary="который классно верстает"
-	hero_subtitle="Превращаю сложное в простое и обожаю системность"
+	desc="Дизайнер интерфейсов, который классно верстает. Превращаю сложное в простое и обожаю системность"
+	hero={{
+		title: 'Дизайнер интерфейсов',
+		title_secondary: 'который классно верстает',
+		desc: 'Превращаю сложное в простое и обожаю системность',
+	}}
 >
 	<Section class="projects">
 		<ContentList class="projects__list">
 			{
 				projects.map(project => (
 					<li class="projects__list-item">
-						<ProjectItem {project} />
+						<ProjectCard {project} />
 					</li>
 				))
 			}
 		</ContentList>
 	</Section>
-	<NextPage title="Обо мне" href="/about" cover={AboutCover} />
+	<NextCard title="Обо мне" href="/about" cover={AboutCover} />
 </MainLayout>

@@ -1,0 +1,41 @@
+---
+import ClientTag from '@/components/atoms/ClientTag.astro'
+import type { ImageMetadata } from 'astro'
+
+interface Props {
+	client?: {
+		logo: ImageMetadata
+		name: string
+		href?: string
+	}
+	year?: number
+	class?: string
+}
+
+const { client, year, class: className, ...props } = Astro.props
+---
+
+<div class:list={['meta', className]} {...props}>
+	{client && <ClientTag class="meta__client" logo={client.logo} name={client.name} href={client.href} />}
+	{year && <span class="meta__year">{year}</span>}
+</div>
+
+<style>
+	.meta {
+		display: flex;
+		align-items: center;
+		font-weight: 500;
+		font-size: var(--font-sm);
+		line-height: var(--lh-lg);
+		font-family: var(--ff-secondary);
+	}
+
+	.meta__client {
+		margin-inline-end: 16px;
+	}
+
+	.meta__year {
+		color: var(--text-secondary-0);
+		font-weight: 400;
+	}
+</style>

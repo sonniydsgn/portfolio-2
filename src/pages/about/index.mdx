@@ -1,6 +1,6 @@
 ---
 title: Обо мне
-description: Кто я такой и как стал дизайнером
+desc: Кто я такой и как стал дизайнером
 layout: '../../layouts/MainLayout.astro'
 ---
 
@@ -13,11 +13,12 @@ import ContentSection from '@/components/organisms/ContentSection.astro'
 import AboutCard from '@/components/molecules/AboutCard.astro'
 import Image from '@/components/atoms/Image.astro'
 import H3 from '@/components/atoms/H3.astro'
+import Link from '@/components/atoms/ButtonLink.astro'
 import aboutVideoCover from './media/about-cover.jpg'
 import aboutVideoMP4 from './media/about-video.mp4'
 import aboutVideoWEBM from './media/about-video.webm'
 
-export const components = { img: Image, h3: H3 }
+export const components = { img: Image, h3: H3, a: Link }
 
 {/* контент */}
 
@@ -114,7 +115,7 @@ export const components = { img: Image, h3: H3 }
 
   <figure>
     ![Страница процесса разработки, где есть 3 вкладки "Архив", "Бэклог" и "9 спринт". Показан "9 спринт" — таблица, которая включает список задач сгрупированных по статусу выполнения. В каждой задаче есть приоритет, сложность выполнения, название, область к которой она относится и ответственные лица.](./media/backlog-example.jpg)
-    <figcaption>Бэклог на 9 спринте во время разработки [Путеводителя для клиники](/projects/vtour)</figcaption>
+    <figcaption>Бэклог на 9 спринте во время разработки [Путеводителя по клинике](/projects/vtour)</figcaption>
   </figure>
 
 </ContentSection>

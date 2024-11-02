@@ -1,0 +1,50 @@
+---
+import type { ImageMetadata } from 'astro'
+import { Image } from 'astro:assets'
+import ButtonLink from './ButtonLink.astro'
+
+interface Props {
+	logo: ImageMetadata
+	name: string
+	href?: string
+	class?: string
+}
+
+const { logo, name, href, class: className, ...props } = Astro.props
+---
+
+{
+	href ? (
+		<ButtonLink class:list={['client-tag', className]} {href} {...props}>
+			<Image class="client-tag__logo" src={logo} alt={name} />
+			<span class="client-tag__name">{name}</span>
+		</ButtonLink>
+	) : (
+		<div class:list={['client-tag', className]} {...props}>
+			<Image class="client-tag__logo" src={logo} alt={name} />
+			<span class="client-tag__name">{name}</span>
+		</div>
+	)
+}
+
+<style>
+	.client-tag {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+	}
+
+	.client-tag__logo {
+		--size: 24px;
+
+		border: 1px solid var(--border-secondary);
+		border-radius: 100%;
+		width: var(--size);
+		height: var(--size);
+	}
+
+	.client-tag__name {
+		color: var(--text-primary-0);
+		font-weight: 500;
+	}
+</style>

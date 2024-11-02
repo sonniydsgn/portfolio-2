@@ -1,4 +1,6 @@
 .page {
+	--main-padding: 56px;
+
 	background-color: var(--bg-secondary);
 	height: 100%;
 	scroll-behavior: smooth;
@@ -29,6 +31,11 @@
 	width: min(var(--content-width), 100% - calc(var(--container-offset) * 2));
 }
 
+.container--main {
+	display: grid;
+	grid-template-columns: 210px 1fr 210px;
+}
+
 .container--fluid {
 	margin-inline: 24px;
 	width: 100%;
@@ -50,4 +57,8 @@
 	@media (width <= 1024) {
 		grid-template-columns: 1fr;
 	}
+}
+
+.main {
+	padding-block-start: var(--main-padding);
 }

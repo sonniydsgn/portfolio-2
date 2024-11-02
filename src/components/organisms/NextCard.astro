@@ -12,21 +12,21 @@ interface Props {
 const { title, href, cover } = Astro.props
 ---
 
-<article class="next-page">
-	<div class="next-page__info">
-		<span class="text-h2 next-page__subtitle">Читайте также</span>
-		<h2 class="text-h3 next-page__title">
-			<a class="next-page__link" {href}>
+<article class="next-card">
+	<div class="next-card__info">
+		<span class="text-h2 next-card__subtitle">Читайте также</span>
+		<h2 class="text-h3 next-card__title">
+			<a class="next-card__link" {href}>
 				{title}
 			</a>
 		</h2>
-		<div class="next-page__icon">
+		<div class="next-card__icon">
 			<Icon name="arrow-right-icon" class="icon" aria-hidden="true" />
 		</div>
 	</div>
-	<div class="next-page__cover">
+	<div class="next-card__cover">
 		<Picture
-			class="next-page__image"
+			class="next-card__image"
 			src={cover}
 			alt="Обложка страницы"
 			formats={['avif', 'webp']}
@@ -37,7 +37,7 @@ const { title, href, cover } = Astro.props
 </article>
 
 <style>
-	.next-page {
+	.next-card {
 		display: grid;
 		position: relative;
 		grid-template-columns: 1fr 400px;
@@ -49,14 +49,14 @@ const { title, href, cover } = Astro.props
 
 		@media (hover) {
 			&:hover {
-				.next-page__image {
+				.next-card__image {
 					transform: scale(1.15);
 				}
 			}
 		}
 	}
 
-	.next-page__info {
+	.next-card__info {
 		display: flex;
 		flex-direction: column;
 		gap: 16px;
@@ -65,13 +65,13 @@ const { title, href, cover } = Astro.props
 		padding-block-end: 24px;
 	}
 
-	.next-page__subtitle {
+	.next-card__subtitle {
 	}
 
-	.next-page__title {
+	.next-card__title {
 	}
 
-	.next-page__link {
+	.next-card__link {
 		&::after {
 			position: absolute;
 			inset: 0;
@@ -79,7 +79,7 @@ const { title, href, cover } = Astro.props
 		}
 	}
 
-	.next-page__icon {
+	.next-card__icon {
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -92,12 +92,12 @@ const { title, href, cover } = Astro.props
 		color: var(--text-primary-0);
 	}
 
-	.next-page__cover {
+	.next-card__cover {
 		border-radius: var(--br-primary);
 		overflow: hidden;
 	}
 
-	.next-page__image {
+	.next-card__image {
 		display: flex;
 		transition: transform 0.3s ease;
 		pointer-events: none;
