@@ -79,19 +79,11 @@ const slug = slugify(title)
 		}
 
 		a {
-			color: var(--text-secondary-0);
-			line-height: var(--lh-sm);
-			text-decoration: underline;
-			text-decoration-color: var(--border-primary);
-			text-underline-offset: 0.15em;
+			opacity: 0.6;
 
 			@media (hover) {
 				&:hover {
-					transition:
-						text-decoration-color var(--tr-primary),
-						color var(--tr-primary);
-					color: var(--text-primary-0);
-					text-decoration-color: transparent;
+					opacity: 1;
 				}
 			}
 		}

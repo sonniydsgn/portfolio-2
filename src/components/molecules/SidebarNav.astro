@@ -9,7 +9,7 @@ const currentPage = Astro.url.pathname !== '/' ? Astro.url.pathname.replace(/\/$
 	<ul class="list-reset sidebar-nav__list">
 		{
 			nav.map(({ link, title }) => (
-				<LinkItem class="sidebar-nav__item" link={link} active={currentPage === link}>
+				<LinkItem class="sidebar-nav__item" href={link} active={currentPage === link}>
 					{title}
 				</LinkItem>
 			))

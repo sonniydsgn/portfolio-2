@@ -13,15 +13,15 @@ const { class: className, ...rest } = Astro.props
 <div class:list={['contacts', className]} {...rest}>
 	<ul class="list-reset contacts__list">
 		<li class="contacts__item">
-			<ButtonLink class="contacts__link" link="mailto:sonniy.design@gmail.com">E-mail</ButtonLink>
+			<ButtonLink class="link--primary contacts__link" href="mailto:sonniy.design@gmail.com">E-mail</ButtonLink>
 		</li>
 		<li class="contacts__item">
-			<ButtonLink class="contacts__link" link="#">CV·Резюме</ButtonLink>
+			<ButtonLink class="link--primary contacts__link" href="#">CV·Резюме</ButtonLink>
 		</li>
 		<li class="contacts__item contacts__item--icon">
 			<ButtonLink
 				class="contacts__link"
-				link="https://www.linkedin.com/in/sonniydsgn/"
+				href="https://www.linkedin.com/in/sonniydsgn/"
 				target="_blank"
 				referrerpolicy="no-referrer"
 				title="Профиль в LinkedIn"
@@ -32,7 +32,7 @@ const { class: className, ...rest } = Astro.props
 		<li class="contacts__item contacts__item--icon">
 			<ButtonLink
 				class="contacts__link"
-				link="https://t.me/sonniyboii"
+				href="https://t.me/sonniyboii"
 				target="_blank"
 				referrerpolicy="no-referrer"
 				title="Профиль в Telegram"
@@ -43,7 +43,7 @@ const { class: className, ...rest } = Astro.props
 		<li class="contacts__item contacts__item--icon">
 			<ButtonLink
 				class="contacts__link"
-				link="https://github.com/sonniydsgn"
+				href="https://github.com/sonniydsgn"
 				target="_blank"
 				referrerpolicy="no-referrer"
 				title="Профиль в GitHub"

@@ -3,16 +3,16 @@ import ButtonLink from '@/components/atoms/ButtonLink.astro'
 import type { HTMLAttributes } from 'astro/types'
 
 interface Props extends HTMLAttributes<'li'> {
-	link: string
+	href: string
 	active?: boolean
 	class?: string
 }
 
-const { link, active = false, class: className, ...rest } = Astro.props
+const { href, active = false, class: className, ...rest } = Astro.props
 ---
 
 <li class:list={['link-item', { 'link-item--active': active }, className]} {...rest}>
-	<ButtonLink {link}><slot /></ButtonLink>
+	<ButtonLink class="link--primary" {href}><slot /></ButtonLink>
 </li>
 
 <style>
@@ -24,21 +24,21 @@ const { link, active = false, class: className, ...rest } = Astro.props
 			padding-inline: 6px;
 			padding-block: 4px;
 		}
+	}
 
-		&:not(.link-item--active) {
-			.link {
-				opacity: 0.6;
-				transition: opacity var(--tr-primary);
-			}
+	.link-item:not(.link-item--active) {
+		transition: background-color var(--tr-primary);
 
-			@media (hover) {
-				&:hover {
-					transition: background-color var(--tr-primary);
-					background-color: var(--bg-secondary);
+		.link {
+			opacity: 0.6;
+		}
 
-					.link {
-						opacity: 1;
-					}
+		@media (hover) {
+			&:hover {
+				background-color: var(--bg-secondary);
+
+				.link {
+					opacity: 1;
 				}
 			}
 		}

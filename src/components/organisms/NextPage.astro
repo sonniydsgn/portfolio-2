@@ -5,18 +5,18 @@ import { Picture } from 'astro:assets'
 
 interface Props {
 	title: string
-	link: string | URL
+	href: string | URL
 	cover: ImageMetadata
 }
 
-const { title, link, cover } = Astro.props
+const { title, href, cover } = Astro.props
 ---
 
 <article class="next-page">
 	<div class="next-page__info">
 		<span class="text-h2 next-page__subtitle">Читайте также</span>
 		<h2 class="text-h3 next-page__title">
-			<a class="next-page__link" href={link}>
+			<a class="next-page__link" {href}>
 				{title}
 			</a>
 		</h2>
