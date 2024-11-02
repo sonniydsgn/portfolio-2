@@ -8,10 +8,7 @@ interface Props {
 	desc?: string
 	number?: number
 	icon?: string
-	image?: {
-		img: ImageMetadata
-		alt?: string
-	}
+	image?: ImageMetadata
 	href?: string
 }
 
@@ -29,21 +26,19 @@ const { name, desc, icon, number, href, image } = Astro.props
 			</div>
 		)
 	}
-	{
-		image && (
-			<Picture
-				class="info-card__image"
-				src={image.img as ImageMetadata}
-				alt={image.alt || name}
-				formats={['avif', 'webp']}
-				width={32}
-				height={32}
-			/>
-		)
-	}
-	<span class="info-card__name">{name}</span>
+	{image && <Picture class="info-card__image" src={image} alt="" formats={['avif', 'webp']} width={32} height={32} />}
+	<span class="info-card__name">
+		{
+			href ? (
+				<a {href} class="info-card__link" target="_blank" referrerpolicy="no-referrer">
+					{name}
+				</a>
+			) : (
+				name
+			)
+		}
+	</span>
 	{desc && <span class="info-card__desc">{desc}</span>}
-	{href && <a {href} class="info-card__link" target="_blank" referrerpolicy="no-referrer" />}
 </li>
 
 <style>
@@ -123,8 +118,9 @@ const { name, desc, icon, number, href, image } = Astro.props
 		font-weight: 400;
 	}
 
-	.info-card__link {
+	.info-card__link::before {
 		position: absolute;
 		inset: 0;
+		content: '';
 	}
 </style>

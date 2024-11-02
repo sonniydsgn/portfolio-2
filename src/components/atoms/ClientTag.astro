@@ -21,7 +21,7 @@ const { logo, name, href, class: className, ...props } = Astro.props
 		</ButtonLink>
 	) : (
 		<div class:list={['client-tag', className]} {...props}>
-			<Image class="client-tag__logo" src={logo} alt={name} />
+			<Image class="client-tag__logo" src={logo} alt="" />
 			<span class="client-tag__name">{name}</span>
 		</div>
 	)
