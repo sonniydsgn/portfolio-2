@@ -1,7 +1,10 @@
 ---
+import convertBytes from '@/scripts/libs/convert-bytes'
 import type { ImageMetadata } from 'astro'
 import { Icon } from 'astro-icon/components'
 import { Picture } from 'astro:assets'
+import fs from 'fs'
+import path from 'path'
 
 interface Props {
 	name: string
@@ -10,15 +13,34 @@ interface Props {
 	icon?: string
 	image?: ImageMetadata
 	href?: string
+	type?: 'link' | 'file'
 }
 
-const { name, desc, icon, number, href, image } = Astro.props
+const { name, number, href, image, type = href && 'link' } = Astro.props
 
-// todo: add link handler
+let { desc, icon } = Astro.props
+
+// link handler
+if (type === 'link') {
+	icon = 'external-link-icon'
+	desc = href.replace(/(^\w+:|^)\/\//, '')
+}
+
+if (type === 'file') {
+	const filePath = path.join(process.cwd(), href)
+	const fileType = path.extname(filePath).replace('.', '').toUpperCase() + '-файл'
+	const fileSize = convertBytes(fs.statSync(filePath).size)
+
+	icon = 'file-icon'
+	desc = fileType + ', ' + fileSize
+}
 ---
 
 <li class:list={['info-card', { 'info-card--link': href }]}>
+	{image && <Picture class="info-card__image" src={image} alt="" formats={['avif', 'webp']} width={32} height={32} />}
+
 	{number && <div class="info-card__number">{number}</div>}
+
 	{
 		icon && (
 			<div class="info-card__icon">
@@ -26,27 +48,28 @@ const { name, desc, icon, number, href, image } = Astro.props
 			</div>
 		)
 	}
-	{image && <Picture class="info-card__image" src={image} alt="" formats={['avif', 'webp']} width={32} height={32} />}
-	<span class="info-card__name">
-		{
-			href ? (
-				<a {href} class="info-card__link" target="_blank" referrerpolicy="no-referrer">
-					{name}
-				</a>
-			) : (
-				name
-			)
-		}
-	</span>
-	{desc && <span class="info-card__desc">{desc}</span>}
+
+	<div class="info-card__content">
+		<span class="info-card__name">
+			{
+				href ? (
+					<a {href} class="info-card__link" target="_blank" referrerpolicy="no-referrer">
+						{name}
+					</a>
+				) : (
+					name
+				)
+			}
+		</span>
+
+		{desc && <span class="info-card__desc">{desc}</span>}
+	</div>
 </li>
 
 <style>
 	.info-card {
-		display: grid;
+		display: flex;
 		position: relative;
-		grid-template-rows: auto auto;
-		grid-template-columns: auto 1fr;
 		column-gap: 16px;
 		align-items: start;
 		justify-items: start;
@@ -60,17 +83,18 @@ const { name, desc, icon, number, href, image } = Astro.props
 		transition: background-color var(--tr-primary);
 		background-color: var(--bg-secondary);
 
+		.info-card__desc {
+			width: 100%;
+			overflow-x: hidden;
+			text-overflow: ellipsis;
+			text-wrap: nowrap;
+		}
+
 		@media (hover) {
 			&:hover {
 				background-color: transparent;
 			}
 		}
-	}
-
-	.info-card__icon,
-	.info-card__number,
-	.info-card__image {
-		grid-column: 1 / 2;
 	}
 
 	.info-card__icon,
@@ -107,14 +131,12 @@ const { name, desc, icon, number, href, image } = Astro.props
 	}
 
 	.info-card__name {
-		grid-column: 2 / 3;
 		color: var(--text-primary-0);
 		font-weight: 500;
 		line-height: var(--lh-lg);
 	}
 
 	.info-card__desc {
-		grid-column: 2 / 3;
 		font-weight: 400;
 	}
 

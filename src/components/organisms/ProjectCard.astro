@@ -16,7 +16,7 @@ const { color, cover, additional_image, name, desc, place_work, year } = project
 <article class="project-card" style={'--cover-color: ' + '#' + color}>
 	<div class="project-card__cover">
 		{
-			cover.mp4.length > 0 ? (
+			cover.mp4 ? (
 				<video
 					class="project-card__image"
 					poster={cover.img.src}

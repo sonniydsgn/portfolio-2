@@ -21,24 +21,25 @@ draft: true
 {/* импорты */}
 import ContentSection from '@/components/organisms/ContentSection.astro'
 import InfoCard from '@/components/atoms/InfoCard.astro'
+import InfoList from '@/components/molecules/InfoList.astro'
 import Kolya from '@/assets/avatar/kolya_krylov.jpg'
+import Gratitude from './media/nova-ug/Gratitude_FA.pdf'
 
 {/* контент */}
 <ContentSection title="О проекте">
 
   ### Моя роль
-  <InfoCard name="Дизайнер интерфейса" desc="быстрое исследование, интерактивный дизайн, визуальный дизайн" icon="image-icon"/>
-
-  <InfoCard name="Фронтендер" icon="code-icon" desc="верстка, анимация, тестирование" />
+  <InfoList>
+    <InfoCard name="Дизайнер интерфейса" desc="быстрое исследование, интерактивный дизайн, визуальный дизайн" icon="image-icon"/>
+    <InfoCard name="Фронтендер" icon="code-icon" desc="верстка, анимация, тестирование" />
+  </InfoList>
 
   ### Команда
-  <InfoCard name="Крылов Николай" image={Kolya} desc="бэкендер" />
+  <InfoList>
+    <InfoCard name="Крылов Николай" image={Kolya} desc="бэкендер" />
+  </InfoList>
 
   ### Время работы
   <InfoCard name="2 месяца" desc="запустили в октябре 2023" icon="clock-icon" />
-
-  <InfoCard number="1" name="Постановка задачи" />
-
-  <InfoCard name="Посмотреть сайт" href="https://implants.factor-alfa.ru" />
 
 </ContentSection>

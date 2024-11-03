@@ -1,0 +1,29 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+
+interface Props extends HTMLAttributes<'ul'>, HTMLAttributes<'ol'> {
+	tag?: 'ul' | 'ol' | 'div'
+	grid?: boolean
+	class?: string
+}
+
+const { tag: Element = 'ul', grid = false, class: className, ...rest } = Astro.props
+---
+
+<Element
+	class:list={[{ 'list-reset': Element !== 'div' }, 'info-list', { 'info-list--grid': grid }, className]}
+	{...rest}
+>
+	<slot />
+</Element>
+
+<style>
+	.info-list {
+		display: grid;
+		gap: 8px;
+	}
+
+	.info-list--grid {
+		grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+	}
+</style>

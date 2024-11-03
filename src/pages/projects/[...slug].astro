@@ -1,8 +1,8 @@
 ---
 import Link from '@/components/atoms/ButtonLink.astro'
-import ContentList from '@/components/atoms/ContentList.astro'
 import H3 from '@/components/atoms/H3.astro'
 import Image from '@/components/atoms/Image.astro'
+import ContentList from '@/components/molecules/ContentList.astro'
 import Meta from '@/components/molecules/Meta.astro'
 import Hero from '@/components/organisms/Hero.astro'
 import NextCard from '@/components/organisms/NextCard.astro'
@@ -40,8 +40,18 @@ const { name: title, desc, place_work, color, cover } = project.data
 			/>
 			<div class="article__cover">
 				{
-					cover.mp4.length > 0 ? (
-						<video class="article__image" autoplay preload="auto" loop muted playsinline width={1180} height={780}>
+					cover.mp4 ? (
+						<video
+							class="article__image"
+							poster={cover.img.src}
+							autoplay
+							preload="auto"
+							loop
+							muted
+							playsinline
+							width={1180}
+							height={780}
+						>
 							<source src={cover.mp4} type="video/mp4" />
 							<source src={cover.webm} type="video/webm" />
 						</video>
