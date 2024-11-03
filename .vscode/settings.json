@@ -9,6 +9,8 @@
 	"editor.codeActionsOnSave": {
 		"source.fixAll": "explicit"
 	},
+	"html.autoClosingTags": false,
+	"auto-close-tag.activationOnLanguage": ["html", "astro", "mdx"],
 	"eslint.validate": ["javascript", "typescript", "astro"],
 	"[markdown]": {
 		"editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
