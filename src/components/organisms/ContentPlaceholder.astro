@@ -1,0 +1,44 @@
+---
+import { Icon } from 'astro-icon/components'
+import Section from '../atoms/Section.astro'
+import InfoList from '../molecules/InfoList.astro'
+---
+
+<Section class="placeholder">
+	<Icon name="edit-box-icon" class="icon placeholder__icon" />
+	<h2 class="text-h3 placeholder__title">Кейс ещё не дописан</h2>
+	<p class="placeholder__desc">Пока предлагаю посмотреть на результат или обсудить проект лично</p>
+	<InfoList class="placeholder__list" grid>
+		<slot />
+	</InfoList>
+</Section>
+
+<style>
+	.placeholder {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		border: 1px solid var(--border-secondary);
+		border-radius: var(--br-lg);
+		background-color: var(--bg-primary);
+		padding: 48px 24px;
+	}
+
+	.placeholder__icon {
+		--size: 40px;
+		margin-block-end: 16px;
+		color: var(--text-primary-0);
+	}
+
+	.placeholder__title {
+		margin-block-end: 16px;
+	}
+
+	.placeholder__desc {
+		margin-block-end: 24px;
+	}
+
+	.placeholder__list {
+		width: 100%;
+	}
+</style>

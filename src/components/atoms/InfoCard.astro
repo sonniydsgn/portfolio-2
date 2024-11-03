@@ -22,7 +22,7 @@ let { desc, icon } = Astro.props
 
 // link handler
 if (type === 'link') {
-	icon = 'external-link-icon'
+	!icon && (icon = 'external-link-icon')
 	desc = href.replace(/(^\w+:|^)\/\//, '')
 }
 
@@ -31,7 +31,7 @@ if (type === 'file') {
 	const fileType = path.extname(filePath).replace('.', '').toUpperCase() + '-файл'
 	const fileSize = convertBytes(fs.statSync(filePath).size)
 
-	icon = 'file-icon'
+	!icon && (icon = 'file-icon')
 	desc = fileType + ', ' + fileSize
 }
 ---

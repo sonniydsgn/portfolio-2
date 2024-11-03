@@ -24,6 +24,7 @@ const projectsCollection = defineCollection({
 				logo: image(),
 				link: z.string(),
 			}),
+			result: z.string().optional(),
 			draft: z.boolean(),
 		}),
 })
