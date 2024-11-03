@@ -6,11 +6,9 @@ const allVideos = import.meta.glob('/src/content/projects/media/**/**/*.{mp4,web
 })
 
 const getVideo = (format: 'mp4' | 'webm', item: CollectionEntry<'projects'>) => {
-	return Object.entries(allVideos)
-		.filter((video: any) => {
-			return video[0].includes(item.data.cover[format]?.slice(1))
-		})
-		.map((video: any) => video[1].default) as unknown as string
+	return Object.keys(allVideos).filter((video: string) => {
+		return video.includes(item.data.cover[format]?.slice(1))
+	})
 }
 
 const projects = async () => {
