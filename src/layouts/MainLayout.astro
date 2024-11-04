@@ -1,10 +1,14 @@
 ---
+import AboutCover from '@/assets/about-cover.jpg'
 import Head from '@/components/Head.astro'
 import ContentList from '@/components/molecules/ContentList.astro'
 import Footer from '@/components/organisms/Footer.astro'
 import Header from '@/components/organisms/Header.astro'
 import Hero from '@/components/organisms/Hero.astro'
+import NextCard from '@/components/organisms/NextCard.astro'
 import Sidebar from '@/components/organisms/Sidebar.astro'
+import getProjects from '@/scripts/getters/get-projects'
+import type { ImageMetadata } from 'astro'
 
 type Page = {
 	title: string
@@ -22,6 +26,9 @@ interface Props extends Page {
 }
 
 const { frontmatter, title = frontmatter.title, desc = frontmatter?.desc, image, hero } = Astro.props
+
+const projects = await getProjects()
+const lastProject = projects.sort((a, b) => a.data.year - b.data.year)[0]
 ---
 
 <html lang="ru" class="page">
@@ -41,6 +48,18 @@ const { frontmatter, title = frontmatter.title, desc = frontmatter?.desc, image,
 						/>
 						<ContentList class="base__list" tag="div">
 							<slot />
+							{
+								Astro.url.pathname === '/' ? (
+									<NextCard title="Обо мне" href="/about" cover={AboutCover} />
+								) : (
+									<NextCard
+										title={lastProject.data.name}
+										cover={lastProject.data.cover.img as ImageMetadata}
+										color={lastProject.data.color}
+										href={'/' + lastProject.collection + '/' + lastProject.slug}
+									/>
+								)
+							}
 						</ContentList>
 					</main>
 				</div>

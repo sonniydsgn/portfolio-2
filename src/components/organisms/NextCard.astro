@@ -7,12 +7,13 @@ interface Props {
 	title: string
 	href: string | URL
 	cover: ImageMetadata
+	color?: string
 }
 
-const { title, href, cover } = Astro.props
+const { title, href, cover, color } = Astro.props
 ---
 
-<article class="next-card">
+<article class:list={['next-card', { 'next-card--project': color }]} style={'--cover-color: ' + '#' + color}>
 	<div class="next-card__info">
 		<span class="text-h2 next-card__subtitle">Читайте также</span>
 		<h2 class="text-h3 next-card__title">
@@ -56,6 +57,24 @@ const { title, href, cover } = Astro.props
 		}
 	}
 
+	.next-card--project {
+		.next-card__cover {
+			background-color: var(--cover-color);
+		}
+
+		.next-card__image {
+			transform: scale(0.85);
+		}
+
+		@media (hover) {
+			&:hover {
+				.next-card__image {
+					transform: scale(1);
+				}
+			}
+		}
+	}
+
 	.next-card__info {
 		display: flex;
 		flex-direction: column;
@@ -69,6 +88,7 @@ const { title, href, cover } = Astro.props
 	}
 
 	.next-card__title {
+		max-width: 380px;
 	}
 
 	.next-card__link {
@@ -99,7 +119,7 @@ const { title, href, cover } = Astro.props
 
 	.next-card__image {
 		display: flex;
-		transition: transform 0.3s ease;
+		transition: transform var(--tr-primary);
 		pointer-events: none;
 	}
 </style>

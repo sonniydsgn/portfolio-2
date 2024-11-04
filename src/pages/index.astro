@@ -1,8 +1,6 @@
 ---
-import AboutCover from '@/assets/about-cover.jpg'
 import Section from '@/components/atoms/Section.astro'
 import ContentList from '@/components/molecules/ContentList.astro'
-import NextCard from '@/components/organisms/NextCard.astro'
 import ProjectCard from '@/components/organisms/ProjectCard.astro'
 import MainLayout from '@/layouts/MainLayout.astro'
 
@@ -31,5 +29,4 @@ const projects = await getProjects()
 			}
 		</ContentList>
 	</Section>
-	<NextCard title="Обо мне" href="/about" cover={AboutCover} />
 </MainLayout>

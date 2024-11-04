@@ -25,7 +25,11 @@ const { Content } = await project.render()
 const { name: title, desc, place_work, color, cover, result, draft } = project.data
 
 // todo: add toc
-// todo: add next card
+// select next page
+const projects = await getProjects()
+const nextProject = projects.find(({ slug }) => slug !== project.slug)
+
+console.log(nextProject)
 ---
 
 <ProjectLayout {title} {desc}>
@@ -72,25 +76,30 @@ const { name: title, desc, place_work, color, cover, result, draft } = project.d
 		</Hero>
 		<div class="container container--main">
 			<div class="article__layout">
-				<ContentList tag="div" class="article__content">
-					<Content components={{ img: Image, h3: H3, a: Link }} />
+				<ContentList tag="div" class="article__inner">
+					<ContentList tag="div" class="article__content">
+						<Content components={{ img: Image, h3: H3, a: Link }} />
 
-					{
-						draft && (
-							<ContentPlaceholder>
-								{result && <InfoCard name="Посмотреть сайт" href={result} />}
-								<InfoCard name="Обсудить проект" href="https://t.me/sonniyboii" icon="message-text-icon" />
-							</ContentPlaceholder>
-						)
-					}
+						{
+							draft && (
+								<ContentPlaceholder>
+									{result && <InfoCard name="Посмотреть сайт" href={result} />}
+									<InfoCard name="Обсудить проект" href="https://t.me/sonniyboii" icon="message-text-icon" />
+								</ContentPlaceholder>
+							)
+						}
+					</ContentList>
+					<NextCard
+						title={nextProject.data.name}
+						cover={nextProject.data.cover.img as ImageMetadata}
+						color={nextProject.data.color}
+						href={'/' + nextProject.collection + '/' + nextProject.slug}
+					/>
 				</ContentList>
 				<!-- <Toc content={toc}/> -->
 			</div>
 		</div>
 	</article>
-	<div class="container container--main">
-		<!-- <NextCard /> -->
-	</div>
 </ProjectLayout>
 
 <style>
