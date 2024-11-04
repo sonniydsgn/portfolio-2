@@ -13,29 +13,33 @@ const { mp4, webm, poster = null } = Astro.props
 ---
 
 <script>
-	const videoPlayer = document.querySelector('[data-about-player]') as HTMLVideoElement
-	const video = videoPlayer.querySelector('[data-about-video]') as HTMLVideoElement
-	const videoButton = videoPlayer.querySelector('[data-about-btn]') as HTMLButtonElement
-	const playButton = videoPlayer.querySelector('[data-about-play]') as HTMLButtonElement
+	document.addEventListener('astro:page-load', () => {
+		const videoPlayer = document.querySelector('[data-about-player]') as HTMLVideoElement
+		if (videoPlayer) {
+			const video = videoPlayer.querySelector('[data-about-video]') as HTMLVideoElement
+			const videoButton = videoPlayer.querySelector('[data-about-btn]') as HTMLButtonElement
+			const playButton = videoPlayer.querySelector('[data-about-play]') as HTMLButtonElement
 
-	const togglePlay = () => {
-		playButton.classList.add('about-card__play--hidden')
-		videoButton.setAttribute('aria-label', 'Поставить видео на паузу')
-	}
+			const togglePlay = () => {
+				playButton.classList.add('about-card__play--hidden')
+				videoButton.setAttribute('aria-label', 'Поставить видео на паузу')
+			}
 
-	const togglePause = () => {
-		playButton.classList.remove('about-card__play--hidden')
-		videoButton.setAttribute('aria-label', 'Включить видео')
-	}
+			const togglePause = () => {
+				playButton.classList.remove('about-card__play--hidden')
+				videoButton.setAttribute('aria-label', 'Включить видео')
+			}
 
-	videoButton.addEventListener('click', () => {
-		if (video.paused) video.play()
-		else video.pause()
+			videoButton.addEventListener('click', () => {
+				if (video.paused) video.play()
+				else video.pause()
+			})
+
+			video.addEventListener('play', togglePlay)
+			video.addEventListener('pause', togglePause)
+			video.addEventListener('ended', togglePause)
+		}
 	})
-
-	video.addEventListener('play', togglePlay)
-	video.addEventListener('pause', togglePause)
-	video.addEventListener('ended', togglePause)
 </script>
 
 <div class="about-card">
@@ -52,7 +56,7 @@ const { mp4, webm, poster = null } = Astro.props
 	</figure>
 	<div class="about-card__content">
 		<h3 class="text-h3 about-card__title">Лёша, 20 лет</h3>
-		<p class="about-card__desc">Живёт в Перми, ответственный и проактивный, ищет работу в продуктовой компании</p>
+		<p class="about-card__desc">Живёт в Перми, ответственный и проактивный, ищет работу в продуктовой компании</p>
 	</div>
 </div>
 

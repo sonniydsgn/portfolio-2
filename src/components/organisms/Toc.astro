@@ -13,30 +13,32 @@ import LinkItem from '../atoms/LinkItem.astro'
 ---
 
 <script>
-	const toc = document.querySelector('.toc')
-	if (toc) {
-		const tocSections = document.querySelectorAll<HTMLElement>('[data-toc]')
+	document.addEventListener('astro:page-load', () => {
+		const toc = document.querySelector('.toc')
+		if (toc) {
+			const tocSections = document.querySelectorAll<HTMLElement>('[data-toc]')
 
-		// подсвечивание ссылок
-		const observer = new IntersectionObserver(
-			entries => {
-				entries.forEach(entry => {
-					const id = entry.target.id
-					const link = document.querySelector(`.toc__item a[href="#${id}"]`)
-					const item = link.parentElement
+			// подсвечивание ссылок
+			const observer = new IntersectionObserver(
+				entries => {
+					entries.forEach(entry => {
+						const id = entry.target.id
+						const link = document.querySelector(`.toc__item a[href="#${id}"]`)
+						const item = link.parentElement
 
-					if (entry.isIntersecting && entry.target) {
-						item?.classList.add('link-item--active')
-					} else {
-						item?.classList.remove('link-item--active')
-					}
-				})
-			},
-			{ rootMargin: '-50%', threshold: 0 },
-		)
+						if (entry.isIntersecting && entry.target) {
+							item?.classList.add('link-item--active')
+						} else {
+							item?.classList.remove('link-item--active')
+						}
+					})
+				},
+				{ rootMargin: '-50%', threshold: 0 },
+			)
 
-		tocSections.forEach(section => observer.observe(section))
-	}
+			tocSections.forEach(section => observer.observe(section))
+		}
+	})
 </script>
 
 <aside class:list={['toc', className]} {...props}>

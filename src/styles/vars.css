@@ -37,7 +37,7 @@
 		--tr-md: 0.3s ease;
 		--tr-primary: 0.2s ease;
 		--tr-sm: 0.15s ease;
-		--tr-bounce: 0.2s cubic-bezier(0.07, 0.82, 0.57, 1.42);
+		--tr-bounce: 0.3s cubic-bezier(0.07, 0.82, 0.57, 1.42);
 	}
 
 	/* MOBILE SIZES */
