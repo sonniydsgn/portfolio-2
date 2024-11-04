@@ -41,7 +41,7 @@ const headings: TocItem[] = project.body
 const needToc = headings.length >= 3 || (headings.length >= 2 && result && draft)
 ---
 
-<ProjectLayout {title} {desc}>
+<ProjectLayout title={title + ' — Алексей Калинин'} {desc}>
 	<article class="article" style={'--cover-color: ' + '#' + color}>
 		<Hero class="article__hero" {title} {desc} tag="header" centered>
 			<Meta
