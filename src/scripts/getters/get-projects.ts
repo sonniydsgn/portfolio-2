@@ -10,7 +10,7 @@ const getVideo = (format: 'mp4' | 'webm', item: CollectionEntry<'projects'>) => 
 		.filter(video => {
 			return video[0].includes(item.data.cover[format]?.slice(1))
 		})
-		.map(video => Object.values(video)[1].default)
+		.map(video => Object.values(video)[1].default) as unknown as string
 }
 
 const projects = async () => {
