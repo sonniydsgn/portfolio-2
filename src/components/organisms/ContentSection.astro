@@ -12,11 +12,9 @@ const { title, icon = '◌', size = 'md' } = Astro.props
 
 const slug = slugify(title)
 const padding = size === 's' ? '24px' : '48px'
-
-// todo: подумать над тем как добавлять аватарки с тултипами
 ---
 
-<Section class="content-section" id={slug} style={'--section-padding: ' + padding}>
+<Section class="content-section" id={slug} style={'--section-padding: ' + padding} data-toc>
 	<header class="content-section__header">
 		<span class="text-h2 content-section__icon">{icon}</span>
 		<h2 class="text-h2 content-section__title">{title}</h2>

@@ -8,12 +8,17 @@ interface Props {
 	href: string | URL
 	cover: ImageMetadata
 	color?: string
+	class?: string
 }
 
-const { title, href, cover, color } = Astro.props
+const { title, href, cover, color, class: className, ...props } = Astro.props
 ---
 
-<article class:list={['next-card', { 'next-card--project': color }]} style={'--cover-color: ' + '#' + color}>
+<article
+	class:list={['next-card', { 'next-card--project': color }, className]}
+	style={'--cover-color: ' + '#' + color}
+	{...props}
+>
 	<div class="next-card__info">
 		<span class="text-h2 next-card__subtitle">Читайте также</span>
 		<h2 class="text-h3 next-card__title">

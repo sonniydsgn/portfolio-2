@@ -2,9 +2,11 @@
 import { Icon } from 'astro-icon/components'
 import Section from '../atoms/Section.astro'
 import InfoList from '../molecules/InfoList.astro'
+
+const { ...props } = Astro.props
 ---
 
-<Section class="placeholder">
+<Section class="placeholder" {...props}>
 	<Icon name="edit-box-icon" class="icon placeholder__icon" />
 	<h2 class="text-h3 placeholder__title">Кейс ещё не дописан</h2>
 	<p class="placeholder__desc">Пока предлагаю посмотреть на результат или обсудить проект лично</p>

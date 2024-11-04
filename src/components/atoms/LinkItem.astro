@@ -18,6 +18,7 @@ const { href, active = false, class: className, ...rest } = Astro.props
 <style>
 	.link-item {
 		display: inline-flex;
+		align-self: flex-start;
 		border-radius: var(--br-primary);
 
 		.link {
@@ -50,7 +51,7 @@ const { href, active = false, class: className, ...rest } = Astro.props
 		.link {
 			color: var(--text-primary-0);
 			font-weight: 700;
-			text-decoration: none;
+			text-decoration-color: transparent;
 		}
 	}
 </style>

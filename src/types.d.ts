@@ -4,3 +4,8 @@ export interface ButtonLink extends HTMLAttributes<'button'>, HTMLAttributes<'a'
 	link?: string
 	class?: string
 }
+
+export interface TocItem {
+	title: string
+	slug: string
+}

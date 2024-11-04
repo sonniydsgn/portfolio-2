@@ -8,7 +8,10 @@ import Meta from '@/components/molecules/Meta.astro'
 import ContentPlaceholder from '@/components/organisms/ContentPlaceholder.astro'
 import Hero from '@/components/organisms/Hero.astro'
 import NextCard from '@/components/organisms/NextCard.astro'
+import Toc from '@/components/organisms/Toc.astro'
 import ProjectLayout from '@/layouts/ProjectLayout.astro'
+import slugify from '@/scripts/libs/slugify'
+import type { TocItem } from '@/types'
 
 import getProjects from '@/scripts/getters/get-projects'
 import type { ImageMetadata } from 'astro'
@@ -24,12 +27,18 @@ const { Content } = await project.render()
 
 const { name: title, desc, place_work, color, cover, result, draft } = project.data
 
-// todo: add toc
 // select next page
 const projects = await getProjects()
 const nextProject = projects.find(({ slug }) => slug !== project.slug)
 
-console.log(nextProject)
+// toc
+const headings: TocItem[] = project.body
+	.split('\n')
+	.filter(line => line.includes('title'))
+	.map(line => line.match(/title="([^"]+)"/)[1])
+	.map(title => ({ title, slug: '#' + slugify(title) }))
+
+const needToc = headings.length >= 3 || (headings.length >= 2 && result && draft)
 ---
 
 <ProjectLayout {title} {desc}>
@@ -74,31 +83,33 @@ console.log(nextProject)
 				}
 			</div>
 		</Hero>
-		<div class="container container--main">
-			<div class="article__layout">
-				<ContentList tag="div" class="article__inner">
-					<ContentList tag="div" class="article__content">
-						<Content components={{ img: Image, h3: H3, a: Link }} />
+		<ContentList tag="div" class="article__inner">
+			<div class="container container--main">
+				<ContentList tag="div" class="article__content">
+					<Content components={{ img: Image, h3: H3, a: Link }} />
 
-						{
-							draft && (
-								<ContentPlaceholder>
-									{result && <InfoCard name="Посмотреть сайт" href={result} />}
-									<InfoCard name="Обсудить проект" href="https://t.me/sonniyboii" icon="message-text-icon" />
-								</ContentPlaceholder>
-							)
-						}
-					</ContentList>
-					<NextCard
-						title={nextProject.data.name}
-						cover={nextProject.data.cover.img as ImageMetadata}
-						color={nextProject.data.color}
-						href={'/' + nextProject.collection + '/' + nextProject.slug}
-					/>
+					{
+						draft && (
+							<ContentPlaceholder id="result" data-toc>
+								{result && <InfoCard name="Посмотреть сайт" href={result} />}
+								<InfoCard name="Обсудить проект" href="https://t.me/sonniyboii" icon="message-text-icon" />
+							</ContentPlaceholder>
+						)
+					}
 				</ContentList>
-				<!-- <Toc content={toc}/> -->
+
+				{needToc && <Toc class="article__toc" list={headings} hasResult={draft && result != null} />}
 			</div>
-		</div>
+			<div class="container container--main">
+				<NextCard
+					class="article__next-page"
+					title={nextProject.data.name}
+					cover={nextProject.data.cover.img as ImageMetadata}
+					color={nextProject.data.color}
+					href={'/' + nextProject.collection + '/' + nextProject.slug}
+				/>
+			</div>
+		</ContentList>
 	</article>
 </ProjectLayout>
 
@@ -128,8 +139,14 @@ console.log(nextProject)
 		width: 100%;
 	}
 
-	.article__layout {
-		grid-column: 2 / 3;
+	.article__content,
+	.article__next-page {
+		grid-column: 2 / span 1;
+	}
+
+	.article__toc {
+		grid-column: 3 / span 1;
+		margin-inline-start: 64px;
 	}
 
 	.article__content {

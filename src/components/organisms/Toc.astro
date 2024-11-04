@@ -1,0 +1,83 @@
+---
+import type { TocItem } from '@/types'
+
+interface Props {
+	list: TocItem[]
+	hasResult: boolean
+	class?: string
+}
+
+const { list, hasResult, class: className, ...props } = Astro.props
+
+import LinkItem from '../atoms/LinkItem.astro'
+---
+
+<script>
+	const toc = document.querySelector('.toc')
+	if (toc) {
+		const tocSections = document.querySelectorAll<HTMLElement>('[data-toc]')
+
+		// подсвечивание ссылок
+		const observer = new IntersectionObserver(
+			entries => {
+				entries.forEach(entry => {
+					const id = entry.target.id
+					const link = document.querySelector(`.toc__item a[href="#${id}"]`)
+					const item = link.parentElement
+
+					if (entry.isIntersecting && entry.target) {
+						item?.classList.add('link-item--active')
+					} else {
+						item?.classList.remove('link-item--active')
+					}
+				})
+			},
+			{ rootMargin: '-50%', threshold: 0 },
+		)
+
+		tocSections.forEach(section => observer.observe(section))
+	}
+</script>
+
+<aside class:list={['toc', className]} {...props}>
+	<span class="text-h2 toc__title">Содержание</span>
+	<ul class="list-reset toc__list">
+		{
+			list.map(({ title, slug }) => (
+				<LinkItem class="toc__item" href={slug}>
+					{title}
+				</LinkItem>
+			))
+		}
+		{
+			hasResult && (
+				<LinkItem class="toc__item" href="#result">
+					Результат
+				</LinkItem>
+			)
+		}
+	</ul>
+</aside>
+
+<style>
+	.toc {
+		display: flex;
+		position: sticky;
+		top: 200px;
+		flex-direction: column;
+		align-items: start;
+		gap: 24px;
+	}
+
+	.toc__title {
+	}
+
+	.toc__list {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+	}
+
+	.toc__item {
+	}
+</style>
