@@ -14,11 +14,11 @@ const { color, cover, additional_image, name, desc, place_work, year } = project
 ---
 
 <article class="project-card" style={'--cover-color: ' + '#' + color}>
-	<div class="project-card__cover">
+	<div class="project-card__cover-container" transition:name={project.slug + '-cover'}>
 		{
 			cover.mp4 ? (
 				<video
-					class="project-card__image"
+					class="project-card__cover"
 					poster={cover.img.src}
 					autoplay
 					preload="auto"
@@ -33,7 +33,7 @@ const { color, cover, additional_image, name, desc, place_work, year } = project
 				</video>
 			) : (
 				<Picture
-					class="project-card__image"
+					class="project-card__cover"
 					src={cover.img as ImageMetadata}
 					alt={cover?.alt}
 					formats={['avif', 'webp']}
@@ -53,6 +53,7 @@ const { color, cover, additional_image, name, desc, place_work, year } = project
 				formats={['avif', 'webp']}
 				width={additional_image.img.width}
 				height={additional_image.img.height}
+				transition:name={project.slug + '-add-image'}
 			/>
 		)
 	}
@@ -90,14 +91,14 @@ const { color, cover, additional_image, name, desc, place_work, year } = project
 
 		@media (hover) {
 			&:hover {
-				.project-card__image {
-					transform: scale(1);
+				.project-card__cover {
+					transform: scale(0.9);
 				}
 			}
 		}
 	}
 
-	.project-card__cover {
+	.project-card__cover-container {
 		margin-block-end: 24px;
 		border-radius: var(--br-primary);
 		background-color: var(--cover-color);
@@ -105,9 +106,9 @@ const { color, cover, additional_image, name, desc, place_work, year } = project
 		overflow: hidden;
 	}
 
-	.project-card__image {
+	.project-card__cover {
 		display: flex;
-		transform: scale(0.85);
+		transform: scale(0.8);
 		transition: transform var(--tr-md);
 		background-color: var(--bg-secondary);
 		width: 100%;

@@ -53,11 +53,11 @@ const needToc = headings.length >= 3 || (headings.length >= 2 && result && draft
 				}}
 				year={project.data.year}
 			/>
-			<div class="article__cover">
+			<div class="article__cover-container" transition:name={project.slug + '-cover'}>
 				{
 					cover.mp4 ? (
 						<video
-							class="article__image"
+							class="article__cover"
 							poster={cover.img.src}
 							autoplay
 							preload="auto"
@@ -72,7 +72,7 @@ const needToc = headings.length >= 3 || (headings.length >= 2 && result && draft
 						</video>
 					) : (
 						<Picture
-							class="article__image"
+							class="article__cover"
 							src={cover.img as ImageMetadata}
 							alt={cover?.alt}
 							formats={['avif', 'webp']}
@@ -87,7 +87,6 @@ const needToc = headings.length >= 3 || (headings.length >= 2 && result && draft
 			<div class="container container--main">
 				<ContentList tag="div" class="article__content">
 					<Content components={{ img: Image, h3: H3, a: Link }} />
-
 					{
 						draft && (
 							<ContentPlaceholder id="result" data-toc>
@@ -125,14 +124,14 @@ const needToc = headings.length >= 3 || (headings.length >= 2 && result && draft
 		margin-block-start: 32px;
 	}
 
-	.article__cover {
+	.article__cover-container {
 		margin-block-start: 48px;
 		border-radius: var(--br-xl);
 		background-color: var(--cover-color);
 		width: 100%;
 	}
 
-	.article__image {
+	.article__cover {
 		display: flex;
 		transform: scale(0.9);
 		background-color: var(--bg-secondary);
