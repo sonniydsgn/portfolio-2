@@ -19,12 +19,12 @@ const { mp4, webm, poster = null } = Astro.props
 	const playButton = videoPlayer.querySelector('[data-about-play]') as HTMLButtonElement
 
 	const togglePlay = () => {
-		playButton.style.transform = 'scale(0)'
+		playButton.classList.add('about-card__play--hidden')
 		videoButton.setAttribute('aria-label', 'Поставить видео на паузу')
 	}
 
 	const togglePause = () => {
-		playButton.style.transform = ''
+		playButton.classList.remove('about-card__play--hidden')
 		videoButton.setAttribute('aria-label', 'Включить видео')
 	}
 
@@ -93,7 +93,17 @@ const { mp4, webm, poster = null } = Astro.props
 		position: absolute;
 		right: 0;
 		bottom: 0;
+		transition:
+			transform var(--tr-bounce),
+			scale var(--tr-bounce);
 		pointer-events: none;
+
+		&.about-card__play--hidden {
+			scale: 0;
+			transition:
+				transform var(--tr-bounce),
+				scale var(--tr-sm);
+		}
 	}
 
 	.about-card__desc {

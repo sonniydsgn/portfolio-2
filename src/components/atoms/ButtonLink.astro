@@ -32,7 +32,6 @@ const { href, class: className, type = 'button', ...rest } = Astro.props
 		justify-content: center;
 		align-items: center;
 		gap: 4px;
-		transition: transform var(--tr-primary);
 		font-weight: 500;
 		font-size: var(--font-sm);
 		line-height: 1;
@@ -47,12 +46,13 @@ const { href, class: className, type = 'button', ...rest } = Astro.props
 
 	.btn--primary {
 		backdrop-filter: var(--button-primary-blur);
+		transition: transform var(--tr-bounce);
 		border: 1px solid var(--button-primary-border);
 		border-radius: var(--br-md);
 		background-color: var(--button-primary-bg);
 		padding-inline: 16px;
 		padding-block: 12px;
-		color: var(--text-primary-0);
+		color: var(--button-primary-text-primary);
 
 		&.btn--only-icon {
 			padding: 8px;
@@ -77,11 +77,13 @@ const { href, class: className, type = 'button', ...rest } = Astro.props
 
 	.btn--secondary {
 		backdrop-filter: var(--button-secondary-blur);
+		transition: transform var(--tr-bounce);
 		border: 1px solid var(--button-secondary-border);
 		border-radius: var(--br-md);
 		background-color: var(--button-secondary-bg);
 		padding-inline: 16px;
 		padding-block: 8px;
+		color: var(--button-secondary-text);
 
 		&.btn--only-icon {
 			border-radius: 100%;
@@ -111,7 +113,7 @@ const { href, class: className, type = 'button', ...rest } = Astro.props
 		--stroke-color: var(--border-primary);
 
 		transition:
-			text-decoration-color 0.15s ease,
+			text-decoration-color var(--tr-sm),
 			opacity var(--tr-primary);
 		text-decoration: underline;
 		text-decoration-color: var(--stroke-color);
