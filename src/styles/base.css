@@ -64,3 +64,51 @@
 .main {
 	padding-block-start: var(--main-padding);
 }
+
+@keyframes fade-in {
+	from {
+		opacity: 0;
+	}
+}
+
+@keyframes fade-out {
+	to {
+		opacity: 0;
+	}
+}
+
+/* @keyframes slide-from-left {
+	from {
+		transform: translateX(-30px);
+	}
+}
+
+@keyframes slide-to-right {
+	to {
+		transform: translateX(30px);
+	}
+} */
+
+@keyframes scale-from {
+	from {
+		transform: scale(0.98);
+	}
+}
+
+@keyframes scale-to {
+	to {
+		transform: scale(1);
+	}
+}
+
+::view-transition-old(case) {
+	animation:
+		90ms cubic-bezier(0.4, 0, 1, 1) both fade-out,
+		300ms cubic-bezier(0.4, 0, 0.2, 1) both scale-to;
+}
+
+::view-transition-new(case) {
+	animation:
+		210ms cubic-bezier(0, 0, 0.2, 1) 90ms both fade-in,
+		300ms cubic-bezier(0.4, 0, 0.2, 1) both scale-from;
+}

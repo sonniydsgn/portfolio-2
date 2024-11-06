@@ -14,7 +14,7 @@ const { color, cover, additional_image, name, desc, place_work, year } = project
 ---
 
 <article class="project-card" style={'--cover-color: ' + '#' + color}>
-	<div class="project-card__cover-container" transition:name={project.slug + '-cover'}>
+	<div class="project-card__cover-container">
 		{
 			cover.mp4 ? (
 				<video
@@ -53,7 +53,6 @@ const { color, cover, additional_image, name, desc, place_work, year } = project
 				formats={['avif', 'webp']}
 				width={additional_image.img.width}
 				height={additional_image.img.height}
-				transition:name={project.slug + '-add-image'}
 			/>
 		)
 	}

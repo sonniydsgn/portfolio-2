@@ -13,7 +13,7 @@ interface Props {
 const { title, desc, image } = Astro.props
 ---
 
-<html lang="ru" class="page">
+<html lang="ru" class="page" transition:name="case">
 	<Head {title} {desc} {image} />
 	<body class="page__body">
 		<div class="site-container">
