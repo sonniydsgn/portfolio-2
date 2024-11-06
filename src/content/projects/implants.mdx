@@ -1,0 +1,53 @@
+---
+name: Имплантация зубов
+desc: Запустил лендинг с 3д-анимацией и системой подарков для стоматологической клиники
+cover:
+  img: './media/implants/cover.jpg'
+  mp4: './media/implants/video_cover.mp4'
+  webm: './media/implants/video_cover.webm'
+  alt: ''
+additional_image:
+  img: './media/implants/additional_image.png'
+  alt: ''
+color: CDD6E7
+year: 2023
+place_work:
+  name: Фактор Альфа
+  logo: './media/icons/factor-alfa.svg'
+  link: https://factor-alfa.ru
+result: https://implants.factor-alfa.ru
+draft: false
+---
+
+{/* импорты */}
+import ContentSection from '@/components/organisms/ContentSection.astro'
+import InfoCard from '@/components/atoms/InfoCard.astro'
+import InfoList from '@/components/molecules/InfoList.astro'
+import Kolya from '@/assets/avatar/kolya_krylov.jpg'
+import Gratitude from './media/implants/Gratitude_FA.pdf'
+
+{/* контент */}
+<ContentSection title="О проекте">
+
+  ### Моя роль
+  <InfoList>
+    <InfoCard name="Дизайнер интерфейса" desc="быстрое исследование, интерактивный дизайн, визуальный дизайн" icon="image-icon"/>
+    <InfoCard name="Фронтендер" icon="code-icon" desc="верстка, анимация, тестирование" />
+  </InfoList>
+
+  ### Команда
+  <InfoList>
+    <InfoCard name="Крылов Николай" image={Kolya} desc="бэкендер" />
+  </InfoList>
+
+  ### Время работы
+  <InfoCard name="6 месяцев" desc="запустили в июле 2024" icon="clock-icon" />
+
+</ContentSection>
+
+<ContentSection title="Хайлайты">
+  <figure>
+    []('./media/nova-ug/highlights.jpg')
+    <figcaption></figcaption>
+  </figure>
+</ContentSection>

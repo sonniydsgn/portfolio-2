@@ -14,21 +14,25 @@ const getVideo = (format: 'mp4' | 'webm', item: CollectionEntry<'projects'>) => 
 }
 
 const projects = async () => {
-	return (await getCollection('projects')).map(item => {
-		return {
-			...item,
-			data: {
-				...item.data,
-				name: typograph.execute(item.data.name),
-				desc: typograph.execute(item.data.desc),
-				cover: {
-					...item.data.cover,
-					mp4: getVideo('mp4', item),
-					webm: getVideo('webm', item),
+	return (await getCollection('projects'))
+		.map(item => {
+			return {
+				...item,
+				data: {
+					...item.data,
+					name: typograph.execute(item.data.name),
+					desc: typograph.execute(item.data.desc),
+					cover: {
+						...item.data.cover,
+						mp4: getVideo('mp4', item),
+						webm: getVideo('webm', item),
+					},
 				},
-			},
-		}
-	})
+			}
+		})
+		.toSorted((a, b) => {
+			return b.data.year - a.data.year
+		})
 }
 
 export default projects

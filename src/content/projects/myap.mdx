@@ -1,0 +1,48 @@
+---
+name: Мама, я повар!
+desc: Разработал подростковую платформу для обмена рецептами блюд и выиграл всероссийскую олимпиаду
+cover:
+  img: './media/mamayapovar/cover.jpg'
+  alt: ''
+color: B0D577
+year: 2023
+place_work:
+  name: Мама, я повар!
+  logo: './media/icons/mamayapovar.svg'
+  link: https://github.com/mamayapovar/platform
+result: https://mamayapovar.github.io
+draft: false
+---
+
+{/* импорты */}
+import ContentSection from '@/components/organisms/ContentSection.astro'
+import InfoCard from '@/components/atoms/InfoCard.astro'
+import InfoList from '@/components/molecules/InfoList.astro'
+import Kolya from '@/assets/avatar/kolya_krylov.jpg'
+import Gratitude from './media/implants/Gratitude_FA.pdf'
+
+{/* контент */}
+<ContentSection title="О проекте">
+
+  ### Моя роль
+  <InfoList>
+    <InfoCard name="Дизайнер интерфейса" desc="быстрое исследование, интерактивный дизайн, визуальный дизайн" icon="image-icon"/>
+    <InfoCard name="Фронтендер" icon="code-icon" desc="верстка, анимация, тестирование" />
+  </InfoList>
+
+  ### Команда
+  <InfoList>
+    <InfoCard name="Крылов Николай" image={Kolya} desc="бэкендер" />
+  </InfoList>
+
+  ### Время работы
+  <InfoCard name="6 месяцев" desc="запустили в июле 2024" icon="clock-icon" />
+
+</ContentSection>
+
+<ContentSection title="Хайлайты">
+  <figure>
+    []('./media/nova-ug/highlights.jpg')
+    <figcaption></figcaption>
+  </figure>
+</ContentSection>

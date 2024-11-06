@@ -2,7 +2,7 @@
 
 ## Генерация обложки
 
-`ffmpeg -i original.mp4 -vframes 1 -q:v 1 video_cover.jpg`
+`ffmpeg -i original.mp4 -vframes 1 -q:v 1 cover.jpg`
 
 ## Сжатие .mp4
 
