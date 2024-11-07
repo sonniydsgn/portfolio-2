@@ -28,7 +28,7 @@ interface Props extends Page {
 const { frontmatter, title = frontmatter.title, desc = frontmatter?.desc, image, hero } = Astro.props
 
 const projects = await getProjects()
-const lastProject = projects.sort((a, b) => a.data.year - b.data.year)[0]
+const lastProject = projects.sort((a, b) => b.data.year - a.data.year)[0]
 const siteTitle = Astro.url.pathname === '/' ? title : title + ' — Алексей Калинин'
 ---
 
