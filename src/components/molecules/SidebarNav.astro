@@ -51,23 +51,25 @@ const currentPage = Astro.url.pathname !== '/' ? Astro.url.pathname.replace(/\/$
 		}
 	}
 
-	@media (prefers-color-scheme: dark) {
-		:root:not([data-theme]) .sidebar-nav__list {
+	@media (width <= 768) {
+		@media (prefers-color-scheme: dark) {
+			:root:not([data-theme]) .sidebar-nav__list {
+				backdrop-filter: var(--blur-sm);
+				background-color: var(--bg-elevate);
+
+				.sidebar-nav__item {
+					--clr-bg-active: var(--bg-secondary);
+				}
+			}
+		}
+
+		:root[data-theme='dark'] .sidebar-nav__list {
 			backdrop-filter: var(--blur-sm);
 			background-color: var(--bg-elevate);
 
 			.sidebar-nav__item {
 				--clr-bg-active: var(--bg-secondary);
 			}
-		}
-	}
-
-	:root[data-theme='dark'] .sidebar-nav__list {
-		backdrop-filter: var(--blur-sm);
-		background-color: var(--bg-elevate);
-
-		.sidebar-nav__item {
-			--clr-bg-active: var(--bg-secondary);
 		}
 	}
 
