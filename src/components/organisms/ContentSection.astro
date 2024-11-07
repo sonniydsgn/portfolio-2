@@ -1,6 +1,6 @@
 ---
 import Section from '@/components/atoms/Section.astro'
-import slugify from '@/scripts/libs/slugify'
+import { slugify, transliterate } from 'transliteration'
 
 interface Props {
 	title: string
@@ -12,7 +12,7 @@ interface Props {
 
 const { title, icon = '◌', size = 'md', type = 'section', class: className, ...props } = Astro.props
 
-const slug = title && slugify(title)
+const slug = title && slugify(transliterate(title))
 const padding = size === 's' ? '24px' : '48px'
 ---
 

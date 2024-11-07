@@ -10,8 +10,8 @@ import Hero from '@/components/organisms/Hero.astro'
 import NextCard from '@/components/organisms/NextCard.astro'
 import Toc from '@/components/organisms/Toc.astro'
 import ProjectLayout from '@/layouts/ProjectLayout.astro'
-import slugify from '@/scripts/libs/slugify'
 import type { TocItem } from '@/types'
+import { slugify, transliterate } from 'transliteration'
 
 import ContentSection from '@/components/organisms/ContentSection.astro'
 import getProjects from '@/scripts/getters/get-projects'
@@ -37,7 +37,7 @@ const headings: TocItem[] = project.body
 	.split('\n')
 	.filter(line => line.includes('title'))
 	.map(line => line.match(/title="([^"]+)"/)[1])
-	.map(title => ({ title, slug: '#' + slugify(title) }))
+	.map(title => ({ title, slug: '#' + slugify(transliterate(title)) }))
 
 const needToc = headings.length >= 3 || (headings.length >= 2 && result && draft)
 ---
@@ -54,6 +54,7 @@ const needToc = headings.length >= 3 || (headings.length >= 2 && result && draft
 				}}
 				year={project.data.year}
 			/>
+
 			<div class="article__cover-container">
 				{
 					cover.mp4 ? (
