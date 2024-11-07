@@ -56,6 +56,11 @@ const lastBuildDate = new Intl.DateTimeFormat('ru-RU', {
 		margin-block-start: 140px;
 		border-top: 1px dashed var(--border-primary);
 		padding-block: 48px;
+
+		@media (width <= 768) {
+			margin-block-start: 88px;
+			padding-block-end: calc(64px + 48px);
+		}
 	}
 
 	.footer__inner {
@@ -71,6 +76,12 @@ const lastBuildDate = new Intl.DateTimeFormat('ru-RU', {
 
 		@media (width <= 1024) {
 			grid-column: 1 / span 4;
+		}
+
+		@media (width <= 768) {
+			grid-row: unset;
+			grid-column: unset;
+			margin-block-end: 40px;
 		}
 	}
 
@@ -98,11 +109,6 @@ const lastBuildDate = new Intl.DateTimeFormat('ru-RU', {
 	.footer__list {
 	}
 
-	.footer__list--nav,
-	.footer__list--update {
-		grid-column: 6 / span 3;
-	}
-
 	.footer__list--nav {
 		grid-row: 1 / span 1;
 	}
@@ -110,6 +116,10 @@ const lastBuildDate = new Intl.DateTimeFormat('ru-RU', {
 	.footer__list--update {
 		grid-row: 2 / span 1;
 		align-self: end;
+
+		@media (width <= 768) {
+			order: 1;
+		}
 	}
 
 	.footer__list--contacts {
@@ -119,11 +129,30 @@ const lastBuildDate = new Intl.DateTimeFormat('ru-RU', {
 		@media (width <= 1024) {
 			grid-column: 10 / span 3;
 		}
+
+		@media (width <= 768) {
+			grid-row: unset;
+			grid-column: unset;
+		}
+	}
+
+	.footer__list--nav,
+	.footer__list--update {
+		grid-column: 6 / span 3;
+
+		@media (width <= 768) {
+			grid-row: unset;
+			grid-column: unset;
+		}
 	}
 
 	.footer__list--nav,
 	.footer__list--contacts {
 		gap: 16px;
+
+		@media (width <= 768) {
+			margin-block-end: 48px;
+		}
 	}
 
 	/* навигация */
@@ -133,7 +162,7 @@ const lastBuildDate = new Intl.DateTimeFormat('ru-RU', {
 	.footer__nav-list {
 		display: flex;
 		flex-direction: column;
-		gap: 20px;
+		gap: 24px;
 	}
 
 	.footer__nav-item {

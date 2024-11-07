@@ -16,27 +16,35 @@ import ButtonLink from '../atoms/ButtonLink.astro'
 <style>
 	@media (prefers-color-scheme: light) {
 		:root:not([data-theme]) [data-theme-icon='light'] {
+			display: block;
 			color: var(--button-primary-text-primary);
 		}
 	}
 
 	@media (prefers-color-scheme: dark) {
 		:root:not([data-theme]) [data-theme-icon='dark'] {
+			display: block;
 			color: var(--button-primary-text-primary);
 		}
 	}
 
 	:root[data-theme='light'] [data-theme-icon='light'] {
+		display: block;
 		color: var(--button-primary-text-primary);
 	}
 
 	:root[data-theme='dark'] [data-theme-icon='dark'] {
+		display: block;
 		color: var(--button-primary-text-primary);
 	}
 
 	.theme-switcher__icon {
 		transition: color var(--tr-primary);
 		color: var(--button-primary-text-secondary);
+
+		@media (width <= 768) {
+			display: none;
+		}
 	}
 </style>
 

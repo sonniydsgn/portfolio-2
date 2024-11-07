@@ -9,6 +9,6 @@
 	"Адаптация под телефоны": {
 		"scope": "css",
 		"prefix": "media",
-		"body": ["@media (width <= 1024) {", "\t$1", "}"],
+		"body": ["@media (width <= 768) {", "\t$1", "}"],
 	},
 }

@@ -7,8 +7,7 @@
 
 	/* FONT FAMILIES */
 	--ff-primary: SuisseIntl, Inter, Roboto, 'Helvetica Neue', system-ui, sans-serif;
-	--ff-secondary: JetBrainsMono, ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono',
-		monospace;
+	--ff-secondary: JetBrainsMono, ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, monospace;
 
 	/* FONT SIZES */
 	--font-lg: 24px;
@@ -42,6 +41,9 @@
 
 	/* MOBILE SIZES */
 	@media (width <= 768) {
+		--font-primary: 16px;
+		--font-sm: 14px;
+
 		--container-offset: 12px;
 		--grid-columns: 0;
 	}

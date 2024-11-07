@@ -77,8 +77,13 @@ const siteTitle = Astro.url.pathname === '/' ? title : title + ' — Алекс
 <style>
 	.base__main {
 		width: 100%;
+
 		@media (width <= 1024) {
 			padding-block-start: 56px;
+		}
+
+		@media (width <= 768) {
+			padding-block-start: 24px;
 		}
 	}
 </style>

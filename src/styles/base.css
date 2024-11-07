@@ -11,8 +11,13 @@
 	font-family: var(--ff-primary);
 
 	@media (width <= 1024) {
-		font-size: var(--font-sm);
 		--main-padding: 32px;
+	}
+
+	@media (width <= 768) {
+		--main-padding: 24px;
+
+		font-size: var(--font-primary);
 	}
 }
 

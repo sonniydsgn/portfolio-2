@@ -20,6 +20,7 @@ const { href, active = false, class: className, ...rest } = Astro.props
 		--padding-inline: 6px;
 		--padding-block: 4px;
 		--link-opacity: 0.6;
+		--clr-bg-active: var(--bg-tertiary);
 
 		display: inline-flex;
 		align-self: flex-start;
@@ -51,7 +52,7 @@ const { href, active = false, class: className, ...rest } = Astro.props
 	}
 
 	.link-item--active {
-		background-color: var(--bg-tertiary);
+		background-color: var(--clr-bg-active);
 
 		.link {
 			color: var(--text-primary-0);

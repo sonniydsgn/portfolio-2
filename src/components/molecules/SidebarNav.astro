@@ -20,6 +20,15 @@ const currentPage = Astro.url.pathname !== '/' ? Astro.url.pathname.replace(/\/$
 <style>
 	.sidebar-nav {
 		display: flex;
+
+		@media (width <= 768) {
+			position: fixed;
+			right: 0;
+			bottom: 24px;
+			left: 0;
+			z-index: 10;
+			margin-inline: 16px;
+		}
 	}
 
 	.sidebar-nav__list {
@@ -30,6 +39,46 @@ const currentPage = Astro.url.pathname !== '/' ? Astro.url.pathname.replace(/\/$
 		@media (width <= 1024) {
 			flex-direction: row;
 			gap: 16px;
+		}
+
+		@media (width <= 768) {
+			gap: 8px;
+			border: 1px solid var(--border-secondary);
+			border-radius: var(--br-lg);
+			background-color: var(--bg-secondary);
+			padding: 8px;
+			width: 100%;
+		}
+	}
+
+	@media (prefers-color-scheme: dark) {
+		:root:not([data-theme]) .sidebar-nav__list {
+			backdrop-filter: var(--blur-sm);
+			background-color: var(--bg-elevate);
+
+			.sidebar-nav__item {
+				--clr-bg-active: var(--bg-secondary);
+			}
+		}
+	}
+
+	:root[data-theme='dark'] .sidebar-nav__list {
+		backdrop-filter: var(--blur-sm);
+		background-color: var(--bg-elevate);
+
+		.sidebar-nav__item {
+			--clr-bg-active: var(--bg-secondary);
+		}
+	}
+
+	.sidebar-nav__item {
+		@media (width <= 768) {
+			--padding-block: 12px;
+
+			justify-content: center;
+			align-items: center;
+			width: 100%;
+			text-align: center;
 		}
 	}
 </style>

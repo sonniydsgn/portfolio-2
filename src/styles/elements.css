@@ -82,7 +82,27 @@
 	text-wrap: balance;
 
 	@media (width <= 768) {
-		font-size: var(--font-sm);
+		font-size: var(--font-primary);
 		letter-spacing: 0;
+	}
+}
+
+.page-icon {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-inline-start: auto;
+	border: 1px solid var(--border-primary);
+	border-radius: 24px;
+	padding-inline: 12px;
+	padding-block: 4px;
+	color: var(--text-primary-0);
+
+	@media (width <= 768) {
+		padding-inline: 8px;
+
+		.icon {
+			--size: 16px;
+		}
 	}
 }

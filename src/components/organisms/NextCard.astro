@@ -19,14 +19,16 @@ const { title, href, cover, color, class: className, ...props } = Astro.props
 	style={'--cover-color: ' + '#' + color}
 	{...props}
 >
-	<div class="next-card__info">
-		<span class="text-h2 next-card__subtitle">Читайте также</span>
-		<h2 class="text-h3 next-card__title">
-			<a class="next-card__link" {href}>
-				{title}
-			</a>
-		</h2>
-		<div class="next-card__icon">
+	<div class="next-card__inner">
+		<div class="next-card__info">
+			<span class="text-h2 next-card__subtitle">Читайте также</span>
+			<h2 class="text-h3 next-card__title">
+				<a class="next-card__link" {href}>
+					{title}
+				</a>
+			</h2>
+		</div>
+		<div class="page-icon next-card__page-icon">
 			<Icon name="arrow-right-icon" class="icon" aria-hidden="true" />
 		</div>
 	</div>
@@ -47,7 +49,6 @@ const { title, href, cover, color, class: className, ...props } = Astro.props
 		display: grid;
 		position: relative;
 		grid-template-columns: 1fr 400px;
-		gap: 24px;
 		border: 1px solid var(--border-secondary);
 		border-radius: var(--br-xl);
 		background-color: var(--bg-primary);
@@ -56,9 +57,21 @@ const { title, href, cover, color, class: className, ...props } = Astro.props
 		@media (hover) {
 			&:hover {
 				.next-card__cover {
-					transform: scale(1.15);
+					transform: scale(1.1);
 				}
 			}
+		}
+
+		&:active {
+			.next-card__cover {
+				transform: scale(1.15);
+			}
+		}
+
+		@media (width <= 768) {
+			grid-template-columns: 1fr;
+			border-radius: var(--br-lg);
+			padding: 8px 8px 24px;
 		}
 	}
 
@@ -78,22 +91,52 @@ const { title, href, cover, color, class: className, ...props } = Astro.props
 				}
 			}
 		}
+
+		@media (width <= 768) {
+			transform: scale(0.9);
+		}
+
+		&:active {
+			.next-card__cover {
+				transform: scale(0.95);
+			}
+		}
+	}
+
+	.next-card__inner {
+		display: flex;
+		padding-inline-start: 16px;
+		padding-inline-end: 24px;
+		padding-block-start: 32px;
+		padding-block-end: 24px;
+
+		@media (width <= 768) {
+			--padding-inline: 8px;
+
+			padding-inline: var(--padding-inline);
+			padding-block: 0;
+		}
 	}
 
 	.next-card__info {
 		display: flex;
 		flex-direction: column;
-		gap: 16px;
-		padding-inline-start: 16px;
-		padding-block-start: 32px;
-		padding-block-end: 24px;
 	}
 
 	.next-card__subtitle {
+		margin-block-end: 16px;
+
+		@media (width <= 768) {
+			margin-block-end: 8px;
+		}
 	}
 
 	.next-card__title {
 		max-width: 340px;
+	}
+
+	.next-card__page-icon {
+		margin-block-start: auto;
 	}
 
 	.next-card__link {
@@ -105,22 +148,15 @@ const { title, href, cover, color, class: className, ...props } = Astro.props
 		}
 	}
 
-	.next-card__icon {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		margin-inline-start: auto;
-		margin-block-start: auto;
-		border: 1px solid var(--border-primary);
-		border-radius: 24px;
-		padding-inline: 12px;
-		padding-block: 4px;
-		color: var(--text-primary-0);
-	}
-
 	.next-card__cover-container {
 		border-radius: var(--br-primary);
 		overflow: hidden;
+
+		@media (width <= 768) {
+			order: -1;
+			margin-block-end: 24px;
+			margin-block-end: 20px;
+		}
 	}
 
 	.next-card__cover {

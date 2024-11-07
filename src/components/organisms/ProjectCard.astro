@@ -70,7 +70,7 @@ const { color, cover, additional_image, name, desc, place_work, year } = project
 				client={{ logo: place_work.logo as ImageMetadata, name: place_work.name }}
 				{year}
 			/>
-			<div class="project-card__icon">
+			<div class="page-icon project-card__page-icon">
 				<Icon name="arrow-right-icon" class="icon" aria-hidden="true" />
 			</div>
 		</div>
@@ -95,6 +95,17 @@ const { color, cover, additional_image, name, desc, place_work, year } = project
 				}
 			}
 		}
+
+		&:active {
+			.project-card__cover {
+				transform: scale(0.95);
+			}
+		}
+
+		@media (width <= 768) {
+			border-radius: var(--br-lg);
+			padding: 8px 8px 24px;
+		}
 	}
 
 	.project-card__cover-container {
@@ -103,6 +114,10 @@ const { color, cover, additional_image, name, desc, place_work, year } = project
 		background-color: var(--cover-color);
 		width: 100%;
 		overflow: hidden;
+
+		@media (width <= 768) {
+			margin-block-end: 16px;
+		}
 	}
 
 	.project-card__cover {
@@ -112,6 +127,10 @@ const { color, cover, additional_image, name, desc, place_work, year } = project
 		background-color: var(--bg-secondary);
 		width: 100%;
 		pointer-events: none;
+
+		@media (width <= 768) {
+			transform: scale(0.9);
+		}
 	}
 
 	.project-card__add-image {
@@ -156,17 +175,5 @@ const { color, cover, additional_image, name, desc, place_work, year } = project
 		font-size: var(--font-sm);
 		line-height: var(--lh-lg);
 		font-family: var(--ff-secondary);
-	}
-
-	.project-card__icon {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		margin-inline-start: auto;
-		border: 1px solid var(--border-primary);
-		border-radius: 24px;
-		padding-inline: 12px;
-		padding-block: 4px;
-		color: var(--text-primary-0);
 	}
 </style>
