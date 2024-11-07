@@ -119,6 +119,10 @@ const { color, cover, additional_image, name, desc, place_work, year } = project
 		position: absolute;
 		right: -130px;
 		bottom: 120px;
+
+		@media (width <= 1024) {
+			display: none;
+		}
 	}
 
 	.project-card__content {

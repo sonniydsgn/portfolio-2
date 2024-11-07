@@ -38,34 +38,44 @@ const siteTitle = Astro.url.pathname === '/' ? title : title + ' — Алекс
 		<div class="site-container">
 			<Header />
 			<div class="base">
-				<div class="container container--main">
-					<Sidebar />
-					<main class="main base__main">
-						<Hero
-							class="base__hero"
-							title={hero?.title || title}
-							title_secondary={hero?.title_secondary}
-							desc={hero?.desc || desc}
-						/>
-						<ContentList class="base__list" tag="div">
-							<slot />
-							{
-								Astro.url.pathname === '/' ? (
-									<NextCard title="Обо мне" href="/about" cover={AboutCover} />
-								) : (
-									<NextCard
-										title={lastProject.data.name}
-										cover={lastProject.data.cover.img as ImageMetadata}
-										color={lastProject.data.color}
-										href={'/' + lastProject.collection + '/' + lastProject.slug}
-									/>
-								)
-							}
-						</ContentList>
-					</main>
+				<div class="container">
+					<div class="base__inner grid grid--page">
+						<Sidebar />
+						<main class="main base__main">
+							<Hero
+								class="base__hero"
+								title={hero?.title || title}
+								title_secondary={hero?.title_secondary}
+								desc={hero?.desc || desc}
+							/>
+							<ContentList class="base__list" tag="div">
+								<slot />
+								{
+									Astro.url.pathname === '/' ? (
+										<NextCard title="Обо мне" href="/about" cover={AboutCover} />
+									) : (
+										<NextCard
+											title={lastProject.data.name}
+											cover={lastProject.data.cover.img as ImageMetadata}
+											color={lastProject.data.color}
+											href={'/' + lastProject.collection + '/' + lastProject.slug}
+										/>
+									)
+								}
+							</ContentList>
+						</main>
+					</div>
 				</div>
 			</div>
 			<Footer />
 		</div>
 	</body>
 </html>
+
+<style>
+	.base__main {
+		@media (width <= 1024) {
+			padding-block-start: 56px;
+		}
+	}
+</style>

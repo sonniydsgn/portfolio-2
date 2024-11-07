@@ -41,7 +41,7 @@
 	}
 
 	/* MOBILE SIZES */
-	@media (width <= 1024) {
+	@media (width <= 768) {
 		--container-offset: 12px;
 		--grid-columns: 0;
 	}

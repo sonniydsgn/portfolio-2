@@ -17,13 +17,18 @@ const { href, active = false, class: className, ...rest } = Astro.props
 
 <style>
 	.link-item {
+		--padding-inline: 6px;
+		--padding-block: 4px;
+		--link-opacity: 0.6;
+
 		display: inline-flex;
 		align-self: flex-start;
 		border-radius: var(--br-primary);
 
 		.link {
-			padding-inline: 6px;
-			padding-block: 4px;
+			padding-inline: var(--padding-inline);
+			padding-block: var(--padding-block);
+			width: 100%;
 		}
 	}
 
@@ -31,7 +36,7 @@ const { href, active = false, class: className, ...rest } = Astro.props
 		transition: background-color var(--tr-primary);
 
 		.link {
-			opacity: 0.6;
+			opacity: var(--link-opacity);
 		}
 
 		@media (hover) {
@@ -39,7 +44,7 @@ const { href, active = false, class: className, ...rest } = Astro.props
 				background-color: var(--bg-secondary);
 
 				.link {
-					opacity: 1;
+					--link-opacity: 1;
 				}
 			}
 		}

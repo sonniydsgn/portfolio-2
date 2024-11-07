@@ -4,7 +4,7 @@ import ThemeSwitcher from '../molecules/ThemeSwitcher.astro'
 ---
 
 <header class="header">
-	<div class="container">
+	<div class="container header__container">
 		<div class="header__inner">
 			<div class="header__btns">
 				<slot />
@@ -19,11 +19,23 @@ import ThemeSwitcher from '../molecules/ThemeSwitcher.astro'
 
 <style>
 	.header {
+		display: flex;
 		position: fixed;
 		z-index: 10;
 		inset-inline: 0;
 		padding-block-start: 32px;
 		pointer-events: none;
+
+		@media (width <= 1024) {
+			padding-block-start: 24px;
+		}
+	}
+
+	.header__container {
+		@media (width <= 1024) {
+			margin-inline: 16px;
+			width: 100%;
+		}
 	}
 
 	.header__inner {

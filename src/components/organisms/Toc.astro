@@ -5,43 +5,50 @@ interface Props {
 	list: TocItem[]
 	hasResult: boolean
 	class?: string
+	mobile?: boolean
 }
 
-const { list, hasResult, class: className, ...props } = Astro.props
+const { list, hasResult, mobile = false, class: className, ...props } = Astro.props
 
 import LinkItem from '../atoms/LinkItem.astro'
 ---
 
 <script>
-	document.addEventListener('astro:page-load', () => {
-		const toc = document.querySelector('.toc')
-		if (toc) {
-			const tocSections = document.querySelectorAll<HTMLElement>('[data-toc]')
+	import { isDesktop } from '@/scripts/libs/check-viewport'
 
-			// подсвечивание ссылок
-			const observer = new IntersectionObserver(
-				entries => {
-					entries.forEach(entry => {
-						const id = entry.target.id
-						const link = document.querySelector(`.toc__item a[href="#${id}"]`)
-						const item = link.parentElement
+	if (isDesktop()) {
+		document.addEventListener('astro:page-load', () => {
+			const toc = document.querySelector('.toc')
 
-						if (entry.isIntersecting && entry.target) {
-							item?.classList.add('link-item--active')
-						} else {
-							item?.classList.remove('link-item--active')
-						}
-					})
-				},
-				{ rootMargin: '-50%', threshold: 0 },
-			)
+			if (toc) {
+				const tocSections = document.querySelectorAll<HTMLElement>('[data-toc-section]')
+				const tocList = document.querySelector('[data-toc-list]')
 
-			tocSections.forEach(section => observer.observe(section))
-		}
-	})
+				// подсвечивание ссылок
+				const observer = new IntersectionObserver(
+					entries => {
+						entries.forEach(entry => {
+							const id = entry.target.id
+							const link = tocList.querySelector(`.toc__item a[href="#${id}"]`)
+							const item = link.parentElement
+
+							if (entry.isIntersecting && entry.target) {
+								item?.classList.add('link-item--active')
+							} else {
+								item?.classList.remove('link-item--active')
+							}
+						})
+					},
+					{ rootMargin: '-50%', threshold: 0 },
+				)
+
+				tocSections.forEach(section => observer.observe(section))
+			}
+		})
+	}
 </script>
 
-<aside class:list={['toc', className]} {...props}>
+<aside class:list={['toc', className]} {...props} data-toc-list={!mobile ? '' : null}>
 	<span class="text-h2 toc__title">Содержание</span>
 	<ul class="list-reset toc__list">
 		{
@@ -69,17 +76,37 @@ import LinkItem from '../atoms/LinkItem.astro'
 		flex-direction: column;
 		align-items: start;
 		gap: 24px;
+
+		@media (width <= 1024) {
+			position: relative;
+			top: 0;
+		}
 	}
 
 	.toc__title {
+		@media (width <= 1024) {
+			display: none;
+		}
 	}
 
 	.toc__list {
 		display: flex;
 		flex-direction: column;
 		gap: 16px;
+		width: 100%;
+
+		@media (width <= 1024) {
+			gap: 8px;
+		}
 	}
 
 	.toc__item {
+		@media (width <= 1024) {
+			--padding-inline: 16px;
+			--padding-block: 8px;
+			--link-opacity: 1;
+
+			width: 100%;
+		}
 	}
 </style>

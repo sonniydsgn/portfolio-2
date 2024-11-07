@@ -34,7 +34,7 @@
 		color: var(--text-tertiary);
 	}
 
-	@media (width <= 1024) {
+	@media (width <= 768) {
 		font-size: 26px;
 		letter-spacing: -0.03em;
 	}
@@ -48,7 +48,7 @@
 	font-family: var(--ff-secondary);
 	text-transform: uppercase;
 
-	@media (width <= 1024) {
+	@media (width <= 768) {
 		font-size: var(--font-xs);
 	}
 }
@@ -58,7 +58,7 @@
 	line-height: 1.1;
 	letter-spacing: -0.03em;
 
-	@media (width <= 1024) {
+	@media (width <= 768) {
 		font-size: 21px;
 		line-height: var(--lh-sm);
 		letter-spacing: -0.02em;
@@ -70,7 +70,7 @@
 	line-height: var(--lh-sm);
 	letter-spacing: -0.02em;
 
-	@media (width <= 1024) {
+	@media (width <= 768) {
 		font-size: 21px;
 	}
 }
@@ -81,7 +81,7 @@
 	letter-spacing: -0.02em;
 	text-wrap: balance;
 
-	@media (width <= 1024) {
+	@media (width <= 768) {
 		font-size: var(--font-sm);
 		letter-spacing: 0;
 	}

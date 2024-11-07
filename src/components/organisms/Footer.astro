@@ -68,6 +68,10 @@ const lastBuildDate = new Intl.DateTimeFormat('ru-RU', {
 		grid-row: 1 / span 2;
 		grid-column: 3 / span 3;
 		flex-direction: column;
+
+		@media (width <= 1024) {
+			grid-column: 1 / span 4;
+		}
 	}
 
 	.footer__copyright-image {
@@ -94,20 +98,27 @@ const lastBuildDate = new Intl.DateTimeFormat('ru-RU', {
 	.footer__list {
 	}
 
+	.footer__list--nav,
+	.footer__list--update {
+		grid-column: 6 / span 3;
+	}
+
 	.footer__list--nav {
 		grid-row: 1 / span 1;
-		grid-column: 6 / span 3;
 	}
 
 	.footer__list--update {
 		grid-row: 2 / span 1;
-		grid-column: 6 / span 3;
 		align-self: end;
 	}
 
 	.footer__list--contacts {
 		grid-row: 1 / span 2;
 		grid-column: 9 / span 2;
+
+		@media (width <= 1024) {
+			grid-column: 10 / span 3;
+		}
 	}
 
 	.footer__list--nav,

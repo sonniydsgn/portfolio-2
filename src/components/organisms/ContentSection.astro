@@ -6,15 +6,23 @@ interface Props {
 	title: string
 	icon?: string
 	size?: 's' | 'md'
+	type?: 'section' | 'accordion'
+	class?: string
 }
 
-const { title, icon = '◌', size = 'md' } = Astro.props
+const { title, icon = '◌', size = 'md', type = 'section', class: className, ...props } = Astro.props
 
-const slug = slugify(title)
+const slug = title && slugify(title)
 const padding = size === 's' ? '24px' : '48px'
 ---
 
-<Section class="content-section" id={slug} style={'--section-padding: ' + padding} data-toc>
+<Section
+	data-toc-section={type === 'section' ? '' : null}
+	class:list={['content-section', className]}
+	id={slug}
+	style={'--section-padding: ' + padding}
+	{...props}
+>
 	<header class="content-section__header">
 		<span class="text-h2 content-section__icon">{icon}</span>
 		<h2 class="text-h2 content-section__title">{title}</h2>

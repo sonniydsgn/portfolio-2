@@ -10,7 +10,7 @@ import SidebarNav from '../molecules/SidebarNav.astro'
 		<Picture
 			class="sidebar__avatar"
 			src={Avatar}
-			alt="Моя фотография"
+			alt="Кудрявый молодой человек с улыбкой на лице"
 			width="56"
 			height="56"
 			formats={['avif', 'webp']}
@@ -30,6 +30,14 @@ import SidebarNav from '../molecules/SidebarNav.astro'
 		align-items: flex-start;
 		padding-block: var(--main-padding);
 		height: 100vh;
+
+		@media (width <= 1024) {
+			position: relative;
+			flex-direction: row;
+			align-items: center;
+			padding-block-end: 0;
+			height: unset;
+		}
 	}
 
 	.sidebar__about {
@@ -37,11 +45,26 @@ import SidebarNav from '../molecules/SidebarNav.astro'
 		flex-direction: column;
 		gap: 12px;
 		margin-block-end: 40px;
+
+		@media (width <= 1024) {
+			flex-direction: row;
+			align-items: center;
+			margin-inline-end: 48px;
+			margin-block-end: 0;
+		}
 	}
 
 	.sidebar__avatar {
+		--size: 56px;
+
 		display: flex;
 		border-radius: 100%;
+		width: var(--size);
+		height: var(--size);
+
+		@media (width <= 1024) {
+			--size: 32px;
+		}
 	}
 
 	.sidebar__author {
@@ -51,9 +74,17 @@ import SidebarNav from '../molecules/SidebarNav.astro'
 		font-size: var(--font-sm);
 		line-height: var(--lh-sm);
 		font-family: var(--ff-secondary);
+
+		@media (width <= 1024) {
+			max-width: 100%;
+		}
 	}
 
 	.sidebar__contacts {
 		margin-block-start: auto;
+
+		@media (width <= 1024) {
+			display: none;
+		}
 	}
 </style>

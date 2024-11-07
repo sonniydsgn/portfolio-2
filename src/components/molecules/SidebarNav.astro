@@ -26,5 +26,10 @@ const currentPage = Astro.url.pathname !== '/' ? Astro.url.pathname.replace(/\/$
 		display: flex;
 		flex-direction: column;
 		gap: 12px;
+
+		@media (width <= 1024) {
+			flex-direction: row;
+			gap: 16px;
+		}
 	}
 </style>
