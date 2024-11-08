@@ -54,11 +54,11 @@ const siteTitle = Astro.url.pathname === '/' ? title : title + ' — Алекс
 
 								{
 									Astro.url.pathname === '/' ? (
-										<NextCard title="Обо мне" href="/about" cover={AboutCover} />
+										<NextCard title="Обо мне" href="/about" cover={{ img: AboutCover, alt: '' }} />
 									) : (
 										<NextCard
 											title={lastProject.data.name}
-											cover={lastProject.data.cover.img as ImageMetadata}
+											cover={lastProject.data.cover}
 											color={lastProject.data.color}
 											href={'/' + lastProject.collection + '/' + lastProject.slug}
 										/>

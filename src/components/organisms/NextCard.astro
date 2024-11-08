@@ -2,11 +2,12 @@
 import type { ImageMetadata } from 'astro'
 import { Icon } from 'astro-icon/components'
 import { Picture } from 'astro:assets'
+import type { CollectionEntry } from 'astro:content'
 
 interface Props {
 	title: string
 	href: string | URL
-	cover: ImageMetadata
+	cover: CollectionEntry<'projects'>['data']['cover']
 	color?: string
 	class?: string
 }
@@ -33,14 +34,33 @@ const { title, href, cover, color, class: className, ...props } = Astro.props
 		</div>
 	</div>
 	<div class="next-card__cover-container">
-		<Picture
-			class="next-card__cover"
-			src={cover}
-			alt="Обложка страницы"
-			formats={['avif', 'webp']}
-			width={cover.width}
-			height={cover.height}
-		/>
+		{
+			cover?.mp4?.length > 0 ? (
+				<video
+					class="next-card__cover"
+					poster={cover.img.src}
+					autoplay
+					preload="auto"
+					loop
+					muted
+					playsinline
+					width={400}
+					height={274}
+				>
+					<source src={cover.mp4} type="video/mp4" />
+					<source src={cover.webm} type="video/webm" />
+				</video>
+			) : (
+				<Picture
+					class="next-card__cover"
+					src={cover.img || (cover as undefined as ImageMetadata)}
+					alt={cover?.alt || ''}
+					formats={['avif', 'webp']}
+					width={400}
+					height={274}
+				/>
+			)
+		}
 	</div>
 </article>
 

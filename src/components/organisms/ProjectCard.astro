@@ -16,7 +16,7 @@ const { color, cover, additional_image, name, desc, place_work, year } = project
 <article class="project-card" style={'--cover-color: ' + '#' + color}>
 	<div class="project-card__cover-container">
 		{
-			cover.mp4 ? (
+			cover?.mp4?.length > 0 ? (
 				<video
 					class="project-card__cover"
 					poster={cover.img.src}
@@ -139,7 +139,7 @@ const { color, cover, additional_image, name, desc, place_work, year } = project
 		right: -130px;
 		bottom: 120px;
 		width: min(16vw, 235px);
-		/* pointer-events: none; */
+		pointer-events: none;
 
 		@media (width <= 1200) {
 			display: none;

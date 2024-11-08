@@ -115,7 +115,7 @@
 
 	img,
 	video {
-		filter: brightness(92%);
+		filter: brightness(95%);
 	}
 }
 
@@ -145,6 +145,11 @@
 	--button-secondary-bg: var(--bg-tertiary);
 	--button-secondary-border: var(--border-primary);
 	--button-secondary-text: var(--text-primary-0);
+
+	img,
+	video {
+		filter: brightness(100%);
+	}
 }
 
 :root[data-theme='dark'] {
@@ -178,6 +183,6 @@
 
 	img,
 	video {
-		filter: brightness(92%);
+		filter: brightness(95%);
 	}
 }
