@@ -144,6 +144,8 @@ const { title, href, cover, color, class: className, ...props } = Astro.props
 	}
 
 	.next-card__link {
+		touch-action: none;
+
 		&::after {
 			position: absolute;
 			z-index: 1;
