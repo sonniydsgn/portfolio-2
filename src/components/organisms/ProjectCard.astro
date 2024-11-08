@@ -37,6 +37,8 @@ const { color, cover, additional_image, name, desc, place_work, year } = project
 					src={cover.img as ImageMetadata}
 					alt={cover?.alt}
 					formats={['avif', 'webp']}
+					fetchpriority="high"
+					loading="eager"
 					width={728}
 					height={481}
 				/>

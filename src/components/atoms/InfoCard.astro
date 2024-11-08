@@ -13,10 +13,11 @@ interface Props {
 	icon?: string
 	image?: ImageMetadata
 	href?: string
+	tag: 'div' | 'li'
 	type?: 'link' | 'file'
 }
 
-const { name, number, href, image, type = href && 'link' } = Astro.props
+const { name, number, href, image, tag: Element = 'li', type = href && 'link' } = Astro.props
 
 let { desc, icon } = Astro.props
 
@@ -36,7 +37,7 @@ if (type === 'file') {
 }
 ---
 
-<li class:list={['info-card', { 'info-card--link': href }]}>
+<Element class:list={['info-card', { 'info-card--link': href }]}>
 	{image && <Picture class="info-card__image" src={image} alt="" formats={['avif', 'webp']} width={32} height={32} />}
 
 	{number && <div class="info-card__number">{number}</div>}
@@ -64,7 +65,7 @@ if (type === 'file') {
 
 		{desc && <span class="info-card__desc">{desc}</span>}
 	</div>
-</li>
+</Element>
 
 <style>
 	.info-card {

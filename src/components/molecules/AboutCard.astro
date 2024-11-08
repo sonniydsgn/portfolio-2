@@ -49,7 +49,12 @@ const { mp4, webm, poster = null } = Astro.props
 			<source src={webm} type="video/webm" />
 		</video>
 		<ButtonLink class="about-card__btn" aria-label="Включить видео" aria-live="polite" data-about-btn />
-		<ButtonLink class="btn btn--secondary btn--only-icon about-card__play" aria-hidden="true" data-about-play>
+		<ButtonLink
+			class="btn btn--secondary btn--only-icon about-card__play"
+			aria-hidden="true"
+			tabindex="-1"
+			data-about-play
+		>
 			<Icon name="play-icon" class="icon" />
 		</ButtonLink>
 		<figcaption class="visually-hidden">Видео обо мне</figcaption>

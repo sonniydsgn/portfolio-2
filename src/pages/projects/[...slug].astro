@@ -78,6 +78,8 @@ const needToc = headings.length >= 3 || (headings.length >= 2 && result && draft
 							class="article__cover"
 							src={cover.img as ImageMetadata}
 							alt={cover?.alt}
+							loading="eager"
+							fetchpriority="high"
 							formats={['avif', 'webp']}
 							width={1180}
 							height={780}
