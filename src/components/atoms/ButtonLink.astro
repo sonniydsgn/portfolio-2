@@ -4,7 +4,7 @@ type Props = ButtonLink
 
 const { href, class: className, type = 'button', ...rest } = Astro.props
 
-const internalLink = href?.startsWith('/')
+const internalLink = href?.startsWith('/') || href?.startsWith('#')
 ---
 
 {
