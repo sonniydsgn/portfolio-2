@@ -41,10 +41,12 @@
 
 	/* MOBILE SIZES */
 	@media (width <= 768) {
+		/* font sizes */
 		--font-primary: 16px;
 		--font-sm: 14px;
 
-		--container-offset: 12px;
+		/* grid */
+		--container-offset: 8px;
 		--grid-columns: 0;
 	}
 }

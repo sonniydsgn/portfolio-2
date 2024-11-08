@@ -56,7 +56,7 @@ const { mp4, webm, poster = null } = Astro.props
 	</figure>
 	<div class="about-card__content">
 		<h3 class="text-h3 about-card__title">Лёша, 20 лет</h3>
-		<p class="about-card__desc">Живёт в Перми, ответственный и проактивный, ищет работу в продуктовой компании</p>
+		<p class="about-card__desc">Живёт в Перми, ответственный и проактивный, ищет работу в найме</p>
 	</div>
 </div>
 
@@ -66,20 +66,33 @@ const { mp4, webm, poster = null } = Astro.props
 		align-items: center;
 		gap: 48px;
 		margin-block-end: 40px;
+
+		@media (width <= 768) {
+			flex-direction: column;
+			/* align-items: unset; */
+			gap: 24px;
+			margin-block-end: 24px;
+		}
 	}
 
 	.about-card__video-player {
-		--size: 250px;
-
+		display: flex;
 		position: relative;
+		justify-content: center;
+		align-items: center;
 		transition: background-color var(--tr-primary);
-		width: var(--size);
-		height: var(--size);
 	}
 
 	.about-card__video {
+		--size: 250px;
+
 		border-radius: 100%;
-		height: 100%;
+		aspect-ratio: 1 / 1;
+		width: var(--size);
+
+		@media (width <= 768) {
+			--size: 100%;
+		}
 	}
 
 	.about-card__btn {
@@ -87,6 +100,12 @@ const { mp4, webm, poster = null } = Astro.props
 		inset: 0;
 
 		@media (hover) {
+			&:hover + .about-card__play {
+				transform: scale(1.15);
+			}
+		}
+
+		&:active {
 			&:hover + .about-card__play {
 				transform: scale(1.15);
 			}
@@ -108,9 +127,20 @@ const { mp4, webm, poster = null } = Astro.props
 				transform var(--tr-bounce),
 				scale var(--tr-sm);
 		}
+
+		@media (width <= 768) {
+			right: unset;
+			bottom: unset;
+		}
+	}
+
+	.about-card__content {
+		@media (width <= 768) {
+			align-self: flex-start;
+		}
 	}
 
 	.about-card__desc {
-		max-width: 450px;
+		max-width: 400px;
 	}
 </style>

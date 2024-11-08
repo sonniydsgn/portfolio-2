@@ -9,7 +9,7 @@ const { ...props } = Astro.props
 <Section class="placeholder" {...props}>
 	<Icon name="edit-box-icon" class="icon placeholder__icon" />
 	<h2 class="text-h3 placeholder__title">Кейс ещё не дописан</h2>
-	<p class="placeholder__desc">Пока предлагаю посмотреть на результат или обсудить проект лично</p>
+	<p class="placeholder__desc">Пока предлагаю посмотреть на результат или обсудить проект лично</p>
 	<InfoList class="placeholder__list" grid>
 		<slot />
 	</InfoList>
@@ -24,20 +24,40 @@ const { ...props } = Astro.props
 		border-radius: var(--br-lg);
 		background-color: var(--bg-primary);
 		padding: 48px 24px;
+
+		@media (width <= 768) {
+			padding: 32px 16px;
+		}
 	}
 
 	.placeholder__icon {
 		--size: 40px;
+
 		margin-block-end: 16px;
 		color: var(--text-primary-0);
+
+		@media (width <= 768) {
+			--size: 32px;
+		}
 	}
 
 	.placeholder__title {
 		margin-block-end: 16px;
+		text-align: center;
+
+		@media (width <= 768) {
+			margin-block-end: 8px;
+		}
 	}
 
 	.placeholder__desc {
 		margin-block-end: 24px;
+		max-width: 400px;
+		text-align: center;
+
+		@media (width <= 768) {
+			margin-block-end: 20px;
+		}
 	}
 
 	.placeholder__list {

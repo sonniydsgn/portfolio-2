@@ -70,13 +70,20 @@ if (type === 'file') {
 	.info-card {
 		display: flex;
 		position: relative;
-		column-gap: 16px;
 		align-items: start;
 		justify-items: start;
+		gap: 16px;
 		border: 1px solid var(--border-primary);
 		border-radius: var(--br-lg);
 		padding: 24px 20px;
 		font-family: var(--ff-secondary);
+
+		@media (width <= 768) {
+			flex-direction: column;
+			gap: 12px;
+			border-radius: var(--br-md);
+			padding: 16px;
+		}
 	}
 
 	.info-card--link {
@@ -132,7 +139,7 @@ if (type === 'file') {
 
 	.info-card__name {
 		color: var(--text-primary-0);
-		font-weight: 500;
+		font-weight: 600;
 		line-height: var(--lh-lg);
 	}
 

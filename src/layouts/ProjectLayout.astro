@@ -36,5 +36,9 @@ const { title, desc, image } = Astro.props
 <style>
 	.project {
 		--main-padding: 80px;
+
+		@media (width <= 768) {
+			--main-padding: 96px;
+		}
 	}
 </style>

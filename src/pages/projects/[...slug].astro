@@ -96,7 +96,7 @@ const needToc = headings.length >= 3 || (headings.length >= 2 && result && draft
 									class="article__toc article__toc--mobile"
 									title="Содержание"
 									icon="§"
-									size="s"
+									size="sm"
 									type="accordion"
 								>
 									<Toc list={headings} hasResult={draft && result != null} mobile />
@@ -150,10 +150,19 @@ const needToc = headings.length >= 3 || (headings.length >= 2 && result && draft
 		@media (width <= 1024) {
 			margin-inline: 16px;
 		}
+
+		@media (width <= 768) {
+			margin-inline: 8px;
+		}
 	}
 
 	.article__meta {
 		margin-block-start: 32px;
+
+		@media (width <= 768) {
+			margin-block-start: 24px;
+			padding-inline: var(--inline-padding);
+		}
 	}
 
 	.article__cover-container {
@@ -164,6 +173,11 @@ const needToc = headings.length >= 3 || (headings.length >= 2 && result && draft
 
 		@media (width <= 1024) {
 			margin-block-start: 40px;
+		}
+
+		@media (width <= 768) {
+			margin-block-start: 32px;
+			border-radius: var(--br-lg);
 		}
 	}
 

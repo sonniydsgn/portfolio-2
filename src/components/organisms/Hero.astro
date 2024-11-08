@@ -52,11 +52,28 @@ const {
 	}
 
 	.hero--centered {
+		--inline-padding: 8px;
+
 		align-items: center;
 		text-align: center;
 
+		.hero__title {
+			@media (width <= 768) {
+				padding-inline: var(--inline-padding);
+			}
+		}
+
 		.hero__subtitle {
 			max-width: 820px;
+
+			@media (width <= 768) {
+				padding-inline: var(--inline-padding);
+			}
+		}
+
+		@media (width <= 768) {
+			align-items: flex-start;
+			text-align: left;
 		}
 	}
 

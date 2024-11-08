@@ -82,6 +82,10 @@ const { title, href, cover, color, class: className, ...props } = Astro.props
 
 		.next-card__cover {
 			transform: scale(0.8);
+
+			@media (width <= 768) {
+				transform: scale(0.9);
+			}
 		}
 
 		@media (hover) {
@@ -90,10 +94,6 @@ const { title, href, cover, color, class: className, ...props } = Astro.props
 					transform: scale(0.9);
 				}
 			}
-		}
-
-		@media (width <= 768) {
-			transform: scale(0.9);
 		}
 
 		&:active {
@@ -133,6 +133,10 @@ const { title, href, cover, color, class: className, ...props } = Astro.props
 
 	.next-card__title {
 		max-width: 340px;
+
+		@media (width <= 768) {
+			max-width: 250px;
+		}
 	}
 
 	.next-card__page-icon {

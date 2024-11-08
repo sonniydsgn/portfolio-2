@@ -34,6 +34,7 @@ export default [
 			'no-var': 'error',
 			'prefer-const': 'off',
 			'func-names': 'off',
+			'no-irregular-whitespace': 'off',
 		},
 	},
 ]
