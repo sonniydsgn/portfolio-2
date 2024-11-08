@@ -26,7 +26,7 @@
 }
 
 .text-h1 {
-	font-size: 64px;
+	font-size: clamp(2.667rem, 3.1vw + 1rem, 3.556rem);
 	line-height: 0.9;
 	letter-spacing: -0.05em;
 
@@ -34,8 +34,8 @@
 		color: var(--text-tertiary);
 	}
 
-	@media (width <= 768) {
-		font-size: 26px;
+	@media (width <= 880) {
+		font-size: clamp(1.5rem, 2vw + 1rem, 4rem);
 		letter-spacing: -0.03em;
 	}
 }
@@ -48,7 +48,7 @@
 	font-family: var(--ff-secondary);
 	text-transform: uppercase;
 
-	@media (width <= 768) {
+	@media (width <= 880) {
 		font-size: var(--font-xs);
 	}
 }
@@ -58,7 +58,7 @@
 	line-height: 1.1;
 	letter-spacing: -0.03em;
 
-	@media (width <= 768) {
+	@media (width <= 880) {
 		font-size: 21px;
 		line-height: var(--lh-sm);
 		letter-spacing: -0.02em;
@@ -70,7 +70,7 @@
 	line-height: var(--lh-sm);
 	letter-spacing: -0.02em;
 
-	@media (width <= 768) {
+	@media (width <= 880) {
 		font-size: 21px;
 	}
 }
@@ -81,7 +81,7 @@
 	letter-spacing: -0.02em;
 	text-wrap: balance;
 
-	@media (width <= 768) {
+	@media (width <= 880) {
 		font-size: var(--font-primary);
 		letter-spacing: 0;
 	}
@@ -98,7 +98,7 @@
 	padding-block: 4px;
 	color: var(--text-primary-0);
 
-	@media (width <= 768) {
+	@media (width <= 880) {
 		padding-inline: 8px;
 
 		.icon {

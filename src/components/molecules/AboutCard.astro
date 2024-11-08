@@ -67,7 +67,7 @@ const { mp4, webm, poster = null } = Astro.props
 		gap: 48px;
 		margin-block-end: 40px;
 
-		@media (width <= 768) {
+		@media (width <= 880) {
 			flex-direction: column;
 			/* align-items: unset; */
 			gap: 24px;
@@ -90,7 +90,7 @@ const { mp4, webm, poster = null } = Astro.props
 		aspect-ratio: 1 / 1;
 		width: var(--size);
 
-		@media (width <= 768) {
+		@media (width <= 880) {
 			--size: 100%;
 		}
 	}
@@ -128,14 +128,14 @@ const { mp4, webm, poster = null } = Astro.props
 				scale var(--tr-sm);
 		}
 
-		@media (width <= 768) {
+		@media (width <= 880) {
 			right: unset;
 			bottom: unset;
 		}
 	}
 
 	.about-card__content {
-		@media (width <= 768) {
+		@media (width <= 880) {
 			align-self: flex-start;
 		}
 	}

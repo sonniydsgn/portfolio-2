@@ -40,7 +40,7 @@
 	}
 
 	/* MOBILE SIZES */
-	@media (width <= 768) {
+	@media (width <= 880) {
 		/* font sizes */
 		--font-primary: 16px;
 		--font-sm: 14px;
@@ -115,7 +115,7 @@
 
 	img,
 	video {
-		filter: brightness(98%);
+		filter: brightness(92%);
 	}
 }
 
@@ -178,6 +178,6 @@
 
 	img,
 	video {
-		filter: brightness(95%);
+		filter: brightness(92%);
 	}
 }

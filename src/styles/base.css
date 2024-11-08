@@ -10,11 +10,11 @@
 	line-height: var(--lh-primary);
 	font-family: var(--ff-primary);
 
-	@media (width <= 1024) {
+	@media (width <= 1200) {
 		--main-padding: 32px;
 	}
 
-	@media (width <= 768) {
+	@media (width <= 880) {
 		--main-padding: 24px;
 
 		font-size: var(--font-primary);
@@ -54,7 +54,7 @@
 		margin-inline: 40px;
 	}
 
-	@media (width <= 1024) {
+	@media (width <= 1200) {
 		margin-inline: 12px;
 	}
 }
@@ -71,7 +71,7 @@
 	column-gap: 0;
 	align-items: start;
 
-	@media (width <= 1024) {
+	@media (width <= 1200) {
 		grid-template-columns: 1fr;
 	}
 }

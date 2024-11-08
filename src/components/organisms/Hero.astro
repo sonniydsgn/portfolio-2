@@ -45,11 +45,11 @@ const {
 			max-width: 420px;
 		}
 
-		@media (width <= 1024) {
+		@media (width <= 1200) {
 			margin-block-end: 40px;
 		}
 
-		@media (width <= 768) {
+		@media (width <= 880) {
 			margin-block-end: 32px;
 		}
 	}
@@ -59,7 +59,7 @@ const {
 			align-items: center;
 			text-align: center;
 
-			@media (width <= 768) {
+			@media (width <= 880) {
 				align-items: flex-start;
 				text-align: left;
 			}
@@ -74,17 +74,18 @@ const {
 		display: flex;
 		flex-direction: column;
 
-		@media (width <= 768) {
+		@media (width <= 880) {
 			padding-inline: var(--inline-padding);
 		}
 	}
 
 	.hero__title {
 		margin-block-end: 24px;
+		max-width: 780px;
 
-		@media (width <= 768) {
+		@media (width <= 880) {
 			margin-block-end: 12px;
-			max-width: 330px;
+			max-width: 600px;
 		}
 	}
 </style>

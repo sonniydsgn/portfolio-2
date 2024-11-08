@@ -48,7 +48,7 @@ const { title, href, cover, color, class: className, ...props } = Astro.props
 	.next-card {
 		display: grid;
 		position: relative;
-		grid-template-columns: 1fr 400px;
+		grid-template-columns: 1fr minmax(320px, 1fr);
 		border: 1px solid var(--border-secondary);
 		border-radius: var(--br-xl);
 		background-color: var(--bg-primary);
@@ -68,7 +68,7 @@ const { title, href, cover, color, class: className, ...props } = Astro.props
 			}
 		}
 
-		@media (width <= 768) {
+		@media (width <= 880) {
 			grid-template-columns: 1fr;
 			border-radius: var(--br-lg);
 			padding: 8px 8px 24px;
@@ -83,7 +83,7 @@ const { title, href, cover, color, class: className, ...props } = Astro.props
 		.next-card__cover {
 			transform: scale(0.8);
 
-			@media (width <= 768) {
+			@media (width <= 880) {
 				transform: scale(0.9);
 			}
 		}
@@ -110,7 +110,7 @@ const { title, href, cover, color, class: className, ...props } = Astro.props
 		padding-block-start: 32px;
 		padding-block-end: 24px;
 
-		@media (width <= 768) {
+		@media (width <= 880) {
 			--padding-inline: 8px;
 
 			padding-inline: var(--padding-inline);
@@ -126,7 +126,7 @@ const { title, href, cover, color, class: className, ...props } = Astro.props
 	.next-card__subtitle {
 		margin-block-end: 16px;
 
-		@media (width <= 768) {
+		@media (width <= 880) {
 			margin-block-end: 8px;
 		}
 	}
@@ -134,7 +134,7 @@ const { title, href, cover, color, class: className, ...props } = Astro.props
 	.next-card__title {
 		max-width: 340px;
 
-		@media (width <= 768) {
+		@media (width <= 880) {
 			max-width: 250px;
 		}
 	}
@@ -158,7 +158,7 @@ const { title, href, cover, color, class: className, ...props } = Astro.props
 		border-radius: var(--br-primary);
 		overflow: hidden;
 
-		@media (width <= 768) {
+		@media (width <= 880) {
 			order: -1;
 			margin-block-end: 24px;
 			margin-block-end: 20px;
@@ -168,6 +168,7 @@ const { title, href, cover, color, class: className, ...props } = Astro.props
 	.next-card__cover {
 		display: flex;
 		transition: transform var(--tr-primary);
+		width: 100%;
 		pointer-events: none;
 	}
 </style>

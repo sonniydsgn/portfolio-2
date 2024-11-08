@@ -102,7 +102,7 @@ const { color, cover, additional_image, name, desc, place_work, year } = project
 			}
 		}
 
-		@media (width <= 768) {
+		@media (width <= 880) {
 			border-radius: var(--br-lg);
 			padding: 8px 8px 24px;
 		}
@@ -115,7 +115,7 @@ const { color, cover, additional_image, name, desc, place_work, year } = project
 		width: 100%;
 		overflow: hidden;
 
-		@media (width <= 768) {
+		@media (width <= 880) {
 			margin-block-end: 16px;
 		}
 	}
@@ -128,7 +128,7 @@ const { color, cover, additional_image, name, desc, place_work, year } = project
 		width: 100%;
 		pointer-events: none;
 
-		@media (width <= 768) {
+		@media (width <= 880) {
 			transform: scale(0.9);
 		}
 	}
@@ -138,8 +138,10 @@ const { color, cover, additional_image, name, desc, place_work, year } = project
 		position: absolute;
 		right: -130px;
 		bottom: 120px;
+		width: min(16vw, 235px);
+		/* pointer-events: none; */
 
-		@media (width <= 1024) {
+		@media (width <= 1200) {
 			display: none;
 		}
 	}
@@ -168,6 +170,10 @@ const { color, cover, additional_image, name, desc, place_work, year } = project
 	.project-card__description {
 		margin-block-end: 16px;
 		max-width: 580px;
+
+		@media (width <= 880) {
+			max-width: 520px;
+		}
 	}
 
 	.project-card__footer {
