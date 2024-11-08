@@ -1,7 +1,7 @@
 ---
 import Avatar from '@/assets/avatar.jpg'
 import nav from '@/data/main-nav.js'
-import { Image } from 'astro:assets'
+import { Picture } from 'astro:assets'
 import ButtonLink from '../atoms/ButtonLink.astro'
 import Contacts from '../molecules/Contacts.astro'
 import DataList from '../molecules/DataList.astro'
@@ -26,7 +26,14 @@ const lastBuildDate = new Intl.DateTimeFormat('ru-RU', {
 	<div class="container">
 		<div class="footer__inner grid">
 			<div class="footer__copyright">
-				<Image src={Avatar} class="footer__copyright-image" alt="Моё фото" width={48} height={48} />
+				<Picture
+					src={Avatar}
+					class="footer__copyright-image"
+					alt="Кудрявый молодой человек с улыбкой на лице"
+					width={48}
+					height={48}
+					formats={['avif', 'webp']}
+				/>
 				<span class="footer__copyright-name">Алексей Калинин</span>
 				<span class="footer__copyright-desc">Сделано с душой и кофе (85% кофе, 15% сливок)</span>
 			</div>
