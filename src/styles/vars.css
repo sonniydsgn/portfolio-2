@@ -51,7 +51,7 @@
 	}
 }
 
-/* COLORS */
+/* COLORS & THEMES */
 @media (prefers-color-scheme: light) {
 	:root {
 		color-scheme: light;
@@ -112,6 +112,11 @@
 		--button-secondary-border: var(--border-primary);
 		--button-secondary-text: var(--text-primary-0);
 	}
+
+	img,
+	video {
+		filter: brightness(98%);
+	}
 }
 
 :root[data-theme='light'] {
@@ -170,4 +175,9 @@
 	--button-secondary-bg: var(--bg-elevate-secondary);
 	--button-secondary-border: var(--border-primary);
 	--button-secondary-text: var(--text-primary-0);
+
+	img,
+	video {
+		filter: brightness(95%);
+	}
 }
