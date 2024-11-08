@@ -52,6 +52,10 @@ import SidebarNav from '../molecules/SidebarNav.astro'
 			margin-inline-end: 48px;
 			margin-block-end: 0;
 		}
+
+		@media (width <= 768) {
+			padding-inline: var(--inline-padding);
+		}
 	}
 
 	.sidebar__avatar {

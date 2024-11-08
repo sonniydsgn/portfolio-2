@@ -49,6 +49,14 @@ const { href, active = false, class: className, ...rest } = Astro.props
 				}
 			}
 		}
+
+		&:active {
+			background-color: var(--bg-secondary);
+
+			.link {
+				--link-opacity: 1;
+			}
+		}
 	}
 
 	.link-item--active {

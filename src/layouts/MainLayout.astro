@@ -86,4 +86,10 @@ const siteTitle = Astro.url.pathname === '/' ? title : title + ' — Алекс
 			padding-block-start: 24px;
 		}
 	}
+
+	.footer {
+		@media (width <= 768) {
+			padding-block-end: calc(64px + 48px);
+		}
+	}
 </style>

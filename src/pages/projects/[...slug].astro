@@ -53,6 +53,7 @@ const needToc = headings.length >= 3 || (headings.length >= 2 && result && draft
 					href: project.data.place_work.link,
 				}}
 				year={project.data.year}
+				slot="header"
 			/>
 
 			<div class="article__cover-container">
@@ -160,8 +161,7 @@ const needToc = headings.length >= 3 || (headings.length >= 2 && result && draft
 		margin-block-start: 32px;
 
 		@media (width <= 768) {
-			margin-block-start: 24px;
-			padding-inline: var(--inline-padding);
+			margin-block-start: 16px;
 		}
 	}
 
@@ -177,7 +177,7 @@ const needToc = headings.length >= 3 || (headings.length >= 2 && result && draft
 
 		@media (width <= 768) {
 			margin-block-start: 32px;
-			border-radius: var(--br-lg);
+			border-radius: var(--br-md);
 		}
 	}
 
