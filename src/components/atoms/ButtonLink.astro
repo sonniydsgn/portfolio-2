@@ -3,11 +3,19 @@ import type { ButtonLink } from '@/types'
 type Props = ButtonLink
 
 const { href, class: className, type = 'button', ...rest } = Astro.props
+
+const internalLink = href?.startsWith('/')
 ---
 
 {
 	href ? (
-		<a {href} class:list={['link', className]} {...rest}>
+		<a
+			{href}
+			class:list={['link', className]}
+			target={!internalLink ? '_blank' : null}
+			rel={!internalLink ? 'noopener' : null}
+			{...rest}
+		>
 			<slot />
 		</a>
 	) : (
