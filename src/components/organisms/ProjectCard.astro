@@ -98,7 +98,8 @@ const { color, cover, additional_image, name, desc, place_work, year } = project
 			}
 		}
 
-		&:active {
+		&:active,
+		&:focus-within {
 			.project-card__cover {
 				transform: scale(0.95);
 			}
@@ -172,6 +173,8 @@ const { color, cover, additional_image, name, desc, place_work, year } = project
 	.project-card__description {
 		margin-block-end: 16px;
 		max-width: 580px;
+		/* hack for temporary disabling chrome font boosting */
+		max-height: 999999px;
 
 		@media (width <= 880) {
 			max-width: 520px;

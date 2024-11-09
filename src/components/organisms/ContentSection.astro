@@ -140,8 +140,18 @@ const slug = title && slugify(transliterate(title))
 			}
 		}
 
+		p,
+		figcaption {
+			/* hack for temporary disabling chrome font boosting */
+			max-height: 999999px;
+		}
+
 		p:not(:has(> picture)) {
 			max-width: 90%;
+
+			@media (width <= 880) {
+				max-width: 100%;
+			}
 		}
 
 		p + p {

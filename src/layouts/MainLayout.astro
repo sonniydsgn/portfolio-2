@@ -2,13 +2,13 @@
 import AboutCover from '@/assets/about-cover.jpg'
 import Head from '@/components/Head.astro'
 import ContentList from '@/components/molecules/ContentList.astro'
+import SkipLink from '@/components/molecules/SkipLink.astro'
 import Footer from '@/components/organisms/Footer.astro'
 import Header from '@/components/organisms/Header.astro'
 import Hero from '@/components/organisms/Hero.astro'
 import NextCard from '@/components/organisms/NextCard.astro'
 import Sidebar from '@/components/organisms/Sidebar.astro'
 import getProjects from '@/scripts/getters/get-projects'
-import type { ImageMetadata } from 'astro'
 
 type Page = {
 	title: string
@@ -36,12 +36,13 @@ const siteTitle = Astro.url.pathname === '/' ? title : title + ' — Алекс
 	<Head title={siteTitle} {desc} {image} />
 	<body class="page__body">
 		<div class="site-container">
+			<SkipLink />
 			<Header />
 			<div class="base">
 				<div class="container">
 					<div class="base__inner grid grid--page">
 						<Sidebar />
-						<main class="main base__main">
+						<main class="main base__main" id="main">
 							<Hero
 								class="base__hero"
 								title={hero?.title || title}

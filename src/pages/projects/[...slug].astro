@@ -92,6 +92,12 @@ const needToc = headings.length >= 3 || (headings.length >= 2 && result && draft
 		<ContentList tag="div" class="article__list">
 			<div class="container">
 				<div class="article__inner grid grid--page">
+					{
+						needToc && (
+							<Toc class="article__toc article__toc--desktop" list={headings} hasResult={draft && result != null} />
+						)
+					}
+
 					<ContentList tag="div" class="article__content">
 						{
 							needToc && (
@@ -118,12 +124,6 @@ const needToc = headings.length >= 3 || (headings.length >= 2 && result && draft
 							)
 						}
 					</ContentList>
-
-					{
-						needToc && (
-							<Toc class="article__toc article__toc--desktop" list={headings} hasResult={draft && result != null} />
-						)
-					}
 				</div>
 			</div>
 			<div class="article__other">
@@ -200,7 +200,7 @@ const needToc = headings.length >= 3 || (headings.length >= 2 && result && draft
 	}
 
 	.article__toc {
-		grid-column: 3 / span 1;
+		order: 1;
 		margin-inline-start: 64px;
 
 		&.article__toc--mobile {

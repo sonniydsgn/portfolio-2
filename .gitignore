@@ -5,6 +5,7 @@ dev-dist/
 # configs
 .github/
 .astro/
+.unlighthouse/
 
 # dependencies
 node_modules/

@@ -1,0 +1,32 @@
+<p class="skip-link">
+	<a class="link" href="#main">К контенту</a>
+</p>
+
+<style>
+	.skip-link {
+		display: inline-flex;
+		position: absolute;
+		top: auto;
+		left: -10000px;
+		justify-content: center;
+		align-items: center;
+		background-color: var(--bg-tertiary);
+		padding: 16px;
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
+		color: var(--text-primary-0);
+
+		a {
+			--stroke-width: 2px;
+			--stroke-color: var(--text-primary-0);
+			outline: none;
+		}
+	}
+
+	.skip-link:focus-within {
+		position: static;
+		width: auto;
+		height: auto;
+	}
+</style>

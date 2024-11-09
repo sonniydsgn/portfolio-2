@@ -3,6 +3,7 @@
 
 	background-color: var(--bg-secondary);
 	height: 100%;
+	text-size-adjust: none;
 	scroll-behavior: smooth;
 	scroll-padding-top: var(--grid-gap);
 	color: var(--text-primary-20);
@@ -16,8 +17,6 @@
 
 	@media (width <= 880) {
 		--main-padding: 24px;
-
-		font-size: var(--font-primary);
 	}
 }
 
