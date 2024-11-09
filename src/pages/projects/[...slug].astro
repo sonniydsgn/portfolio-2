@@ -59,17 +59,7 @@ const needToc = headings.length >= 3 || (headings.length >= 2 && result && draft
 			<div class="article__cover-container">
 				{
 					cover?.mp4?.length > 0 ? (
-						<video
-							class="article__cover"
-							poster={cover.img.src}
-							autoplay
-							preload="auto"
-							loop
-							muted
-							playsinline
-							width={1180}
-							height={780}
-						>
+						<video class="article__cover" autoplay preload="auto" loop muted playsinline width={1440} height={972}>
 							<source src={cover.mp4} type="video/mp4" />
 							<source src={cover.webm} type="video/webm" />
 						</video>
@@ -81,8 +71,8 @@ const needToc = headings.length >= 3 || (headings.length >= 2 && result && draft
 							loading="eager"
 							fetchpriority="high"
 							formats={['avif', 'webp']}
-							width={1180}
-							height={780}
+							width={1440}
+							height={972}
 						/>
 					)
 				}
@@ -186,8 +176,9 @@ const needToc = headings.length >= 3 || (headings.length >= 2 && result && draft
 	.article__cover {
 		display: flex;
 		transform: scale(0.9);
-		background-color: var(--bg-secondary);
+		background-color: var(--bg-placeholder);
 		width: 100%;
+		height: auto;
 	}
 
 	.article__content,

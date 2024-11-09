@@ -35,17 +35,7 @@ const { title, href, cover, color, class: className, ...props } = Astro.props
 	<div class="next-card__cover-container">
 		{
 			cover?.mp4?.length > 0 ? (
-				<video
-					class="next-card__cover"
-					poster={cover.img.src}
-					autoplay
-					preload="auto"
-					loop
-					muted
-					playsinline
-					width={400}
-					height={274}
-				>
+				<video class="next-card__cover" autoplay preload="auto" loop muted playsinline width={453} height={274}>
 					<source src={cover.mp4} type="video/mp4" />
 					<source src={cover.webm} type="video/webm" />
 				</video>
@@ -55,7 +45,7 @@ const { title, href, cover, color, class: className, ...props } = Astro.props
 					src={cover.img || cover}
 					alt={cover?.alt || ''}
 					formats={['avif', 'webp']}
-					width={400}
+					width={453}
 					height={274}
 				/>
 			)
@@ -189,6 +179,7 @@ const { title, href, cover, color, class: className, ...props } = Astro.props
 	.next-card__cover {
 		display: flex;
 		transition: transform var(--tr-primary);
+		background-color: var(--bg-placeholder);
 		width: 100%;
 		pointer-events: none;
 	}

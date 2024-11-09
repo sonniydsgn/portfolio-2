@@ -17,17 +17,7 @@ const { color, cover, additional_image, name, desc, place_work, year } = project
 	<div class="project-card__cover-container">
 		{
 			cover?.mp4?.length > 0 ? (
-				<video
-					class="project-card__cover"
-					poster={cover.img.src}
-					autoplay
-					preload="auto"
-					loop
-					muted
-					playsinline
-					width={728}
-					height={481}
-				>
+				<video class="project-card__cover" autoplay preload="auto" loop muted playsinline width={906} height={598}>
 					<source src={cover.mp4} type="video/mp4" />
 					<source src={cover.webm} type="video/webm" />
 				</video>
@@ -39,8 +29,8 @@ const { color, cover, additional_image, name, desc, place_work, year } = project
 					formats={['avif', 'webp']}
 					fetchpriority="high"
 					loading="eager"
-					width={728}
-					height={481}
+					width={906}
+					height={598}
 				/>
 			)
 		}
@@ -127,7 +117,7 @@ const { color, cover, additional_image, name, desc, place_work, year } = project
 		display: flex;
 		transform: scale(0.8);
 		transition: transform var(--tr-md);
-		background-color: var(--bg-secondary);
+		background-color: var(--bg-placeholder);
 		width: 100%;
 		pointer-events: none;
 

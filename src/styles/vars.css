@@ -60,6 +60,7 @@
 		--bg-primary: rgb(255 255 255);
 		--bg-secondary: rgb(247 247 245);
 		--bg-tertiary: rgb(232 232 227);
+		--bg-placeholder: rgb(247 247 245);
 		--border-accent: rgb(54 54 49);
 		--border-primary: rgb(219 219 215);
 		--border-secondary: rgb(232 232 227);
@@ -92,6 +93,7 @@
 		--bg-primary: rgb(53 53 49);
 		--bg-secondary: rgb(43 43 39);
 		--bg-tertiary: rgb(75 75 68);
+		--bg-placeholder: rgb(247 247 245);
 		--border-accent: rgb(32 32 29);
 		--border-primary: rgb(93 93 85);
 		--border-secondary: rgb(75 75 68);
@@ -126,6 +128,7 @@
 	--bg-primary: rgb(255 255 255);
 	--bg-secondary: rgb(247 247 245);
 	--bg-tertiary: rgb(232 232 227);
+	--bg-placeholder: rgb(247 247 245);
 	--border-accent: rgb(54 54 49);
 	--border-primary: rgb(219 219 215);
 	--border-secondary: rgb(232 232 227);
@@ -161,6 +164,7 @@
 	--bg-primary: rgb(53 53 49);
 	--bg-secondary: rgb(43 43 39);
 	--bg-tertiary: rgb(75 75 68);
+	--bg-placeholder: rgb(247 247 245);
 	--border-accent: rgb(32 32 29);
 	--border-primary: rgb(93 93 85);
 	--border-secondary: rgb(75 75 68);
