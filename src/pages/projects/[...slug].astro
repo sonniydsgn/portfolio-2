@@ -40,6 +40,10 @@ const headings: TocItem[] = project.body
 	.map(title => ({ title, slug: '#' + slugify(transliterate(title)) }))
 
 const needToc = headings.length >= 3 || (headings.length >= 2 && result && draft)
+
+// cover
+const coverWidth = 1440
+const coverHeight = 952
 ---
 
 <ProjectLayout title={title + ' — Алексей Калинин'} {desc}>
@@ -59,7 +63,18 @@ const needToc = headings.length >= 3 || (headings.length >= 2 && result && draft
 			<div class="article__cover-container">
 				{
 					cover?.mp4?.length > 0 ? (
-						<video class="article__cover" autoplay preload="auto" loop muted playsinline width={1440} height={972}>
+						<video
+							class="article__cover"
+							autoplay
+							preload="auto"
+							loop
+							muted
+							playsinline
+							tabindex="-1"
+							width={coverWidth}
+							height={coverHeight}
+							style={'aspect-ratio: ' + coverWidth + '/' + coverHeight}
+						>
 							<source src={cover.mp4} type="video/mp4" />
 							<source src={cover.webm} type="video/webm" />
 						</video>
@@ -71,8 +86,8 @@ const needToc = headings.length >= 3 || (headings.length >= 2 && result && draft
 							loading="eager"
 							fetchpriority="high"
 							formats={['avif', 'webp']}
-							width={1440}
-							height={972}
+							width={coverWidth}
+							height={coverHeight}
 						/>
 					)
 				}
@@ -178,7 +193,6 @@ const needToc = headings.length >= 3 || (headings.length >= 2 && result && draft
 		transform: scale(0.9);
 		background-color: var(--bg-placeholder);
 		width: 100%;
-		height: auto;
 	}
 
 	.article__content,

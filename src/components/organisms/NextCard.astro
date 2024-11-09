@@ -12,6 +12,10 @@ interface Props {
 }
 
 const { title, href, cover, color, class: className, ...props } = Astro.props
+
+// cover
+const coverWidth = 453
+const coverHeight = 300
 ---
 
 <article
@@ -35,7 +39,18 @@ const { title, href, cover, color, class: className, ...props } = Astro.props
 	<div class="next-card__cover-container">
 		{
 			cover?.mp4?.length > 0 ? (
-				<video class="next-card__cover" autoplay preload="auto" loop muted playsinline width={453} height={274}>
+				<video
+					class="next-card__cover"
+					autoplay
+					preload="auto"
+					loop
+					muted
+					playsinline
+					tabindex="-1"
+					width={coverWidth}
+					height={coverHeight}
+					style={'aspect-ratio: ' + coverWidth + '/' + coverHeight}
+				>
 					<source src={cover.mp4} type="video/mp4" />
 					<source src={cover.webm} type="video/webm" />
 				</video>
@@ -45,8 +60,8 @@ const { title, href, cover, color, class: className, ...props } = Astro.props
 					src={cover.img || cover}
 					alt={cover?.alt || ''}
 					formats={['avif', 'webp']}
-					width={453}
-					height={274}
+					width={coverWidth}
+					height={coverHeight}
 				/>
 			)
 		}

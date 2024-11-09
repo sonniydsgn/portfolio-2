@@ -11,13 +11,28 @@ interface Props {
 
 const { project } = Astro.props
 const { color, cover, additional_image, name, desc, place_work, year } = project.data
+
+// cover
+const coverWidth = 906
+const coverHeight = 598
 ---
 
 <article class="project-card" style={'--cover-color: ' + '#' + color}>
 	<div class="project-card__cover-container">
 		{
 			cover?.mp4?.length > 0 ? (
-				<video class="project-card__cover" autoplay preload="auto" loop muted playsinline width={906} height={598}>
+				<video
+					class="project-card__cover"
+					autoplay
+					preload="auto"
+					loop
+					muted
+					playsinline
+					tabindex="-1"
+					width={coverWidth}
+					height={coverHeight}
+					style={'aspect-ratio: ' + coverWidth + '/' + coverHeight}
+				>
 					<source src={cover.mp4} type="video/mp4" />
 					<source src={cover.webm} type="video/webm" />
 				</video>
@@ -29,8 +44,8 @@ const { color, cover, additional_image, name, desc, place_work, year } = project
 					formats={['avif', 'webp']}
 					fetchpriority="high"
 					loading="eager"
-					width={906}
-					height={598}
+					width={coverWidth}
+					height={coverHeight}
 				/>
 			)
 		}
@@ -118,6 +133,7 @@ const { color, cover, additional_image, name, desc, place_work, year } = project
 		transform: scale(0.8);
 		transition: transform var(--tr-md);
 		background-color: var(--bg-placeholder);
+		aspect-ratio: 906 / 598;
 		width: 100%;
 		pointer-events: none;
 
