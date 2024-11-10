@@ -13,10 +13,6 @@ export default defineConfig({
 			transformer: 'lightningcss',
 		},
 	},
-	i18n: {
-		defaultLocale: 'ru',
-		locales: ['ru', 'en'],
-	},
 	integrations: [
 		sitemap(),
 		icon({

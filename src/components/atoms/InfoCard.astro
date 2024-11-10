@@ -28,7 +28,7 @@ if (type === 'link') {
 }
 
 if (type === 'file') {
-	const filePath = path.join(process.cwd(), href)
+	const filePath = import.meta.env.PROD ? path.join('dist', href) : path.join(process.cwd(), href)
 	const fileType = path.extname(filePath).replace('.', '').toUpperCase() + '-файл'
 	const fileSize = convertBytes(fs.statSync(filePath).size)
 
