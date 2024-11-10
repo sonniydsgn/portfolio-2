@@ -1,15 +1,10 @@
 ---
-import type { ImageMetadata } from 'astro'
 import { Icon } from 'astro-icon/components'
 import ButtonLink from '../atoms/ButtonLink.astro'
 
-interface Props {
-	mp4: string
-	webm: string
-	poster?: ImageMetadata
-}
-
-const { mp4, webm, poster = null } = Astro.props
+import videoCover from '@/assets/about/about-cover.jpg'
+import videoMP4 from '@/assets/about/about-video.mp4'
+import videoWEBM from '@/assets/about/about-video.webm'
 ---
 
 <script>
@@ -44,9 +39,9 @@ const { mp4, webm, poster = null } = Astro.props
 
 <div class="about-card">
 	<figure class="about-card__video-player" data-about-player>
-		<video class="about-card__video" width="250" height="250" poster={poster.src} playsinline data-about-video>
-			<source src={mp4} type="video/mp4" />
-			<source src={webm} type="video/webm" />
+		<video class="about-card__video" width="250" height="250" poster={videoCover.src} playsinline data-about-video>
+			<source src={videoMP4} type="video/mp4" />
+			<source src={videoWEBM} type="video/webm" />
 		</video>
 		<ButtonLink class="about-card__btn" aria-label="Включить видео" aria-live="polite" data-about-btn />
 		<ButtonLink

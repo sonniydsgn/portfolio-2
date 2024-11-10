@@ -91,17 +91,13 @@ const slug = title && slugify(transliterate(title))
 
 <style is:global>
 	.content-section {
-		hr {
-			margin: 0;
-			border: 1px solid var(--border-secondary);
-		}
+		/* заголовки */
+		h3 + * {
+			margin-block-start: 16px;
 
-		ul:not(.list-reset),
-		ol:not(.list-reset) {
-			display: flex;
-			flex-direction: column;
-			gap: 8px;
-			padding-inline-start: 32px;
+			@media (width <= 880) {
+				margin-block-start: 12px;
+			}
 		}
 
 		h3 + .info-list,
@@ -113,22 +109,15 @@ const slug = title && slugify(transliterate(title))
 			}
 		}
 
-		h3 + * {
-			margin-block-start: 16px;
-
-			@media (width <= 880) {
-				margin-block-start: 12px;
-			}
-		}
-
 		* ~ h3 {
-			margin-block-start: 40px;
+			margin-block-start: 32px;
 
 			@media (width <= 880) {
 				margin-block-start: 24px;
 			}
 		}
 
+		/* ссылки */
 		a.link {
 			opacity: 0.8;
 
@@ -139,6 +128,7 @@ const slug = title && slugify(transliterate(title))
 			}
 		}
 
+		/* параграфы */
 		p,
 		figcaption {
 			/* hack for temporary disabling chrome font boosting */
@@ -154,10 +144,19 @@ const slug = title && slugify(transliterate(title))
 		}
 
 		p + p {
-			margin-block-start: 12px;
+			margin-block-start: 16px;
 
 			@media (width <= 880) {
-				margin-block-start: 8px;
+				margin-block-start: 12px;
+			}
+		}
+
+		ul + p,
+		ol + p {
+			margin-block-start: 16px;
+
+			@media (width <= 880) {
+				margin-block-start: 12px;
 			}
 		}
 
@@ -179,6 +178,34 @@ const slug = title && slugify(transliterate(title))
 			}
 		}
 
+		/* списки */
+		ul:not(.list-reset),
+		ol:not(.list-reset) {
+			display: flex;
+			flex-direction: column;
+			gap: 12px;
+			padding-inline-start: 32px;
+
+			@media (width <= 880) {
+				gap: 8px;
+			}
+		}
+
+		p + ul,
+		p + ol {
+			margin-block-start: 8px;
+
+			@media (width <= 880) {
+				margin-block-start: 4px;
+			}
+		}
+
+		/* остальное */
+		hr {
+			margin: 0;
+			border: 1px solid var(--border-secondary);
+		}
+
 		figcaption {
 			--padding: 8px;
 
@@ -194,6 +221,14 @@ const slug = title && slugify(transliterate(title))
 			@media (width <= 880) {
 				--padding: 4px;
 			}
+		}
+
+		code {
+			border-radius: var(--br-sm);
+			background-color: var(--bg-tertiary);
+			padding-inline: 6px;
+			font-size: var(--font-sm);
+			font-family: var(--ff-secondary);
 		}
 
 		.content-section__body:has(.about-card) {
