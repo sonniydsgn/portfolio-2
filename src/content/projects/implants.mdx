@@ -19,57 +19,83 @@ result: https://implants.factor-alfa.ru
 draft: false
 ---
 
-{/* импорты */}
 import Kolya from '@/assets/avatar/kolya_krylov.jpg'
 import Gratitude from './media/implants/gratitude.pdf'
 
-{/* контент */}
-<Section title="О проекте">
+::::Section[О проекте]
 
-  ### Моя роль
-  <List>
-    <Card name="Дизайнер интерфейса" desc="быстрое исследование, интерактивный дизайн, визуальный дизайн" icon="image-icon"/>
-    <Card name="Фронтендер" icon="code-icon" desc="верстка, анимация, тестирование" />
-  </List>
+### Моя роль
 
-  ### Команда
-  <List>
-    <Card name="Крылов Николай" image={Kolya} desc="бэкендер" />
-  </List>
+:::List
 
-  ### Время работы
-  <Card name="2 месяца" desc="запустили в октябре 2023" icon="clock-icon" tag='div' />
+<Card
+	name="Дизайнер интерфейса"
+	desc="быстрое исследование, интерактивный дизайн, визуальный дизайн"
+	icon="image-icon"
+/>
 
-</Section>
+<Card name="Фронтендер" icon="code-icon" desc="верстка, анимация, тестирование" />
 
-<Section title="Хайлайты">
-  <figure>
-    []('./media/nova-ug/highlights.jpg')
-    <figcaption></figcaption>
-  </figure>
-</Section>
+:::
 
-<Section title="Контекст">
+### Команда
 
-</Section>
+<Card name="Крылов Николай" image={Kolya} desc="бэкендер" />
 
-<Section title="Понимание">
+### Время работы
 
-</Section>
+<Card name="2 месяца" desc="запустили в октябре 2023" icon="clock-icon" tag="div" />
 
-<Section title="Изучение">
+::::
 
-</Section>
+::::Section[Хайлайты]
 
-<Section title="Дизайн">
+<figure>
+	[]('./media/nova-ug/highlights.jpg')
+	<figcaption></figcaption>
+</figure>
 
-</Section>
+::::
 
-<Section title="Разработка">
+::::Section[Контекст]
 
-</Section>
+::::
 
-<Section title="Результаты">
-  {/* <Card name="Посмотреть сайт" href={result} /> */}
-  <Card name="Отзыв клиента" href={Gratitude} type='file' />
-</Section>
+::::Section[Понимание]
+
+::::
+
+::::Section[Изучение]
+
+::::
+
+::::Section[Дизайн]
+
+::::
+
+::::Section[Разработка]
+
+::::
+
+::::Section[Результаты]
+
+### Успешность
+
+Мы запустили, но из-за проблем у клиента со стороны маркетинга не удалось достичь поставленный целей...
+
+### Рефлексия
+
+- Что можно было сделать ещё
+- Что можно было бы доработать
+- Понравилось ли работать над проектом
+
+### Что получилось
+
+:::List{grid=true}
+
+<Card name="Посмотреть сайт" href={frontmatter.result} />
+<Card name="Отзыв клиента" href={Gratitude} type="file" />
+
+:::
+
+::::

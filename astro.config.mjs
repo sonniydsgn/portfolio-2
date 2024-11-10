@@ -2,8 +2,25 @@ import mdx from '@astrojs/mdx'
 import sitemap from '@astrojs/sitemap'
 import remarkTypograf from '@mavrin/remark-typograf'
 import icon from 'astro-icon'
+import mdxDirective from 'astro-mdx-directive'
 import { defineConfig } from 'astro/config'
 import rehypeUnwrapImages from 'rehype-unwrap-images'
+
+const directives = {
+	container: [
+		{
+			name: 'Section',
+			path: 'src/components/organisms/ContentSection.astro',
+			useAsProps: {
+				directiveLabel: 'title',
+			},
+		},
+		{
+			name: 'List',
+			path: 'src/components/molecules/InfoList.astro',
+		},
+	],
+}
 
 export default defineConfig({
 	compressHTML: true,
@@ -30,9 +47,11 @@ export default defineConfig({
 				],
 			},
 		}),
-		mdx({
-			rehypePlugins: [rehypeUnwrapImages],
-			remarkPlugins: [[remarkTypograf, { locale: ['ru'] }]],
-		}),
+		mdxDirective({ directives }),
+		mdx(),
 	],
+	markdown: {
+		rehypePlugins: [rehypeUnwrapImages],
+		remarkPlugins: [[remarkTypograf, { locale: ['ru'] }]],
+	},
 })

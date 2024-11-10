@@ -15,9 +15,6 @@
 	"[markdown]": {
 		"editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
 	},
-	"[mdx]": {
-		"editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
-	},
 	"emmet.includeLanguages": {
 		"mdx": "html"
 	}

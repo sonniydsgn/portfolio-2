@@ -3,8 +3,8 @@ import convertBytes from '@/scripts/libs/convert-bytes'
 import type { ImageMetadata } from 'astro'
 import { Icon } from 'astro-icon/components'
 import { Picture } from 'astro:assets'
-import fs from 'fs'
-import path from 'path'
+import fs from 'node:fs'
+import path from 'node:path'
 
 interface Props {
 	name: string

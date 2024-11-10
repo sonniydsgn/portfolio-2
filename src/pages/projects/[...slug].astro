@@ -36,8 +36,8 @@ const nextProject = projects[currentIndex + 1] || projects[0]
 // toc
 const headings: TocItem[] = project.body
 	.split('\n')
-	.filter(line => line.includes('title'))
-	.map(line => line.match(/title="([^"]+)"/)[1])
+	.filter(line => line.includes(':::Section['))
+	.map(line => line.match(/:::Section\[(.*?)\]/)![1])
 	.map(title => ({ title, slug: '#' + slugify(transliterate(title)) }))
 
 const needToc = headings.length >= 3 || (headings.length >= 2 && result && draft)
