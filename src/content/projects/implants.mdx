@@ -20,34 +20,56 @@ draft: false
 ---
 
 {/* импорты */}
-import ContentSection from '@/components/organisms/ContentSection.astro'
-import InfoCard from '@/components/atoms/InfoCard.astro'
-import InfoList from '@/components/molecules/InfoList.astro'
 import Kolya from '@/assets/avatar/kolya_krylov.jpg'
 import Gratitude from './media/implants/Gratitude_FA.pdf'
 
 {/* контент */}
-<ContentSection title="О проекте">
+<Section title="О проекте">
 
   ### Моя роль
-  <InfoList>
-    <InfoCard name="Дизайнер интерфейса" desc="быстрое исследование, интерактивный дизайн, визуальный дизайн" icon="image-icon"/>
-    <InfoCard name="Фронтендер" icon="code-icon" desc="верстка, анимация, тестирование" />
-  </InfoList>
+  <List>
+    <Card name="Дизайнер интерфейса" desc="быстрое исследование, интерактивный дизайн, визуальный дизайн" icon="image-icon"/>
+    <Card name="Фронтендер" icon="code-icon" desc="верстка, анимация, тестирование" />
+  </List>
 
   ### Команда
-  <InfoList>
-    <InfoCard name="Крылов Николай" image={Kolya} desc="бэкендер" />
-  </InfoList>
+  <List>
+    <Card name="Крылов Николай" image={Kolya} desc="бэкендер" />
+  </List>
 
   ### Время работы
-  <InfoCard name="6 месяцев" desc="запустили в июле 2024" icon="clock-icon" tag='div' />
+  <Card name="2 месяца" desc="запустили в октябре 2023" icon="clock-icon" tag='div' />
 
-</ContentSection>
+</Section>
 
-<ContentSection title="Хайлайты">
+<Section title="Хайлайты">
   <figure>
     []('./media/nova-ug/highlights.jpg')
     <figcaption></figcaption>
   </figure>
-</ContentSection>
+</Section>
+
+<Section title="Контекст">
+
+</Section>
+
+<Section title="Понимание">
+
+</Section>
+
+<Section title="Изучение">
+
+</Section>
+
+<Section title="Дизайн">
+
+</Section>
+
+<Section title="Разработка">
+
+</Section>
+
+<Section title="Результаты">
+  {/* <Card name="Посмотреть сайт" href={result} /> */}
+  <Card name="Отзыв клиента" href={Gratitude} type='file' />
+</Section>

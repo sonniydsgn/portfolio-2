@@ -1,11 +1,9 @@
 ---
-import Section from '@/components/atoms/Section.astro'
-
 interface Props {
 	title: string
 	title_secondary?: string
 	desc: string
-	tag?: typeof Section | 'header'
+	tag?: 'section' | 'header'
 	class?: string
 	centered?: boolean
 }
@@ -14,7 +12,7 @@ const {
 	title,
 	title_secondary,
 	desc,
-	tag: Element = Section,
+	tag: Element = 'section',
 	class: className,
 	centered = false,
 	...props

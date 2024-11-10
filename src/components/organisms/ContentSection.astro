@@ -1,5 +1,4 @@
 ---
-import Section from '@/components/atoms/Section.astro'
 import { slugify, transliterate } from 'transliteration'
 
 interface Props {
@@ -15,7 +14,7 @@ const { title, icon = '◌', size = 'md', type = 'section', class: className, ..
 const slug = title && slugify(transliterate(title))
 ---
 
-<Section
+<section
 	data-toc-section={type === 'section' ? '' : null}
 	class:list={['content-section', { 'content-section--sm': size === 'sm' }, className]}
 	id={slug}
@@ -29,7 +28,7 @@ const slug = title && slugify(transliterate(title))
 	<div class="content-section__body">
 		<slot />
 	</div>
-</Section>
+</section>
 
 <style>
 	.content-section {

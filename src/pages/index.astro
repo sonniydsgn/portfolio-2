@@ -1,5 +1,4 @@
 ---
-import Section from '@/components/atoms/Section.astro'
 import ContentList from '@/components/molecules/ContentList.astro'
 import ProjectCard from '@/components/organisms/ProjectCard.astro'
 import MainLayout from '@/layouts/MainLayout.astro'
@@ -18,7 +17,7 @@ const projects = await getProjects()
 		desc: 'Превращаю сложное в простое и обожаю системность',
 	}}
 >
-	<Section class="projects">
+	<section class="projects">
 		<ContentList class="projects__list">
 			{
 				projects.map(project => (
@@ -28,5 +27,5 @@ const projects = await getProjects()
 				))
 			}
 		</ContentList>
-	</Section>
+	</section>
 </MainLayout>

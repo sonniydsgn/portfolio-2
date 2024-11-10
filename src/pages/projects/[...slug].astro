@@ -4,6 +4,7 @@ import H3 from '@/components/atoms/H3.astro'
 import Image from '@/components/atoms/Image.astro'
 import InfoCard from '@/components/atoms/InfoCard.astro'
 import ContentList from '@/components/molecules/ContentList.astro'
+import InfoList from '@/components/molecules/InfoList.astro'
 import Meta from '@/components/molecules/Meta.astro'
 import ContentPlaceholder from '@/components/organisms/ContentPlaceholder.astro'
 import ContentSection from '@/components/organisms/ContentSection.astro'
@@ -44,6 +45,11 @@ const needToc = headings.length >= 3 || (headings.length >= 2 && result && draft
 // cover
 const coverWidth = 1440
 const coverHeight = 952
+
+// components
+const Section = ContentSection
+const List = InfoList
+const Card = InfoCard
 ---
 
 <ProjectLayout title={title + ' — Алексей Калинин'} {desc}>
@@ -118,7 +124,7 @@ const coverHeight = 952
 							)
 						}
 
-						<Content components={{ img: Image, h3: H3, a: Link }} />
+						<Content components={{ img: Image, h3: H3, a: Link, Section, Card, List }} />
 
 						{
 							draft && (
@@ -205,8 +211,11 @@ const coverHeight = 952
 	}
 
 	.article__toc {
-		order: 1;
 		margin-inline-start: 64px;
+
+		&.article__toc--desktop {
+			order: 1;
+		}
 
 		&.article__toc--mobile {
 			display: none;
