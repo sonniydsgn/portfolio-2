@@ -45,6 +45,7 @@ const { title, desc, image } = Astro.props
 	}
 
 	[data-btn-back] {
-		touch-action: none;
+		/* prevent 300ms delay in mobile */
+		touch-action: manipulation;
 	}
 </style>

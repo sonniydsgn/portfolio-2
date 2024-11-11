@@ -166,7 +166,8 @@ const coverHeight = 598
 	}
 
 	.project-card__link {
-		touch-action: none;
+		/* prevent 300ms delay in mobile */
+		touch-action: manipulation;
 		color: currentcolor;
 
 		&::after {
