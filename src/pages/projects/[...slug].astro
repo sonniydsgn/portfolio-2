@@ -26,7 +26,7 @@ export async function getStaticPaths() {
 const { project } = Astro.props
 const { Content } = await project.render()
 
-const { name: title, desc, place_work, color, cover, result, draft } = project.data
+const { name: title, desc, place_work, color, cover, roles, team, timeline, highlights, result, draft } = project.data
 
 // select next page
 const projects = await getProjects()
@@ -40,7 +40,7 @@ const headings: TocItem[] = project.body
 	.map(line => line.match(/:::Section\[(.*?)\]/)![1])
 	.map(title => ({ title, slug: '#' + slugify(transliterate(title)) }))
 
-const needToc = headings.length >= 3 || (headings.length >= 2 && result && draft)
+const needToc = headings.length >= 3 && !draft
 
 // cover
 const coverWidth = 1440
@@ -103,6 +103,7 @@ const Card = InfoCard
 		<ContentList tag="div" class="article__list">
 			<div class="container">
 				<div class="article__inner grid grid--page">
+					<!-- desktop toc -->
 					{
 						needToc && (
 							<Toc class="article__toc article__toc--desktop" list={headings} hasResult={draft && result != null} />
@@ -110,6 +111,7 @@ const Card = InfoCard
 					}
 
 					<ContentList tag="div" class="article__content">
+						<!-- mobile toc section -->
 						{
 							needToc && (
 								<ContentSection
@@ -124,14 +126,47 @@ const Card = InfoCard
 							)
 						}
 
-						<Content components={{ img: Image, h3: H3, a: Link, Section, Card, List }} />
+						<!-- base sections -->
+						<ContentSection title="О проекте">
+							<H3>Моя роль</H3>
+							<List>
+								{roles.map(role => <Card name={role.name} desc={role.desc} icon={role.icon} />)}
+							</List>
+
+							{team && (
+								<H3>Команда</H3>
+								<List>
+									{
+										team.map(people => (
+											<Card name={people.name} desc={people.desc} image={people.image as ImageMetadata} />
+										))
+									}
+								</List>
+							)}
+
+							<H3>Время работы</H3>
+							<Card name={timeline.period} desc={timeline.status} icon="clock-icon" tag="div" />
+						</ContentSection>
 
 						{
-							draft && (
+							highlights && (
+								<ContentSection title="Хайлайты">
+									{highlights.map(highlight => (
+										<Image src={highlight.src as ImageMetadata} alt={highlight.alt} title={highlight.title} />
+									))}
+								</ContentSection>
+							)
+						}
+
+						<!-- other sections -->
+						{
+							draft && import.meta.env.PROD ? (
 								<ContentPlaceholder id="result" data-toc-section>
 									{result && <InfoCard name="Посмотреть сайт" href={result} />}
 									<InfoCard name="Обсудить проект" href="https://t.me/sonniyboii" icon="message-text-icon" />
 								</ContentPlaceholder>
+							) : (
+								<Content components={{ img: Image, h3: H3, a: Link, Section, Card, List }} />
 							)
 						}
 					</ContentList>

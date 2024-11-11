@@ -37,7 +37,7 @@ if (type === 'file') {
 }
 ---
 
-<Element class:list={['info-card', { 'info-card--link': href }]}>
+<Element class:list={['info-card', { 'info-card--link': href }, { 'info-card--number': number }]}>
 	{image && <Picture class="info-card__image" src={image} alt="" formats={['avif', 'webp']} width={32} height={32} />}
 
 	{number && <div class="info-card__number">{number}</div>}
@@ -80,11 +80,14 @@ if (type === 'file') {
 		font-family: var(--ff-secondary);
 
 		@media (width <= 880) {
-			flex-direction: column;
 			gap: 12px;
 			border-radius: var(--br-md);
 			padding: 16px;
 			font-size: var(--font-sm);
+
+			&:not(.info-card--number) {
+				flex-direction: column;
+			}
 		}
 	}
 

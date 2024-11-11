@@ -15,35 +15,20 @@ place_work:
   name: НОВА ЮГ
   logo: './media/icons/nova-ug.svg'
   link: https://nova-ug.ru
+roles:
+  - name: Дизайнер интерфейсов
+    desc: быстрое исследование, интерактивный дизайн, визуальный дизайн
+    icon: image-icon
+  - name: Фронтендер
+    desc: верстка, анимация, тестирование
+    icon: code-icon
+team:
+  - name: Крылов Николай
+    desc: бэкендер
+    image: '@/assets/avatar/kolya_krylov.jpg'
+timeline:
+  period: 4 месяца
+  status: запустили в августе 2024
 result: https://nova-ug.ru
 draft: true
 ---
-
-{/* импорты */}
-import Kolya from '@/assets/avatar/kolya_krylov.jpg'
-
-{/* контент */}
-<Section title="О проекте">
-
-  ### Моя роль
-  <List>
-    <Card name="Дизайнер интерфейса" desc="быстрое исследование, интерактивный дизайн, визуальный дизайн" icon="image-icon"/>
-    <Card name="Фронтендер" icon="code-icon" desc="верстка, анимация, тестирование" />
-  </List>
-
-  ### Команда
-  <List>
-    <Card name="Крылов Николай" image={Kolya} desc="бэкендер" />
-  </List>
-
-  ### Время работы
-  <Card name="6 месяцев" desc="запустили в июле 2024" icon="clock-icon" tag='div' />
-
-</Section>
-
-<Section title="Хайлайты">
-  <figure>
-    []('./media/nova-ug/highlights.jpg')
-    <figcaption></figcaption>
-  </figure>
-</Section>
