@@ -33,8 +33,8 @@ const coverHeight = 598
 					height={coverHeight}
 					style={'aspect-ratio: ' + coverWidth + '/' + coverHeight}
 				>
+					<source src={cover.h265} type="video/mp4" />
 					<source src={cover.mp4} type="video/mp4" />
-					<source src={cover.webm} type="video/webm" />
 				</video>
 			) : (
 				<Picture

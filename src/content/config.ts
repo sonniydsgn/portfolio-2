@@ -8,7 +8,7 @@ const projectsCollection = defineCollection({
 			cover: z.object({
 				img: image(),
 				mp4: z.string().optional(),
-				webm: z.string().optional(),
+				h265: z.string().optional(),
 				alt: z.string(),
 			}),
 			additional_image: z
