@@ -29,7 +29,10 @@
 	"dependencies": {
 		"@astrojs/mdx": "^3.1.9",
 		"@astrojs/sitemap": "^3.2.1",
+		"@astrojs/vercel": "^7.8.2",
 		"@mavrin/remark-typograf": "^2.2.0",
+		"@vercel/analytics": "^1.3.2",
+		"@vercel/speed-insights": "^1.1.0",
 		"astro": "^4.16.10",
 		"astro-icon": "^1.1.2",
 		"rehype-unwrap-images": "^1.0.0",

@@ -1,5 +1,6 @@
 import mdx from '@astrojs/mdx'
 import sitemap from '@astrojs/sitemap'
+import vercel from '@astrojs/vercel/static'
 import remarkTypograf from '@mavrin/remark-typograf'
 import icon from 'astro-icon'
 import mdxDirective from 'astro-mdx-directive'
@@ -50,6 +51,9 @@ export default defineConfig({
 		mdxDirective({ directives }),
 		mdx(),
 	],
+	adapter: vercel({
+		webAnalytics: { enabled: true },
+	}),
 	markdown: {
 		rehypePlugins: [rehypeUnwrapImages],
 		remarkPlugins: [[remarkTypograf, { locale: ['ru'] }]],

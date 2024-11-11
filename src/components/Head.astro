@@ -4,6 +4,7 @@ import '@/styles/elements.css'
 import '@/styles/fonts.css'
 import '@/styles/reset.css'
 import '@/styles/vars.css'
+import SpeedInsights from '@vercel/speed-insights/astro'
 import { ViewTransitions } from 'astro:transitions'
 
 interface Props {
@@ -40,5 +41,7 @@ const { title, desc, url = Astro.url, image = '/images/og.jpg' } = Astro.props
 	<link rel="preload" href="/fonts/JetBrainsMono.woff2" as="font" type="font/woff2" crossorigin />
 	<!-- пасхалка -->
 	<script src="@/scripts/love.js"></script>
+	<!-- остальное -->
 	<ViewTransitions fallback="swap" />
+	<SpeedInsights />
 </head>
