@@ -8,33 +8,31 @@ import videoH265 from '@/assets/about/about_video_h265.mp4'
 ---
 
 <script>
-	document.addEventListener('astro:page-load', () => {
-		const videoPlayer = document.querySelector('[data-about-player]') as HTMLVideoElement
-		if (videoPlayer) {
-			const video = videoPlayer.querySelector('[data-about-video]') as HTMLVideoElement
-			const videoButton = videoPlayer.querySelector('[data-about-btn]') as HTMLButtonElement
-			const playButton = videoPlayer.querySelector('[data-about-play]') as HTMLButtonElement
+	const videoPlayer = document.querySelector('[data-about-player]') as HTMLVideoElement
+	if (videoPlayer) {
+		const video = videoPlayer.querySelector('[data-about-video]') as HTMLVideoElement
+		const videoButton = videoPlayer.querySelector('[data-about-btn]') as HTMLButtonElement
+		const playButton = videoPlayer.querySelector('[data-about-play]') as HTMLButtonElement
 
-			const togglePlay = () => {
-				playButton.classList.add('about-card__play--hidden')
-				videoButton.setAttribute('aria-label', 'Поставить видео на паузу')
-			}
-
-			const togglePause = () => {
-				playButton.classList.remove('about-card__play--hidden')
-				videoButton.setAttribute('aria-label', 'Включить видео')
-			}
-
-			videoButton.addEventListener('click', () => {
-				if (video.paused) video.play()
-				else video.pause()
-			})
-
-			video.addEventListener('play', togglePlay)
-			video.addEventListener('pause', togglePause)
-			video.addEventListener('ended', togglePause)
+		const togglePlay = () => {
+			playButton.classList.add('about-card__play--hidden')
+			videoButton.setAttribute('aria-label', 'Поставить видео на паузу')
 		}
-	})
+
+		const togglePause = () => {
+			playButton.classList.remove('about-card__play--hidden')
+			videoButton.setAttribute('aria-label', 'Включить видео')
+		}
+
+		videoButton.addEventListener('click', () => {
+			if (video.paused) video.play()
+			else video.pause()
+		})
+
+		video.addEventListener('play', togglePlay)
+		video.addEventListener('pause', togglePause)
+		video.addEventListener('ended', togglePause)
+	}
 </script>
 
 <div class="about-card">
@@ -91,6 +89,7 @@ import videoH265 from '@/assets/about/about_video_h265.mp4'
 		background-color: var(--bg-placeholder);
 		aspect-ratio: 1 / 1;
 		width: var(--size);
+		pointer-events: none;
 
 		@media (width <= 880) {
 			--size: 100%;

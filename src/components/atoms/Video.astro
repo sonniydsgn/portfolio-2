@@ -12,34 +12,32 @@ const { title, autoplay, ...props } = Astro.props
 ---
 
 <script>
-	document.addEventListener('astro:page-load', () => {
-		const videoPlayers = document.querySelectorAll('[data-autoplayer]')
-		if (videoPlayers) {
-			videoPlayers.forEach((videoPlayer: HTMLDivElement) => {
-				const video = videoPlayer.querySelector('video') as HTMLVideoElement
-				const playButton = videoPlayer.querySelector('.btn__play') as HTMLButtonElement
+	const videoPlayers = document.querySelectorAll('[data-autoplayer]')
+	if (videoPlayers) {
+		videoPlayers.forEach((videoPlayer: HTMLDivElement) => {
+			const video = videoPlayer.querySelector('video') as HTMLVideoElement
+			const playButton = videoPlayer.querySelector('.btn__play') as HTMLButtonElement
 
-				video.addEventListener('play', () => togglePlay(playButton, videoPlayer))
-				video.addEventListener('pause', () => togglePause(playButton, videoPlayer))
-				video.addEventListener('ended', () => togglePause(playButton, videoPlayer))
+			video.addEventListener('play', () => togglePlay(playButton, videoPlayer))
+			video.addEventListener('pause', () => togglePause(playButton, videoPlayer))
+			video.addEventListener('ended', () => togglePause(playButton, videoPlayer))
 
-				playButton.addEventListener('click', () => {
-					if (video.paused) video.play()
-					else video.pause()
-				})
+			playButton.addEventListener('click', () => {
+				if (video.paused) video.play()
+				else video.pause()
 			})
+		})
 
-			const togglePlay = (btn: HTMLButtonElement, player: HTMLDivElement) => {
-				player.dataset.autoplayer = 'played'
-				btn.setAttribute('aria-label', 'Поставить видео на паузу')
-			}
-
-			const togglePause = (btn: HTMLButtonElement, player: HTMLDivElement) => {
-				player.dataset.autoplayer = 'paused'
-				btn.setAttribute('aria-label', 'Включить видео')
-			}
+		const togglePlay = (btn: HTMLButtonElement, player: HTMLDivElement) => {
+			player.dataset.autoplayer = 'played'
+			btn.setAttribute('aria-label', 'Поставить видео на паузу')
 		}
-	})
+
+		const togglePause = (btn: HTMLButtonElement, player: HTMLDivElement) => {
+			player.dataset.autoplayer = 'paused'
+			btn.setAttribute('aria-label', 'Включить видео')
+		}
+	}
 </script>
 
 {
