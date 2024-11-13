@@ -3,6 +3,7 @@ import type { ImageMetadata } from 'astro'
 import { Icon } from 'astro-icon/components'
 import { Picture } from 'astro:assets'
 import type { CollectionEntry } from 'astro:content'
+import Cover from '../atoms/Cover.astro'
 import Meta from '../molecules/Meta.astro'
 
 interface Props {
@@ -18,38 +19,15 @@ const coverHeight = 598
 ---
 
 <article class="project-card" style={'--cover-color: ' + '#' + color}>
-	<div class="project-card__cover-container">
-		{
-			cover?.mp4?.length > 0 ? (
-				<video
-					class="project-card__cover"
-					autoplay
-					preload="auto"
-					loop
-					muted
-					playsinline
-					tabindex="-1"
-					width={coverWidth}
-					height={coverHeight}
-					style={'aspect-ratio: ' + coverWidth + '/' + coverHeight}
-				>
-					<source src={cover.h265} type="video/mp4" />
-					<source src={cover.mp4} type="video/mp4" />
-				</video>
-			) : (
-				<Picture
-					class="project-card__cover"
-					src={cover.img as ImageMetadata}
-					alt={cover?.alt}
-					formats={['avif', 'webp']}
-					fetchpriority="high"
-					loading="eager"
-					width={coverWidth}
-					height={coverHeight}
-				/>
-			)
-		}
-	</div>
+	<Cover
+		{cover}
+		width={coverWidth}
+		height={coverHeight}
+		containerClass="project-card__cover-container"
+		class="project-card__cover"
+		loading="eager"
+		fetchpriority="high"
+	/>
 
 	{
 		additional_image && (
@@ -119,8 +97,6 @@ const coverHeight = 598
 	.project-card__cover-container {
 		margin-block-end: 24px;
 		border-radius: var(--br-primary);
-		background-color: var(--cover-color);
-		width: 100%;
 		overflow: hidden;
 
 		@media (width <= 880) {
@@ -129,12 +105,8 @@ const coverHeight = 598
 	}
 
 	.project-card__cover {
-		display: flex;
 		transform: scale(0.8);
 		transition: transform var(--tr-md);
-		background-color: var(--bg-placeholder);
-		aspect-ratio: 906 / 598;
-		width: 100%;
 		pointer-events: none;
 
 		@media (width <= 880) {

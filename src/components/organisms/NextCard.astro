@@ -1,8 +1,7 @@
 ---
-import type { ImageMetadata } from 'astro'
 import { Icon } from 'astro-icon/components'
-import { Picture } from 'astro:assets'
 import type { CollectionEntry } from 'astro:content'
+import Cover from '../atoms/Cover.astro'
 
 interface Props {
 	title: string
@@ -37,36 +36,14 @@ const coverHeight = 300
 			<Icon name="arrow-right-icon" class="icon" aria-hidden="true" />
 		</div>
 	</div>
-	<div class="next-card__cover-container">
-		{
-			cover?.mp4?.length > 0 ? (
-				<video
-					class="next-card__cover"
-					autoplay
-					preload="auto"
-					loop
-					muted
-					playsinline
-					tabindex="-1"
-					width={coverWidth}
-					height={coverHeight}
-					style={'aspect-ratio: ' + coverWidth + '/' + coverHeight}
-				>
-					<source src={cover.h265} type="video/mp4" />
-					<source src={cover.mp4} type="video/mp4" />
-				</video>
-			) : (
-				<Picture
-					class="next-card__cover"
-					src={cover.img as ImageMetadata}
-					alt={cover?.alt || ''}
-					formats={['avif', 'webp']}
-					width={coverWidth}
-					height={coverHeight}
-				/>
-			)
-		}
-	</div>
+
+	<Cover
+		{cover}
+		width={coverWidth}
+		height={coverHeight}
+		containerClass="next-card__cover-container"
+		class="next-card__cover"
+	/>
 </article>
 
 <style>
@@ -194,10 +171,7 @@ const coverHeight = 300
 	}
 
 	.next-card__cover {
-		display: flex;
 		transition: transform var(--tr-primary);
-		background-color: var(--bg-placeholder);
-		width: 100%;
 		pointer-events: none;
 	}
 </style>
