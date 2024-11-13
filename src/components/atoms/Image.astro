@@ -50,6 +50,10 @@ const renderedTitle = title && parseLink(title)
 <style>
 	picture img {
 		display: flex;
-		border-radius: var(--br-primary);
+		border-radius: var(--br-md);
+
+		@media (width <= 880) {
+			border-radius: var(--br-primary);
+		}
 	}
 </style>

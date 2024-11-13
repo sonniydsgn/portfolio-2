@@ -47,9 +47,10 @@ const projectsCollection = defineCollection({
 			highlights: z
 				.array(
 					z.object({
-						src: image(),
+						src: z.string().or(z.array(z.string())),
 						alt: z.string(),
-						title: z.string().optional(),
+						title: z.string().optional().nullable(),
+						type: z.enum(['image', 'video']),
 					}),
 				)
 				.optional(),

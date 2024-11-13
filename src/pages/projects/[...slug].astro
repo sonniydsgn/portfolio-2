@@ -11,8 +11,10 @@ import ContentSection from '@/components/organisms/ContentSection.astro'
 import Hero from '@/components/organisms/Hero.astro'
 import NextCard from '@/components/organisms/NextCard.astro'
 import Toc from '@/components/organisms/Toc.astro'
+import Video from '@/components/atoms/Video.astro'
 import ProjectLayout from '@/layouts/ProjectLayout.astro'
 import getProjects from '@/scripts/getters/get-projects'
+import getHighlightSource from '@/scripts/getters/get-highlight'
 import type { TocItem } from '@/types'
 import type { ImageMetadata } from 'astro'
 import { Picture } from 'astro:assets'
@@ -33,6 +35,7 @@ const projects = await getProjects()
 const currentIndex = projects.findIndex(p => p.slug === project.slug)
 const nextProject = projects[currentIndex + 1] || projects[0]
 
+
 // toc
 const headings: TocItem[] = project.body
 	.split('\n')
@@ -41,6 +44,14 @@ const headings: TocItem[] = project.body
 	.map(title => ({ title, slug: '#' + slugify(transliterate(title)) }))
 
 const needToc = headings.length >= 3 && !draft
+
+// highlights
+const highlightsPrepared = highlights?.map(highlight => {
+	return {
+		...highlight,
+		src: getHighlightSource(highlight.type, highlight.src),
+	}
+})
 
 // cover
 const coverWidth = 1440
@@ -150,9 +161,16 @@ const Card = InfoCard
 
 						{
 							highlights && (
-								<ContentSection title="Хайлайты">
-									{highlights.map(highlight => (
-										<Image src={highlight.src as ImageMetadata} alt={highlight.alt} title={highlight.title} />
+								<ContentSection title="Хайлайты" size='sm'>
+									{highlightsPrepared.map(highlight => (
+										highlight.type === 'image' ? (
+											<Image src={highlight.src[0] as unknown as ImageMetadata} alt={highlight.alt} title={highlight.title} />
+										) : (
+											<Video title={highlight.title} width="1440" height="1000" autoplay>
+												<source src={highlight.src[1]} type="video/mp4" />
+												<source src={highlight.src[0]} type="video/mp4" />
+											</Video>
+										)
 									))}
 								</ContentSection>
 							)

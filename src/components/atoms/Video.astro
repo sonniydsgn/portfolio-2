@@ -1,0 +1,112 @@
+---
+import { Icon } from 'astro-icon/components'
+import type { HTMLAttributes } from 'astro/types'
+import ButtonLink from './ButtonLink.astro'
+
+interface Props extends HTMLAttributes<'video'> {
+	title?: string
+	autoplay?: boolean
+}
+
+const { title, autoplay, ...props } = Astro.props
+---
+
+<script>
+	document.addEventListener('astro:page-load', () => {
+		const videoPlayers = document.querySelectorAll('[data-autoplayer]')
+		if (videoPlayers) {
+			videoPlayers.forEach((videoPlayer: HTMLDivElement) => {
+				const video = videoPlayer.querySelector('video') as HTMLVideoElement
+				const playButton = videoPlayer.querySelector('.btn__play') as HTMLButtonElement
+
+				video.addEventListener('play', () => togglePlay(playButton, videoPlayer))
+				video.addEventListener('pause', () => togglePause(playButton, videoPlayer))
+				video.addEventListener('ended', () => togglePause(playButton, videoPlayer))
+
+				playButton.addEventListener('click', () => {
+					if (video.paused) video.play()
+					else video.pause()
+				})
+			})
+
+			const togglePlay = (btn: HTMLButtonElement, player: HTMLDivElement) => {
+				player.dataset.autoplayer = 'played'
+				btn.setAttribute('aria-label', 'Поставить видео на паузу')
+			}
+
+			const togglePause = (btn: HTMLButtonElement, player: HTMLDivElement) => {
+				player.dataset.autoplayer = 'paused'
+				btn.setAttribute('aria-label', 'Включить видео')
+			}
+		}
+	})
+</script>
+
+{
+	title ? (
+		<figure>
+			<div class="video-container" data-autoplayer="played">
+				<video {...props} {autoplay} muted={autoplay} loop={autoplay} playsinline={autoplay} preload="auto">
+					<slot />
+				</video>
+
+				{autoplay && (
+					<ButtonLink class="btn btn--secondary btn--only-icon btn__play" aria-label="Поставить видео на паузу">
+						<Icon name="play-icon" class="icon icon--play" aria-hidden="true" />
+						<Icon name="pause-icon" class="icon icon--pause" aria-hidden="true" />
+					</ButtonLink>
+				)}
+			</div>
+			<figcaption>{title}</figcaption>
+		</figure>
+	) : (
+		<div class="video-container" data-autoplayer="played">
+			<video {...props} {autoplay} muted={autoplay} loop={autoplay} playsinline={autoplay} preload="auto">
+				<slot />
+			</video>
+
+			{autoplay && (
+				<ButtonLink class="btn btn--secondary btn--only-icon btn__play" aria-label="Поставить видео на паузу">
+					<Icon name="play-icon" class="icon icon--play" aria-hidden="true" />
+					<Icon name="pause-icon" class="icon icon--pause" aria-hidden="true" />
+				</ButtonLink>
+			)}
+		</div>
+	)
+}
+
+<style>
+	.video-container {
+		position: relative;
+
+		&[data-autoplayer='paused'] .icon--play {
+			display: block;
+		}
+
+		&[data-autoplayer='played'] .icon--pause {
+			display: block;
+		}
+	}
+
+	.btn__play {
+		--margin: 16px;
+
+		position: absolute;
+		right: var(--margin);
+		bottom: var(--margin);
+		z-index: 1;
+
+		.icon {
+			display: none;
+		}
+	}
+
+	video {
+		display: flex;
+		border-radius: var(--br-md);
+
+		@media (width <= 880) {
+			border-radius: var(--br-primary);
+		}
+	}
+</style>

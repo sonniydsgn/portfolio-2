@@ -161,7 +161,8 @@ const slug = title && slugify(transliterate(title))
 		}
 
 		p + figure,
-		p + picture {
+		p + picture,
+		p + .video-container {
 			margin-block-start: 16px;
 
 			@media (width <= 880) {
@@ -169,12 +170,47 @@ const slug = title && slugify(transliterate(title))
 			}
 		}
 
-		figure + p,
-		picture + p {
+		picture + p,
+		.video-container + p,
+		figure + p {
 			margin-block-start: 24px;
 
 			@media (width <= 880) {
 				margin-block-start: 20px;
+			}
+		}
+
+		/* медиа-материалы */
+		picture + picture,
+		picture + .video-container,
+		picture + figure,
+		.video-container + .video-container,
+		.video-container + figure,
+		.video-container + picture,
+		figure + figure,
+		figure + picture,
+		figure + .video-container {
+			margin-block-start: 32px;
+
+			@media (width <= 880) {
+				margin-block-start: 24px;
+			}
+		}
+
+		figcaption {
+			--padding: 8px;
+
+			margin-block-start: 12px;
+			padding-inline: var(--padding);
+			max-width: calc(714px + 2 * var(--padding));
+			color: var(--text-secondary-0);
+			font-style: normal;
+			font-weight: 300;
+			font-size: var(--font-sm);
+			line-height: var(--lh-sm);
+
+			@media (width <= 880) {
+				--padding: 4px;
 			}
 		}
 
@@ -204,23 +240,6 @@ const slug = title && slugify(transliterate(title))
 		hr {
 			margin: 0;
 			border: 1px solid var(--border-secondary);
-		}
-
-		figcaption {
-			--padding: 8px;
-
-			margin-block-start: 12px;
-			padding-inline: var(--padding);
-			max-width: calc(714px + 2 * var(--padding));
-			color: var(--text-secondary-0);
-			font-style: normal;
-			font-weight: 300;
-			font-size: var(--font-sm);
-			line-height: var(--lh-sm);
-
-			@media (width <= 880) {
-				--padding: 4px;
-			}
 		}
 
 		code {

@@ -10,7 +10,7 @@
 
 ## Сжатие h265
 
-`ffmpeg -i original.mp4 -c:v libx265 -crf 24 -an -filter:v fps=30 video_cover_h265.mp4`
+`ffmpeg -i original.mp4 -c:v libx265 -crf 24 -an -preset slow -filter:v fps=30 video_cover_h265.mp4`
 
 ## Объяснение флагов
 
