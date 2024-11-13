@@ -46,8 +46,9 @@ const { title, autoplay, ...props } = Astro.props
 	title ? (
 		<figure>
 			<div class="video-container" data-autoplayer="played">
-				<video {...props} {autoplay} muted={autoplay} loop={autoplay} playsinline={autoplay} preload="auto">
+				<video {...props} {autoplay} muted={autoplay} loop={autoplay} playsinline={autoplay}>
 					<slot />
+					Ваш браузер не поддерживает встроенные видео :(
 				</video>
 
 				{autoplay && (
@@ -61,8 +62,9 @@ const { title, autoplay, ...props } = Astro.props
 		</figure>
 	) : (
 		<div class="video-container" data-autoplayer="played">
-			<video {...props} {autoplay} muted={autoplay} loop={autoplay} playsinline={autoplay} preload="auto">
+			<video {...props} {autoplay} muted={autoplay} loop={autoplay} playsinline={autoplay}>
 				<slot />
+				Ваш браузер не поддерживает встроенные видео :(
 			</video>
 
 			{autoplay && (
