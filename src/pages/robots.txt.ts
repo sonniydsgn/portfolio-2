@@ -1,10 +1,8 @@
 import type { APIRoute } from 'astro'
 
-// todo: не забывать включить индексацию после запуска
-
 const robotsTxt = `
 User-agent: *
-Disallow: /
+Allow: /
 
 Sitemap: ${new URL('sitemap-index.xml', import.meta.env.SITE).href}
 `.trim()
