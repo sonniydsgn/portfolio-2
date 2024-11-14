@@ -49,74 +49,45 @@ import ButtonLink from '../atoms/ButtonLink.astro'
 </style>
 
 <script>
-	document.addEventListener('astro:page-load', () => {
-		const themePicker = document.querySelector('[data-theme-picker]') as HTMLElement
-		if (themePicker) {
-			const THEME_OWNER = document.documentElement
+	const themePicker = document.querySelector('[data-theme-picker]') as HTMLElement
+	if (themePicker) {
+		const THEME_OWNER = document.documentElement
 
-			let systemTheme: string
-			const cachedTheme = localStorage.getItem('theme')
+		let systemTheme: string
+		const cachedTheme = localStorage.getItem('theme')
 
-			// set theme picker label
-			const setThemePickerLabel = (theme: string) => {
-				themePicker.setAttribute('aria-label', theme === 'dark' ? 'Включить светлую тему' : 'Включить тёмную тему')
-			}
+		// set theme picker label
+		const setThemePickerLabel = (theme: string) => {
+			themePicker.setAttribute('aria-label', theme === 'dark' ? 'Включить светлую тему' : 'Включить тёмную тему')
+		}
 
-			// set inital theme
-			if (cachedTheme) {
-				THEME_OWNER.dataset['theme'] = cachedTheme
-				setThemePickerLabel(cachedTheme)
-			} else {
-				systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches === true ? 'dark' : 'light'
+		// set inital theme
+		if (cachedTheme) {
+			THEME_OWNER.dataset['theme'] = cachedTheme
+			setThemePickerLabel(cachedTheme)
+		} else {
+			systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches === true ? 'dark' : 'light'
+			setThemePickerLabel(systemTheme)
+
+			window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', ({ matches: isDark }) => {
+				systemTheme = isDark ? 'dark' : 'light'
 				setThemePickerLabel(systemTheme)
-
-				window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', ({ matches: isDark }) => {
-					systemTheme = isDark ? 'dark' : 'light'
-					setThemePickerLabel(systemTheme)
-				})
-			}
-
-			// set theme on click
-			themePicker.addEventListener('click', () => {
-				const theme = THEME_OWNER.dataset['theme'] === undefined ? systemTheme : THEME_OWNER.dataset['theme']
-
-				if (theme === 'light') {
-					THEME_OWNER.dataset['theme'] = 'dark'
-					localStorage.setItem('theme', 'dark')
-					themePicker.setAttribute('aria-label', 'Включить светлую тему')
-				} else {
-					THEME_OWNER.dataset['theme'] = 'light'
-					localStorage.setItem('theme', 'light')
-					themePicker.setAttribute('aria-label', 'Включить тёмную тему')
-				}
 			})
 		}
-	})
-</script>
 
-<script>
-	document.addEventListener('astro:after-swap', () => {
-		const themePicker = document.querySelector('[data-theme-picker]') as HTMLElement
-		if (themePicker) {
-			const THEME_OWNER = document.documentElement
-			let systemTheme: string
-			const cachedTheme = localStorage.getItem('theme')
-			// set theme picker label
-			const setThemePickerLabel = (theme: string) => {
-				themePicker.setAttribute('aria-label', theme === 'dark' ? 'Включить светлую тему' : 'Включить тёмную тему')
-			}
+		// set theme on click
+		themePicker.addEventListener('click', () => {
+			const theme = THEME_OWNER.dataset['theme'] === undefined ? systemTheme : THEME_OWNER.dataset['theme']
 
-			if (cachedTheme) {
-				THEME_OWNER.dataset['theme'] = cachedTheme
-				setThemePickerLabel(cachedTheme)
+			if (theme === 'light') {
+				THEME_OWNER.dataset['theme'] = 'dark'
+				localStorage.setItem('theme', 'dark')
+				themePicker.setAttribute('aria-label', 'Включить светлую тему')
 			} else {
-				systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches === true ? 'dark' : 'light'
-				setThemePickerLabel(systemTheme)
-				window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', ({ matches: isDark }) => {
-					systemTheme = isDark ? 'dark' : 'light'
-					setThemePickerLabel(systemTheme)
-				})
+				THEME_OWNER.dataset['theme'] = 'light'
+				localStorage.setItem('theme', 'light')
+				themePicker.setAttribute('aria-label', 'Включить тёмную тему')
 			}
-		}
-	})
+		})
+	}
 </script>

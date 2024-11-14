@@ -97,28 +97,26 @@ const { class: className, ...rest } = Astro.props
 </style>
 
 <script>
-	document.addEventListener('astro:page-load', () => {
-		const currentTimeElements = document.querySelectorAll('[data-current-time]')
+	const currentTimeElements = document.querySelectorAll('[data-current-time]')
 
-		const optionsEl = {
-			hour: '2-digit',
-			minute: '2-digit',
-			timeZone: 'Asia/Yekaterinburg',
+	const optionsEl = {
+		hour: '2-digit',
+		minute: '2-digit',
+		timeZone: 'Asia/Yekaterinburg',
+	}
+
+	function updateTime() {
+		const currentTime = (options: {}) => {
+			return new Date().toLocaleTimeString('ru-RU', { ...options })
 		}
 
-		function updateTime() {
-			const currentTime = (options: {}) => {
-				return new Date().toLocaleTimeString('ru-RU', { ...options })
-			}
+		currentTimeElements.forEach(el => {
+			el.textContent = currentTime(optionsEl)
+			el.setAttribute('datetime', currentTime({ ...optionsEl, timeZoneName: 'longOffset' }).replace(' GMT', ''))
+		})
+	}
 
-			currentTimeElements.forEach(el => {
-				el.textContent = currentTime(optionsEl)
-				el.setAttribute('datetime', currentTime({ ...optionsEl, timeZoneName: 'longOffset' }).replace(' GMT', ''))
-			})
-		}
+	updateTime()
 
-		updateTime()
-
-		setInterval(updateTime, 1000 * 5)
-	})
+	setInterval(updateTime, 1000 * 5)
 </script>
