@@ -58,8 +58,8 @@ import videoH265 from '@/assets/about/about_video_h265.mp4'
 <div class="about-card">
 	<figure class="about-card__video-player" data-about-player>
 		<video class="about-card__video" width="250" height="250" poster={videoCover.src} playsinline data-about-video>
-			<source src={videoH265} type="video/mp4; codecs=hvc1" />
-			<source src={videoMP4} type="video/mp4; codecs=avc1" />
+			<source src={videoH265} type="video/mp4" />
+			<source src={videoMP4} type="video/mp4" />
 			Ваш браузер не поддерживает встроенные видео :(
 		</video>
 		<ButtonLink class="about-card__btn" aria-label="Включить видео" aria-live="polite" data-about-btn />

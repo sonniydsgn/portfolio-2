@@ -32,8 +32,8 @@ const { cover, width, height, loading, fetchpriority, containerClass, class: cla
 				class:list={['cover', className]}
 				{...props}
 			>
-				<source src={cover.h265} type="video/mp4; codecs=hvc1" />
-				<source src={cover.mp4} type="video/mp4; codecs=avc1" />
+				<source src={cover.h265} type="video/mp4" />
+				<source src={cover.mp4} type="video/mp4" />
 				Ваш браузер не поддерживает встроенные видео :(
 			</video>
 		) : (

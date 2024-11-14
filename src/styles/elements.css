@@ -121,6 +121,7 @@
 	border-radius: 50%;
 	width: var(--size);
 	height: var(--size);
+	pointer-events: none;
 }
 
 @keyframes circle-spin {
