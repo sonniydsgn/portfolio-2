@@ -43,7 +43,9 @@ const headings: TocItem[] = project.body
 	.map(line => line.match(/:::Section\[(.*?)\]/)![1])
 	.map(title => ({ title, slug: '#' + slugify(transliterate(title)) }))
 
-const needToc = headings.length >= 3 && !draft
+headings.unshift({ title: 'О проекте', slug: '#' + slugify(transliterate('О проекте'))}, { title: 'Хайлайты', slug: '#' + slugify(transliterate('Хайлайты'))})
+
+const needToc = (headings.length >= 3 && !draft) || (headings.length >= 3 && import.meta.env.DEV)
 
 // highlights
 const highlightsPrepared = highlights?.map(highlight => {
@@ -52,8 +54,6 @@ const highlightsPrepared = highlights?.map(highlight => {
 		src: getHighlightSource(highlight.type, highlight.src),
 	}
 })
-
-
 
 // cover
 const coverWidth = 1440
