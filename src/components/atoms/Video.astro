@@ -14,52 +14,54 @@ const { title, autoplay, width, height, ...props } = Astro.props
 ---
 
 <script>
-	const videoPlayers = document.querySelectorAll('[data-autoplayer]')
-	if (videoPlayers) {
-		videoPlayers.forEach((videoPlayer: HTMLDivElement) => {
-			const video = videoPlayer.querySelector('video') as HTMLVideoElement
-			const playButton = videoPlayer.querySelector('.btn__play') as HTMLButtonElement
+	document.addEventListener('astro:page-load', () => {
+		const videoPlayers = document.querySelectorAll('[data-autoplayer]')
+		if (videoPlayers) {
+			videoPlayers.forEach((videoPlayer: HTMLDivElement) => {
+				const video = videoPlayer.querySelector('video') as HTMLVideoElement
+				const playButton = videoPlayer.querySelector('.btn__play') as HTMLButtonElement
 
-			video.addEventListener('play', () => togglePlay(playButton, videoPlayer))
-			video.addEventListener('pause', () => togglePause(playButton, videoPlayer))
-			video.addEventListener('ended', () => togglePause(playButton, videoPlayer))
-			video.addEventListener('waiting', () => showSpinner(videoPlayer))
-			video.addEventListener('playing', () => removeSpinner(videoPlayer))
+				video.addEventListener('play', () => togglePlay(playButton, videoPlayer))
+				video.addEventListener('pause', () => togglePause(playButton, videoPlayer))
+				video.addEventListener('ended', () => togglePause(playButton, videoPlayer))
+				video.addEventListener('waiting', () => showSpinner(videoPlayer))
+				video.addEventListener('playing', () => removeSpinner(videoPlayer))
 
-			playButton.addEventListener('click', () => {
-				if (video.paused) video.play()
-				else video.pause()
+				playButton.addEventListener('click', () => {
+					if (video.paused) video.play()
+					else video.pause()
+				})
 			})
-		})
 
-		const togglePlay = (btn: HTMLButtonElement, player: HTMLDivElement) => {
-			player.dataset.autoplayer = 'played'
-			btn.setAttribute('aria-label', 'Поставить видео на паузу')
+			const togglePlay = (btn: HTMLButtonElement, player: HTMLDivElement) => {
+				player.dataset.autoplayer = 'played'
+				btn.setAttribute('aria-label', 'Поставить видео на паузу')
 
-			removeSpinner(player)
+				removeSpinner(player)
+			}
+
+			const togglePause = (btn: HTMLButtonElement, player: HTMLDivElement) => {
+				player.dataset.autoplayer = 'paused'
+				btn.setAttribute('aria-label', 'Включить видео')
+
+				removeSpinner(player)
+			}
+
+			const showSpinner = (player: HTMLDivElement) => {
+				const spinner = player.querySelector('.spinner')
+				if (spinner) return
+
+				const newSpinner = document.createElement('div')
+				newSpinner.classList.add('spinner')
+				player.appendChild(newSpinner)
+			}
+
+			const removeSpinner = (player: HTMLDivElement) => {
+				const spinner = player.querySelector('.spinner')
+				if (spinner) spinner.remove()
+			}
 		}
-
-		const togglePause = (btn: HTMLButtonElement, player: HTMLDivElement) => {
-			player.dataset.autoplayer = 'paused'
-			btn.setAttribute('aria-label', 'Включить видео')
-
-			removeSpinner(player)
-		}
-
-		const showSpinner = (player: HTMLDivElement) => {
-			const spinner = player.querySelector('.spinner')
-			if (spinner) return
-
-			const newSpinner = document.createElement('div')
-			newSpinner.classList.add('spinner')
-			player.appendChild(newSpinner)
-		}
-
-		const removeSpinner = (player: HTMLDivElement) => {
-			const spinner = player.querySelector('.spinner')
-			if (spinner) spinner.remove()
-		}
-	}
+	})
 </script>
 
 {
