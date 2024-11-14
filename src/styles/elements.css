@@ -1,21 +1,3 @@
-/* иконки */
-.icon {
-	--size: 24px;
-
-	width: var(--size);
-	height: var(--size);
-	fill: currentcolor;
-	transition:
-		color var(--tr-primary) ease,
-		opacity var(--tr-primary) ease,
-		transform var(--tr-primary) ease;
-	pointer-events: none;
-
-	&.icon--16 {
-		--size: 16px;
-	}
-}
-
 /* заголовки */
 .text-h1,
 .text-h3,
@@ -87,6 +69,24 @@
 	}
 }
 
+/* иконки */
+.icon {
+	--size: 24px;
+
+	width: var(--size);
+	height: var(--size);
+	fill: currentcolor;
+	transition:
+		color var(--tr-primary) ease,
+		opacity var(--tr-primary) ease,
+		transform var(--tr-primary) ease;
+	pointer-events: none;
+
+	&.icon--16 {
+		--size: 16px;
+	}
+}
+
 .page-icon {
 	display: flex;
 	justify-content: center;
@@ -104,5 +104,31 @@
 		.icon {
 			--size: 16px;
 		}
+	}
+}
+
+/* спиннер */
+.spinner {
+	--size: 48px;
+	--color: #fff;
+	--stroke-width: calc(var(--size) / 8);
+
+	position: absolute;
+	animation: linear 0.8s circle-spin infinite;
+	border-width: var(--stroke-width);
+	border-style: solid;
+	border-color: var(--color) var(--color) var(--color) transparent;
+	border-radius: 50%;
+	width: var(--size);
+	height: var(--size);
+}
+
+@keyframes circle-spin {
+	from {
+		transform: rotate(0deg);
+	}
+
+	to {
+		transform: rotate(360deg);
 	}
 }

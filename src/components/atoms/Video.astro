@@ -6,9 +6,11 @@ import ButtonLink from './ButtonLink.astro'
 interface Props extends HTMLAttributes<'video'> {
 	title?: string
 	autoplay?: boolean
+	width?: number
+	height?: number
 }
 
-const { title, autoplay, ...props } = Astro.props
+const { title, autoplay, width, height, ...props } = Astro.props
 ---
 
 <script>
@@ -21,6 +23,8 @@ const { title, autoplay, ...props } = Astro.props
 			video.addEventListener('play', () => togglePlay(playButton, videoPlayer))
 			video.addEventListener('pause', () => togglePause(playButton, videoPlayer))
 			video.addEventListener('ended', () => togglePause(playButton, videoPlayer))
+			video.addEventListener('waiting', () => showSpinner(videoPlayer))
+			video.addEventListener('playing', () => removeSpinner(videoPlayer))
 
 			playButton.addEventListener('click', () => {
 				if (video.paused) video.play()
@@ -31,11 +35,29 @@ const { title, autoplay, ...props } = Astro.props
 		const togglePlay = (btn: HTMLButtonElement, player: HTMLDivElement) => {
 			player.dataset.autoplayer = 'played'
 			btn.setAttribute('aria-label', 'Поставить видео на паузу')
+
+			removeSpinner(player)
 		}
 
 		const togglePause = (btn: HTMLButtonElement, player: HTMLDivElement) => {
 			player.dataset.autoplayer = 'paused'
 			btn.setAttribute('aria-label', 'Включить видео')
+
+			removeSpinner(player)
+		}
+
+		const showSpinner = (player: HTMLDivElement) => {
+			const spinner = player.querySelector('.spinner')
+			if (spinner) return
+
+			const newSpinner = document.createElement('div')
+			newSpinner.classList.add('spinner')
+			player.appendChild(newSpinner)
+		}
+
+		const removeSpinner = (player: HTMLDivElement) => {
+			const spinner = player.querySelector('.spinner')
+			if (spinner) spinner.remove()
 		}
 	}
 </script>
@@ -44,7 +66,14 @@ const { title, autoplay, ...props } = Astro.props
 	title ? (
 		<figure>
 			<div class="video-container" data-autoplayer="played">
-				<video {...props} {autoplay} muted={autoplay} loop={autoplay} playsinline={autoplay}>
+				<video
+					{...props}
+					{autoplay}
+					muted={autoplay}
+					loop={autoplay}
+					playsinline={autoplay}
+					style={'aspect-ratio: ' + width + '/' + height}
+				>
 					<slot />
 					Ваш браузер не поддерживает встроенные видео :(
 				</video>
@@ -60,7 +89,14 @@ const { title, autoplay, ...props } = Astro.props
 		</figure>
 	) : (
 		<div class="video-container" data-autoplayer="played">
-			<video {...props} {autoplay} muted={autoplay} loop={autoplay} playsinline={autoplay}>
+			<video
+				{...props}
+				{autoplay}
+				muted={autoplay}
+				loop={autoplay}
+				playsinline={autoplay}
+				style={'aspect-ratio: ' + width + '/' + height}
+			>
 				<slot />
 				Ваш браузер не поддерживает встроенные видео :(
 			</video>
@@ -77,7 +113,10 @@ const { title, autoplay, ...props } = Astro.props
 
 <style>
 	.video-container {
+		display: flex;
 		position: relative;
+		justify-content: center;
+		align-items: center;
 
 		&[data-autoplayer='paused'] .icon--play {
 			display: block;
@@ -105,6 +144,7 @@ const { title, autoplay, ...props } = Astro.props
 		display: flex;
 		border-radius: var(--br-md);
 		background-color: var(--bg-placeholder);
+		width: 100%;
 
 		@media (width <= 880) {
 			border-radius: var(--br-primary);

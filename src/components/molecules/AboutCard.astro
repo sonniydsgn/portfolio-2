@@ -8,20 +8,38 @@ import videoH265 from '@/assets/about/about_video_h265.mp4'
 ---
 
 <script>
-	const videoPlayer = document.querySelector('[data-about-player]') as HTMLVideoElement
+	const videoPlayer = document.querySelector('[data-about-player]') as HTMLDivElement
 	if (videoPlayer) {
 		const video = videoPlayer.querySelector('[data-about-video]') as HTMLVideoElement
 		const videoButton = videoPlayer.querySelector('[data-about-btn]') as HTMLButtonElement
 		const playButton = videoPlayer.querySelector('[data-about-play]') as HTMLButtonElement
 
-		const togglePlay = () => {
+		const togglePlay = (player: HTMLDivElement) => {
 			playButton.classList.add('about-card__play--hidden')
 			videoButton.setAttribute('aria-label', 'Поставить видео на паузу')
+
+			removeSpinner(player)
 		}
 
-		const togglePause = () => {
+		const togglePause = (player: HTMLDivElement) => {
 			playButton.classList.remove('about-card__play--hidden')
 			videoButton.setAttribute('aria-label', 'Включить видео')
+
+			removeSpinner(player)
+		}
+
+		const showSpinner = (player: HTMLDivElement) => {
+			const spinner = player.querySelector('.spinner')
+			if (spinner) return
+
+			const newSpinner = document.createElement('div')
+			newSpinner.classList.add('spinner')
+			player.appendChild(newSpinner)
+		}
+
+		const removeSpinner = (player: HTMLDivElement) => {
+			const spinner = player.querySelector('.spinner')
+			if (spinner) spinner.remove()
 		}
 
 		videoButton.addEventListener('click', () => {
@@ -29,9 +47,11 @@ import videoH265 from '@/assets/about/about_video_h265.mp4'
 			else video.pause()
 		})
 
-		video.addEventListener('play', togglePlay)
-		video.addEventListener('pause', togglePause)
-		video.addEventListener('ended', togglePause)
+		video.addEventListener('play', () => togglePlay(videoPlayer))
+		video.addEventListener('pause', () => togglePause(videoPlayer))
+		video.addEventListener('ended', () => togglePause(videoPlayer))
+		video.addEventListener('waiting', () => showSpinner(videoPlayer))
+		video.addEventListener('playing', () => removeSpinner(videoPlayer))
 	}
 </script>
 

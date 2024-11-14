@@ -137,7 +137,7 @@ const Card = InfoCard
 										highlight.type === 'image' ? (
 											<Image src={highlight.src[0] as unknown as ImageMetadata} alt={highlight.alt} title={highlight.title} />
 										) : (
-											<Video title={highlight.title} width="1440" height="1000" poster={highlight.src[0].src} autoplay>
+											<Video title={highlight.title} width={1440} height={1000} poster={highlight.src[0].src} autoplay>
 												<source src={highlight.src[2]} type="video/mp4" />
 												<source src={highlight.src[1]} type="video/mp4" />
 											</Video>
