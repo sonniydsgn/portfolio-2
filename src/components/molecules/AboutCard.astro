@@ -58,7 +58,15 @@ import videoWEBM from '@/assets/about/about_video_vp9.webm'
 
 <div class="about-card">
 	<figure class="about-card__video-player" data-about-player>
-		<video class="about-card__video" width="100%" height="100%" poster={videoCover.src} playsinline data-about-video>
+		<video
+			class="about-card__video"
+			width="100%"
+			height="100%"
+			poster={videoCover.src}
+			preload="metadata"
+			playsinline
+			data-about-video
+		>
 			<source src={videoH265} type="video/mp4" />
 			<source src={videoMP4} type="video/mp4" />
 			<source src={videoWEBM} type="video/webm" />
@@ -90,7 +98,6 @@ import videoWEBM from '@/assets/about/about_video_vp9.webm'
 
 		@media (width <= 880) {
 			flex-direction: column;
-			/* align-items: unset; */
 			gap: 24px;
 			margin-block-end: 24px;
 		}
