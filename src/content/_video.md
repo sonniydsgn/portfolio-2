@@ -4,31 +4,27 @@
 
 `ffmpeg -i ***.mp4 -vframes 1 -q:v 1 ***_cover.jpg`
 
-## Без звука (h264)
+## H264
 
-`ffmpeg -i ***.mp4 -vcodec h264 -crf 24 -an -filter:v fps=30 ***_video.mp4`
+`ffmpeg -i ***.mp4 -vcodec h264 -crf 27 -profile:v main -level:v 4.* -pix_fmt yuv420p -movflags faststart -tag:v avc1 ***_video.mp4`
 
-## Со звуком (h264)
+## H265
 
-`ffmpeg -i ***.mp4 -vcodec h264 -acodec mp3 -crf 24 -pix_fmt yuv420p -profile:v baseline -level 3.0 ***_video.mp4`
+`ffmpeg -i ***.mp4 -vcodec libx265 -crf 32 -pix_fmt yuv420p -movflags faststart -tag:v hvc1 ***_video_h265.mp4`
 
-## Без звука (h265)
+## WEBM (VP9)
 
-`ffmpeg -i ***.mp4 -vcodec libx265 -crf 24 -an -filter:v fps=30 ***_h265.mp4`
-
-## Со звуком (h265)
-
-`ffmpeg -i ***.mp4 -vcodec libx265 -acodec mp3 -crf 24 -pix_fmt yuv420p ***_video_h265.mp4`
+`ffmpeg -i ***.mp4 -vcodec libvpx-vp9 -crf 40 -pix_fmt yuv420p -b:v 1M -acodec libvorbis -deadline best ***_video_vp9.webm`
 
 ## Объяснение флагов
 
-- выбор качества: 0 — лучшее, 18-29 оптимальное, 51 — худшее `-crf 24`
-- смена частоты кадров видео `fps=fps=30`
-- отключить звук видео `-an`
-- изменение разрешения видео `scale=720:-1:flags=lanczos`, где `-1` — сохранение сохрание то же разрешение, а `-2` — разделит его на 2
-- профиль для максимальной поддержки android-устройств `-profile:v baseline -level 3.0`
-- цветовой формат для максимальной поддержки устройств `-pix_fmt yuv420p`
-- кодирование звука в mp3-формат, чтобы safari загружал видео `-acodec mp3`
+- `-crf` — выбор качества, где 0 — лучшее, 18-30 (mp4) или 32-40 (webm) — оптимальное, 51 — худшее
+- `-filter:v fps=30` — смена частоты кадров видео до 30
+- `-an` — удаляет звук из видео
+- `-movflags faststart` + `-tag:v avc1` (H264) или `-tag:v hvc1` (H265) — корректирует положение метаданных, чтобы видео [грузилось на устройствах apple](https://apple.stackexchange.com/a/476283) и было оптимизированно под веб
+- `-vf scale=720:-1:flags=lanczos` — изменение разрешения видео к ширине 720px, где `-1` — сохранение того же соотношения сторон, а `-2` — разделит его на 2
+- `-level:v 4.*` (4.0–4.2 база) — влияет на доступные фишки h264 поддержку видео устройствами, где версия ставится в зависимости от необходимого [максимального разрешения и частоты кадров](https://en.wikipedia.org/wiki/Advanced_Video_Coding#Levels)
+- `-pix_fmt yuv420p` (база) — формат кодирования цветовых данных
 
 ## Подробная информация
 

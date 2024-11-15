@@ -5,6 +5,7 @@ import ButtonLink from '../atoms/ButtonLink.astro'
 import videoMP4 from '@/assets/about/about_video.mp4'
 import videoCover from '@/assets/about/about_video_cover.jpg'
 import videoH265 from '@/assets/about/about_video_h265.mp4'
+import videoWEBM from '@/assets/about/about_video_vp9.webm'
 ---
 
 <script>
@@ -57,9 +58,10 @@ import videoH265 from '@/assets/about/about_video_h265.mp4'
 
 <div class="about-card">
 	<figure class="about-card__video-player" data-about-player>
-		<video class="about-card__video" width="720" height="720" poster={videoCover.src} playsinline data-about-video>
+		<video class="about-card__video" width="100%" height="100%" poster={videoCover.src} playsinline data-about-video>
 			<source src={videoH265} type="video/mp4" />
 			<source src={videoMP4} type="video/mp4" />
+			<source src={videoWEBM} type="video/webm" />
 			Ваш браузер не поддерживает встроенные видео :(
 		</video>
 		<ButtonLink class="about-card__btn" aria-label="Включить видео" aria-live="polite" data-about-btn />
