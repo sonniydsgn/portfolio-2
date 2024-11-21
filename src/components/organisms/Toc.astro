@@ -3,12 +3,11 @@ import type { TocItem } from '@/types'
 
 interface Props {
 	list: TocItem[]
-	hasResult: boolean
 	class?: string
 	mobile?: boolean
 }
 
-const { list, hasResult, mobile = false, class: className, ...props } = Astro.props
+const { list, mobile = false, class: className, ...props } = Astro.props
 
 import LinkItem from '../atoms/LinkItem.astro'
 ---
@@ -55,13 +54,6 @@ import LinkItem from '../atoms/LinkItem.astro'
 					{title}
 				</LinkItem>
 			))
-		}
-		{
-			hasResult && (
-				<LinkItem class="toc__item" href="#result">
-					Результат
-				</LinkItem>
-			)
 		}
 	</ul>
 </aside>

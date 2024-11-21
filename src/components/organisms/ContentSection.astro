@@ -136,7 +136,7 @@ const slug = title && slugify(transliterate(title))
 		}
 
 		p:not(:has(> picture)) {
-			max-width: 90%;
+			max-width: 95%;
 
 			@media (width <= 880) {
 				max-width: 100%;
@@ -194,6 +194,16 @@ const slug = title && slugify(transliterate(title))
 
 			@media (width <= 880) {
 				margin-block-start: 24px;
+			}
+		}
+
+		picture + h3,
+		figure + h3,
+		.video-container + h3 {
+			margin-block-start: 40px;
+
+			@media (width <= 880) {
+				margin-block-start: 32px;
 			}
 		}
 

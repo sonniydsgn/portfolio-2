@@ -45,7 +45,7 @@ const headings: TocItem[] = project.body
 
 headings.unshift({ title: 'О проекте', slug: '#' + slugify(transliterate('О проекте'))}, { title: 'Хайлайты', slug: '#' + slugify(transliterate('Хайлайты'))})
 
-const needToc = (headings.length >= 3 && !draft) || (headings.length >= 3 && import.meta.env.DEV)
+const needToc = (headings.length > 3 && !draft) || (headings.length > 3 && import.meta.env.DEV)
 
 // highlights
 const highlightsPrepared = highlights?.map(highlight => {
@@ -88,7 +88,7 @@ const Card = InfoCard
 					<!-- desktop toc -->
 					{
 						needToc && (
-							<Toc class="article__toc article__toc--desktop" list={headings} hasResult={draft && result != null} />
+							<Toc class="article__toc article__toc--desktop" list={headings} />
 						)
 					}
 
@@ -103,7 +103,7 @@ const Card = InfoCard
 									size="sm"
 									type="accordion"
 								>
-									<Toc list={headings} hasResult={draft && result != null} mobile />
+									<Toc list={headings} mobile />
 								</ContentSection>
 							)
 						}
@@ -150,7 +150,7 @@ const Card = InfoCard
 						<!-- other sections -->
 						{
 							draft && import.meta.env.PROD ? (
-								<ContentPlaceholder id="result" data-toc-section>
+								<ContentPlaceholder data-toc-section>
 									{result && <InfoCard name="Посмотреть сайт" href={result} />}
 									<InfoCard name="Обсудить проект" href="https://t.me/sonniyboii" icon="message-text-icon" />
 								</ContentPlaceholder>
