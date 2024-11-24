@@ -1,0 +1,56 @@
+---
+interface Props {
+	icon?: string
+	class?: string
+}
+
+const { icon, class: className, ...props } = Astro.props
+---
+
+<aside class:list={['note', className]} {...props}>
+	<span>{icon}</span>
+	<div class="note__body">
+		<slot />
+	</div>
+</aside>
+
+<style>
+	.note {
+		display: flex;
+		gap: 16px;
+		border-radius: var(--br-primary);
+		background-color: var(--note-bg);
+		padding-inline: 16px;
+		padding-block: 20px;
+		font-weight: 400;
+		font-size: var(--font-primary);
+		font-family: var(--ff-secondary);
+
+		@media (width <= 880) {
+			gap: 12px;
+			padding-inline: 12px;
+			padding-block: 16px;
+		}
+	}
+
+	.note__body {
+		display: flex;
+		flex-direction: column;
+	}
+</style>
+
+<style is:global>
+	.note {
+		p {
+			color: var(--note-text-secondary);
+		}
+
+		p:first-child:not(:only-child) {
+			color: var(--note-text-primary);
+		}
+
+		p + p {
+			margin-block-start: 8px;
+		}
+	}
+</style>
