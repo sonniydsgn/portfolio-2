@@ -174,8 +174,8 @@ const slug = title && slugify(transliterate(title))
 			}
 		}
 
-		& > ul:not(.list-reset) + p,
-		& > ol:not(.list-reset) + p {
+		& > ul + p,
+		& > ol + p {
 			margin-block-start: 16px;
 
 			@media (width <= 880) {
@@ -238,20 +238,23 @@ const slug = title && slugify(transliterate(title))
 		}
 
 		/* списки */
-		ul:not(.list-reset),
-		ol:not(.list-reset) {
+		ul,
+		ol {
 			display: flex;
 			flex-direction: column;
 			gap: 12px;
-			padding-inline-start: 32px;
 
 			@media (width <= 880) {
 				gap: 8px;
 			}
 		}
 
-		p + ul:not(.list-reset),
-		p + ol:not(.list-reset) {
+		ul {
+			padding-inline-start: 32px;
+		}
+
+		p + ul,
+		p + ol {
 			margin-block-start: 8px;
 
 			@media (width <= 880) {

@@ -1,0 +1,41 @@
+---
+interface Props {
+	class?: string
+}
+
+const { class: className, ...rest } = Astro.props
+---
+
+<ol class:list={['list-reset', className]} {...rest}>
+	<slot />
+</ol>
+
+<style is:global>
+	ol {
+		counter-reset: ol;
+
+		li {
+			display: flex;
+			gap: 8px;
+			counter-increment: ol;
+
+			&::before {
+				--size: 24px;
+
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				border-radius: var(--br-sm);
+				background-color: var(--bg-tertiary);
+				width: var(--size);
+				height: var(--size);
+				content: counter(ol);
+				color: var(--text-primary-20);
+				font-weight: 500;
+				font-size: var(--font-sm);
+				line-height: var(--lh-lg);
+				font-family: var(--ff-secondary);
+			}
+		}
+	}
+</style>
