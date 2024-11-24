@@ -185,14 +185,21 @@ const slug = title && slugify(transliterate(title))
 
 		& > picture + *,
 		& > .video-container + *,
-		& > figure + *,
-		& > * + figure,
-		& > * + picture,
-		& > * + .video-container {
+		& > figure + * {
 			margin-block-start: 24px;
 
 			@media (width <= 880) {
-				margin-block-start: 20px;
+				margin-block-start: 16px;
+			}
+		}
+
+		& > * + figure,
+		& > * + picture,
+		& > * + .video-container {
+			margin-block-start: 16px;
+
+			@media (width <= 880) {
+				margin-block-start: 12px;
 			}
 		}
 
