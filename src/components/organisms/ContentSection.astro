@@ -103,7 +103,7 @@ const slug = title && slugify(transliterate(title))
 </style>
 
 <style is:global>
-	.content-section {
+	.content-section__body {
 		/* заголовки */
 		h3 + * {
 			margin-block-start: 16px;
@@ -158,7 +158,7 @@ const slug = title && slugify(transliterate(title))
 			max-height: 999999px;
 		}
 
-		p:not(:has(> picture)) {
+		p {
 			max-width: 95%;
 
 			@media (width <= 880) {
@@ -166,7 +166,7 @@ const slug = title && slugify(transliterate(title))
 			}
 		}
 
-		p + p {
+		& > p + p {
 			margin-block-start: 12px;
 
 			@media (width <= 880) {
@@ -174,8 +174,8 @@ const slug = title && slugify(transliterate(title))
 			}
 		}
 
-		ul + p,
-		ol + p {
+		& > ul:not(.list-reset) + p,
+		& > ol:not(.list-reset) + p {
 			margin-block-start: 16px;
 
 			@media (width <= 880) {
@@ -183,12 +183,12 @@ const slug = title && slugify(transliterate(title))
 			}
 		}
 
-		picture + *,
-		.video-container + *,
-		figure + *,
-		* + figure,
-		* + picture,
-		* + .video-container {
+		& > picture + *,
+		& > .video-container + *,
+		& > figure + *,
+		& > * + figure,
+		& > * + picture,
+		& > * + .video-container {
 			margin-block-start: 20px;
 
 			@media (width <= 880) {
@@ -197,15 +197,15 @@ const slug = title && slugify(transliterate(title))
 		}
 
 		/* медиа-материалы */
-		picture + picture,
-		picture + .video-container,
-		picture + figure,
-		.video-container + .video-container,
-		.video-container + figure,
-		.video-container + picture,
-		figure + figure,
-		figure + picture,
-		figure + .video-container {
+		& > picture + picture,
+		& > picture + .video-container,
+		& > picture + figure,
+		& > .video-container + .video-container,
+		& > .video-container + figure,
+		& > .video-container + picture,
+		& > figure + figure,
+		& > figure + picture,
+		& > figure + .video-container {
 			margin-block-start: 32px;
 
 			@media (width <= 880) {
@@ -243,8 +243,8 @@ const slug = title && slugify(transliterate(title))
 			}
 		}
 
-		p + ul,
-		p + ol {
+		p + ul:not(.list-reset),
+		p + ol:not(.list-reset) {
 			margin-block-start: 8px;
 
 			@media (width <= 880) {
