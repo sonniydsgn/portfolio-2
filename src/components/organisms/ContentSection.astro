@@ -130,6 +130,16 @@ const slug = title && slugify(transliterate(title))
 			}
 		}
 
+		picture + h3,
+		figure + h3,
+		.video-container + h3 {
+			margin-block-start: 40px;
+
+			@media (width <= 880) {
+				margin-block-start: 32px;
+			}
+		}
+
 		/* ссылки */
 		a.link {
 			opacity: 0.8;
@@ -164,25 +174,6 @@ const slug = title && slugify(transliterate(title))
 			}
 		}
 
-		p + figure,
-		p + picture,
-		p + .video-container {
-			margin-block-start: 16px;
-
-			@media (width <= 880) {
-				margin-block-start: 12px;
-			}
-		}
-
-		* + .note,
-		.note + * {
-			margin-block-start: 20px;
-
-			@media (width <= 880) {
-				margin-block-start: 16px;
-			}
-		}
-
 		ul + p,
 		ol + p {
 			margin-block-start: 16px;
@@ -192,13 +183,16 @@ const slug = title && slugify(transliterate(title))
 			}
 		}
 
-		picture + p,
-		.video-container + p,
-		figure + p {
-			margin-block-start: 24px;
+		picture + *,
+		.video-container + *,
+		figure + *,
+		* + figure,
+		* + picture,
+		* + .video-container {
+			margin-block-start: 20px;
 
 			@media (width <= 880) {
-				margin-block-start: 20px;
+				margin-block-start: 16px;
 			}
 		}
 
@@ -216,16 +210,6 @@ const slug = title && slugify(transliterate(title))
 
 			@media (width <= 880) {
 				margin-block-start: 24px;
-			}
-		}
-
-		picture + h3,
-		figure + h3,
-		.video-container + h3 {
-			margin-block-start: 40px;
-
-			@media (width <= 880) {
-				margin-block-start: 32px;
 			}
 		}
 
@@ -265,6 +249,16 @@ const slug = title && slugify(transliterate(title))
 
 			@media (width <= 880) {
 				margin-block-start: 4px;
+			}
+		}
+
+		/* заметки */
+		* + .note,
+		.note + * {
+			margin-block-start: 20px;
+
+			@media (width <= 880) {
+				margin-block-start: 16px;
 			}
 		}
 

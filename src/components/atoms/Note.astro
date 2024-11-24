@@ -18,12 +18,12 @@ const { icon, class: className, ...props } = Astro.props
 	.note {
 		display: flex;
 		gap: 16px;
-		border-radius: var(--br-primary);
+		border-radius: var(--br-md);
 		background-color: var(--note-bg);
 		padding-inline: 16px;
 		padding-block: 20px;
 		font-weight: 400;
-		font-size: var(--font-primary);
+		font-size: calc(var(--font-primary) - 1px);
 		font-family: var(--ff-secondary);
 
 		@media (width <= 880) {
@@ -51,6 +51,10 @@ const { icon, class: className, ...props } = Astro.props
 
 		p + p {
 			margin-block-start: 8px;
+
+			@media (width <= 880) {
+				margin-block-start: 4px;
+			}
 		}
 	}
 </style>

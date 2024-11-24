@@ -72,6 +72,7 @@
 	/* aliases */
 	--button-primary-blur: unset;
 	--button-primary-bg: var(--bg-primary);
+	--button-primary-border: var(--border-secondary);
 	--button-primary-text-primary: var(--text-primary-0);
 	--button-primary-text-secondary: var(--text-tertiary);
 	--button-secondary-blur: unset;
@@ -105,6 +106,7 @@
 	/* aliases */
 	--button-primary-blur: var(--blur-sm);
 	--button-primary-bg: var(--bg-elevate);
+	--button-primary-border: var(--border-secondary);
 	--button-primary-text-primary: var(--text-primary-0);
 	--button-primary-text-secondary: var(--text-secondary-0);
 	--button-secondary-blur: var(--blur-sm);
