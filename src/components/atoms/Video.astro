@@ -150,6 +150,10 @@ const h265 = preparedSources?.[2]
 		&[data-autoplayer='played'] .icon--pause {
 			display: block;
 		}
+
+		@media (width <= 880) {
+			border-radius: var(--br-primary);
+		}
 	}
 
 	.btn__play {
@@ -171,9 +175,5 @@ const h265 = preparedSources?.[2]
 		scale: 1.01;
 		background-color: var(--bg-placeholder);
 		width: 100%;
-
-		@media (width <= 880) {
-			border-radius: var(--br-primary);
-		}
 	}
 </style>

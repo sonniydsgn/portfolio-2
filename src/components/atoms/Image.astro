@@ -62,14 +62,14 @@ const renderedTitle = title && parseLink(title)
 			pointer-events: none;
 			content: '';
 		}
+
+		@media (width <= 880) {
+			border-radius: var(--br-primary);
+		}
 	}
 
 	picture img {
 		display: flex;
 		background-color: var(--bg-placeholder);
-
-		@media (width <= 880) {
-			border-radius: var(--br-primary);
-		}
 	}
 </style>
