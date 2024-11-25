@@ -46,7 +46,6 @@ import LinkItem from '../atoms/LinkItem.astro'
 </script>
 
 <aside class:list={['toc', className]} {...props} data-toc-list={!mobile ? '' : null}>
-	<span class="text-h2 toc__title">Содержание</span>
 	<ul class="list-reset toc__list">
 		{
 			list.map(({ title, slug }) => (
@@ -91,6 +90,8 @@ import LinkItem from '../atoms/LinkItem.astro'
 	}
 
 	.toc__item {
+		--font-size: var(--font-xs);
+
 		@media (width <= 1200) {
 			--padding-inline: 16px;
 			--padding-block: 8px;

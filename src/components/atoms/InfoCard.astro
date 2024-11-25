@@ -77,13 +77,13 @@ if (type === 'file') {
 		border: 1px solid var(--border-primary);
 		border-radius: var(--br-lg);
 		padding: 24px 20px;
+		font-size: calc(var(--font-primary) - 1px);
 		font-family: var(--ff-secondary);
 
 		@media (width <= 880) {
 			gap: 12px;
 			border-radius: var(--br-md);
-			padding: 16px;
-			font-size: var(--font-sm);
+			padding: 16px 12px;
 
 			&:not(.info-card--number) {
 				flex-direction: column;

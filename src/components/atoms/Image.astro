@@ -48,13 +48,28 @@ const renderedTitle = title && parseLink(title)
 }
 
 <style>
-	picture img {
-		display: flex;
+	picture {
+		display: block;
+		position: relative;
 		border-radius: var(--br-md);
-		background-color: var(--bg-placeholder);
+		overflow: hidden;
+
+		&::after {
+			position: absolute;
+			inset: 0;
+			box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.03);
+			border-radius: inherit;
+			pointer-events: none;
+			content: '';
+		}
 
 		@media (width <= 880) {
 			border-radius: var(--br-primary);
 		}
+	}
+
+	picture img {
+		display: flex;
+		background-color: var(--bg-placeholder);
 	}
 </style>

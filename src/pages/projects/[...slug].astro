@@ -19,6 +19,7 @@ import getHighlightSource from '@/scripts/getters/get-highlight'
 import type { TocItem } from '@/types'
 import type { ImageMetadata } from 'astro'
 import { slugify, transliterate } from 'transliteration'
+import Ol from '@/components/atoms/Ol.astro'
 
 export async function getStaticPaths() {
 	const projects = await getProjects()
@@ -155,7 +156,7 @@ const Card = InfoCard
 									<InfoCard name="Обсудить проект" href="https://t.me/sonniyboii" icon="message-text-icon" />
 								</ContentPlaceholder>
 							) : (
-								<Content components={{ img: Image, h3: H3, a: Link, Section, Card, List }} />
+								<Content components={{ img: Image, h3: H3, a: Link, ol: Ol, Video, Section, Card, List }} />
 							)
 						}
 					</ContentList>

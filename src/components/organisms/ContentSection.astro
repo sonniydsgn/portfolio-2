@@ -4,7 +4,7 @@ import { slugify, transliterate } from 'transliteration'
 interface Props {
 	title: string
 	icon?: string
-	size?: 'sm' | 'md'
+	size?: 'null' | 'sm' | 'md'
 	type?: 'section' | 'accordion'
 	class?: string
 }
@@ -16,7 +16,12 @@ const slug = title && slugify(transliterate(title))
 
 <section
 	data-toc-section={type === 'section' ? '' : null}
-	class:list={['content-section', { 'content-section--sm': size === 'sm' }, className]}
+	class:list={[
+		'content-section',
+		{ 'content-section--sm': size === 'sm' },
+		{ 'content-section--null': size === 'null' },
+		className,
+	]}
 	id={slug}
 	{...props}
 >
@@ -55,6 +60,14 @@ const slug = title && slugify(transliterate(title))
 		}
 	}
 
+	.content-section--null {
+		--section-padding: 0px;
+
+		@media (width <= 880) {
+			--section-padding: 0px;
+		}
+	}
+
 	.content-section__header {
 		display: flex;
 		border-bottom: 1px solid var(--border-secondary);
@@ -90,9 +103,9 @@ const slug = title && slugify(transliterate(title))
 </style>
 
 <style is:global>
-	.content-section {
+	.content-section__body {
 		/* заголовки */
-		h3 + * {
+		& > h3 + * {
 			margin-block-start: 16px;
 
 			@media (width <= 880) {
@@ -100,8 +113,8 @@ const slug = title && slugify(transliterate(title))
 			}
 		}
 
-		h3 + .info-list,
-		h3 + .info-card {
+		& > h3 + .info-list,
+		& > h3 + .info-card {
 			margin-block-start: 12px;
 
 			@media (width <= 880) {
@@ -109,11 +122,22 @@ const slug = title && slugify(transliterate(title))
 			}
 		}
 
-		* ~ h3 {
+		& > * + h3 {
 			margin-block-start: 32px;
 
 			@media (width <= 880) {
 				margin-block-start: 24px;
+			}
+		}
+
+		& > picture + h3,
+		& > figure + h3,
+		& > .video-container + h3,
+		& > .note + h3 {
+			margin-block-start: 40px;
+
+			@media (width <= 880) {
+				margin-block-start: 32px;
 			}
 		}
 
@@ -135,7 +159,7 @@ const slug = title && slugify(transliterate(title))
 			max-height: 999999px;
 		}
 
-		p:not(:has(> picture)) {
+		& > p {
 			max-width: 95%;
 
 			@media (width <= 880) {
@@ -143,7 +167,7 @@ const slug = title && slugify(transliterate(title))
 			}
 		}
 
-		p + p {
+		& > p + p {
 			margin-block-start: 12px;
 
 			@media (width <= 880) {
@@ -151,8 +175,8 @@ const slug = title && slugify(transliterate(title))
 			}
 		}
 
-		ul + p,
-		ol + p {
+		& > ul + p,
+		& > ol + p {
 			margin-block-start: 16px;
 
 			@media (width <= 880) {
@@ -160,50 +184,40 @@ const slug = title && slugify(transliterate(title))
 			}
 		}
 
-		p + figure,
-		p + picture,
-		p + .video-container {
-			margin-block-start: 16px;
-
-			@media (width <= 880) {
-				margin-block-start: 12px;
-			}
-		}
-
-		picture + p,
-		.video-container + p,
-		figure + p {
+		& > picture + *,
+		& > .video-container + *,
+		& > figure + * {
 			margin-block-start: 24px;
 
 			@media (width <= 880) {
-				margin-block-start: 20px;
+				margin-block-start: 16px;
+			}
+		}
+
+		& > * + figure,
+		& > * + picture,
+		& > * + .video-container {
+			margin-block-start: 16px;
+
+			@media (width <= 880) {
+				margin-block-start: 12px;
 			}
 		}
 
 		/* медиа-материалы */
-		picture + picture,
-		picture + .video-container,
-		picture + figure,
-		.video-container + .video-container,
-		.video-container + figure,
-		.video-container + picture,
-		figure + figure,
-		figure + picture,
-		figure + .video-container {
+		& > picture + picture,
+		& > picture + .video-container,
+		& > picture + figure,
+		& > .video-container + .video-container,
+		& > .video-container + figure,
+		& > .video-container + picture,
+		& > figure + figure,
+		& > figure + picture,
+		& > figure + .video-container {
 			margin-block-start: 32px;
 
 			@media (width <= 880) {
 				margin-block-start: 24px;
-			}
-		}
-
-		picture + h3,
-		figure + h3,
-		.video-container + h3 {
-			margin-block-start: 40px;
-
-			@media (width <= 880) {
-				margin-block-start: 32px;
 			}
 		}
 
@@ -226,23 +240,36 @@ const slug = title && slugify(transliterate(title))
 
 		/* списки */
 		ul:not(.list-reset),
-		ol:not(.list-reset) {
+		ol {
 			display: flex;
 			flex-direction: column;
 			gap: 12px;
-			padding-inline-start: 32px;
 
 			@media (width <= 880) {
 				gap: 8px;
 			}
 		}
 
-		p + ul,
+		ul:not(.list-reset) {
+			padding-inline-start: 32px;
+		}
+
+		p + ul:not(.list-reset),
 		p + ol {
 			margin-block-start: 8px;
 
 			@media (width <= 880) {
 				margin-block-start: 4px;
+			}
+		}
+
+		/* заметки */
+		& > * + .note,
+		& > .note + * {
+			margin-block-start: 20px;
+
+			@media (width <= 880) {
+				margin-block-start: 16px;
 			}
 		}
 
@@ -260,10 +287,8 @@ const slug = title && slugify(transliterate(title))
 			font-family: var(--ff-secondary);
 		}
 
-		.content-section__body:has(.about-card) {
-			@media (width <= 880) {
-				--section-padding: 24px;
-			}
+		strong {
+			font-weight: 600;
 		}
 	}
 </style>

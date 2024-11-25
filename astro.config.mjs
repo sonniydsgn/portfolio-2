@@ -7,6 +7,8 @@ import mdxDirective from 'astro-mdx-directive'
 import { defineConfig } from 'astro/config'
 import rehypeUnwrapImages from 'rehype-unwrap-images'
 
+let mixins = new Map()
+
 const directives = {
 	container: [
 		{
@@ -20,15 +22,43 @@ const directives = {
 			name: 'List',
 			path: 'src/components/molecules/InfoList.astro',
 		},
+		{
+			name: 'Note',
+			path: 'src/components/atoms/Note.astro',
+		},
 	],
 }
 
 export default defineConfig({
 	compressHTML: true,
-	site: 'https://sonniydesign.ru',
+	site: 'https://designbykalinin.ru',
 	vite: {
 		css: {
 			transformer: 'lightningcss',
+			lightningcss: {
+				customAtRules: {
+					mixin: {
+						prelude: '<custom-ident>',
+						body: 'style-block',
+					},
+					apply: {
+						prelude: '<custom-ident>',
+					},
+				},
+				visitor: {
+					Rule: {
+						custom: {
+							mixin(rule) {
+								mixins.set(rule.prelude.value, rule.body.value)
+								return []
+							},
+							apply(rule) {
+								return mixins.get(rule.prelude.value)
+							},
+						},
+					},
+				},
+			},
 		},
 	},
 	integrations: [

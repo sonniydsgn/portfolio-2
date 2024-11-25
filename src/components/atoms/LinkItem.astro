@@ -20,6 +20,7 @@ const { href, active = false, class: className, ...rest } = Astro.props
 		--padding-inline: 6px;
 		--padding-block: 4px;
 		--link-opacity: 0.6;
+		--font-size: var(--font-sm);
 		--clr-bg-active: var(--bg-tertiary);
 
 		display: inline-flex;
@@ -32,6 +33,7 @@ const { href, active = false, class: className, ...rest } = Astro.props
 			width: 100%;
 			/* prevent 300ms delay in mobile */
 			touch-action: manipulation;
+			font-size: var(--font-size);
 		}
 	}
 
