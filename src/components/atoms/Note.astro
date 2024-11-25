@@ -35,26 +35,24 @@ const { icon, class: className, ...props } = Astro.props
 
 	.note__body {
 		display: flex;
+		row-gap: 6px;
 		flex-direction: column;
+		width: 95%;
+
+		@media (width <= 880) {
+			row-gap: 4px;
+		}
 	}
 </style>
 
 <style is:global>
-	.note {
+	.note__body {
 		p {
 			color: var(--note-text-secondary);
 		}
 
-		p:first-child:not(:only-child) {
+		strong {
 			color: var(--note-text-primary);
-		}
-
-		p + p {
-			margin-block-start: 8px;
-
-			@media (width <= 880) {
-				margin-block-start: 4px;
-			}
 		}
 	}
 </style>
