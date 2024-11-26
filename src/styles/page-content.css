@@ -1,6 +1,7 @@
 .content-section__body {
 	/* заголовки */
-	& > h3 + * {
+	& > h3 + *,
+	.about-card h3 + * {
 		margin-block-start: 16px;
 
 		@media (width <= 880) {

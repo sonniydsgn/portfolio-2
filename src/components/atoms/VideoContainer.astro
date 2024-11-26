@@ -118,7 +118,7 @@ const h265 = preparedSources?.[2]
 <div class="video-container" data-videoplayer={paused || lazy ? 'paused' : 'played'} data-lazy-video={lazy}>
 	<video
 		{poster}
-		{autoplay}
+		autoplay={autoplay && !lazy}
 		muted={autoplay}
 		loop={autoplay}
 		preload={paused && 'none'}
