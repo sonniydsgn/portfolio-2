@@ -94,7 +94,7 @@ const Card = InfoCard
 					}
 
 					<ContentList tag="div" class="article__content">
-						<!-- mobile toc section -->
+						<!-- mobile toc -->
 						{
 							needToc && (
 								<ContentSection
@@ -102,7 +102,7 @@ const Card = InfoCard
 									title="Содержание"
 									icon="§"
 									size="sm"
-									type="accordion"
+									wrapped
 								>
 									<Toc list={headings} mobile />
 								</ContentSection>
@@ -148,7 +148,7 @@ const Card = InfoCard
 							)
 						}
 
-						<!-- other sections -->
+						<!-- case sections & pre-result -->
 						{
 							draft && import.meta.env.PROD ? (
 								<ContentPlaceholder data-toc-section>
@@ -159,6 +159,7 @@ const Card = InfoCard
 								<Content components={{ img: Image, h3: H3, a: Link, ol: Ol, Video, Section, Card, List }} />
 							)
 						}
+
 					</ContentList>
 				</div>
 			</div>
@@ -250,11 +251,9 @@ const Card = InfoCard
 			}
 
 			&.article__toc--mobile {
-				display: flex;
+				display: grid;
 			}
 		}
 	}
 
-	.article__content {
-	}
 </style>

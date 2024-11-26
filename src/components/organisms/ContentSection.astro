@@ -1,21 +1,52 @@
 ---
+import '@/styles/page-content.css'
+
+import { Icon } from 'astro-icon/components'
 import { slugify, transliterate } from 'transliteration'
 
 interface Props {
 	title: string
 	icon?: string
 	size?: 'null' | 'sm' | 'md'
-	type?: 'section' | 'accordion'
+	wrapped?: boolean
 	class?: string
 }
 
-const { title, icon = '◌', size = 'md', type = 'section', class: className, ...props } = Astro.props
+const { title, icon = '◌', size = 'md', wrapped = false, class: className, ...props } = Astro.props
 
 const slug = title && slugify(transliterate(title))
 ---
 
+<script>
+	const wrappedSection = document.querySelectorAll('[data-wrap-section]')
+
+	if (wrappedSection) {
+		wrappedSection.forEach((section: HTMLElement) => {
+			let state = section.dataset.wrapSection
+			const toggle = section.querySelector('.content-section__toggle')
+
+			toggle.addEventListener('click', () => {
+				if (state === 'unwrap') {
+					state = ''
+					section.dataset.wrapSection = state
+
+					toggle.setAttribute('aria-expanded', 'false')
+					toggle.setAttribute('aria-label', 'Развернуть содержание')
+				} else {
+					state = 'unwrap'
+					section.dataset.wrapSection = state
+
+					toggle.setAttribute('aria-expanded', 'true')
+					toggle.setAttribute('aria-label', 'Скрыть содержание')
+				}
+			})
+		})
+	}
+</script>
+
 <section
-	data-toc-section={type === 'section' ? '' : null}
+	data-toc-section={!wrapped ? '' : null}
+	data-wrap-section={wrapped ? '' : null}
 	class:list={[
 		'content-section',
 		{ 'content-section--sm': size === 'sm' },
@@ -26,12 +57,38 @@ const slug = title && slugify(transliterate(title))
 	{...props}
 >
 	<header class="content-section__header">
-		<span class="text-h2 content-section__icon">{icon}</span>
-		<h2 class="text-h2 content-section__title">{title}</h2>
-		<slot name="header" />
+		<span class="text-h2 content-section__icon" aria-hidden="true">{icon}</span>
+		<h2 class="text-h2 content-section__title">
+			{
+				wrapped ? (
+					<button
+						type="button"
+						class="btn-reset content-section__toggle"
+						aria-expanded="false"
+						aria-label="Развернуть содержание"
+					>
+						{title}
+
+						<span class="content-section__chevron">
+							<Icon name="chevron-down-icon" class="icon icon--16" />
+						</span>
+					</button>
+				) : (
+					title
+				)
+			}
+		</h2>
 	</header>
 	<div class="content-section__body">
-		<slot />
+		{
+			wrapped ? (
+				<div class="content-section__wrap">
+					<slot />
+				</div>
+			) : (
+				<slot />
+			)
+		}
 	</div>
 </section>
 
@@ -40,8 +97,8 @@ const slug = title && slugify(transliterate(title))
 		--section-padding: 48px;
 		--inline-padding: 24px;
 
-		display: flex;
-		flex-direction: column;
+		display: grid;
+		align-items: start;
 		border: 1px solid var(--border-secondary);
 		border-radius: var(--br-lg);
 		background-color: var(--bg-primary);
@@ -69,8 +126,11 @@ const slug = title && slugify(transliterate(title))
 	}
 
 	.content-section__header {
+		--border-color: var(--border-secondary);
+
 		display: flex;
-		border-bottom: 1px solid var(--border-secondary);
+		align-items: center;
+		border-bottom: 1px solid var(--border-color);
 		padding-inline: var(--inline-padding);
 		padding-block-start: 16px;
 		padding-block-end: 12px;
@@ -87,208 +147,101 @@ const slug = title && slugify(transliterate(title))
 
 	.content-section__title {
 		margin-inline-end: auto;
+		width: 100%;
 	}
 
 	.content-section__body {
+		--pd-block-start: var(--section-padding);
+		--pd-block-end: 48px;
+
 		display: flex;
 		flex-direction: column;
 		padding-inline: var(--inline-padding);
 		padding-block-start: var(--section-padding);
-		padding-block-end: 48px;
+		padding-block-end: var(--pd-block-end);
 
 		@media (width <= 880) {
-			padding-block-end: 32px;
+			--pd-block-end: 32px;
 		}
 	}
-</style>
 
-<style is:global>
-	.content-section__body {
-		/* заголовки */
-		& > h3 + * {
-			margin-block-start: 16px;
+	/* wrapped section */
+	[data-wrap-section] {
+		overflow: hidden;
+	}
 
-			@media (width <= 880) {
-				margin-block-start: 12px;
+	[data-wrap-section] .content-section__header {
+		position: relative;
+		transition-delay: 0.2s;
+		transition-property: border-bottom-color;
+		border-bottom-color: transparent;
+	}
+
+	[data-wrap-section] .content-section__toggle {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		width: 100%;
+		color: inherit;
+		font-weight: inherit;
+		font-size: inherit;
+		line-height: inherit;
+		font-family: inherit;
+		text-transform: inherit;
+
+		&:focus {
+			outline: none;
+		}
+
+		&:focus-visible {
+			&::after {
+				outline: 5px auto Highlight;
+				outline: 5px auto -webkit-focus-ring-color;
 			}
 		}
 
-		& > h3 + .info-list,
-		& > h3 + .info-card {
-			margin-block-start: 12px;
+		&::after {
+			position: absolute;
+			inset: 0;
+			width: 100%;
+			height: 100%;
+			content: '';
+		}
+	}
 
-			@media (width <= 880) {
-				margin-block-start: 8px;
-			}
+	[data-wrap-section] .content-section__chevron {
+		display: flex;
+		transition: transform var(--tr-primary);
+		pointer-events: none;
+	}
+
+	[data-wrap-section] .content-section__body {
+		display: grid;
+		grid-template-rows: 0fr;
+		transition:
+			grid-template-rows var(--tr-primary),
+			padding-block var(--tr-primary);
+		padding-block: unset;
+
+		& > .content-section__wrap {
+			grid-row: 1 / span 2;
+			overflow: hidden;
+		}
+	}
+
+	[data-wrap-section='unwrap'] {
+		& .content-section__header {
+			transition-delay: unset;
+			border-bottom-color: var(--border-color);
 		}
 
-		& > * + h3 {
-			margin-block-start: 32px;
-
-			@media (width <= 880) {
-				margin-block-start: 24px;
-			}
+		& .content-section__body {
+			grid-template-rows: 1fr;
+			padding-block: var(--pd-block-start) var(--pd-block-end);
 		}
 
-		& > picture + h3,
-		& > figure + h3,
-		& > .video-container + h3,
-		& > .note + h3 {
-			margin-block-start: 40px;
-
-			@media (width <= 880) {
-				margin-block-start: 32px;
-			}
-		}
-
-		/* ссылки */
-		a.link {
-			opacity: 0.8;
-
-			@media (hover) {
-				&:hover {
-					opacity: 1;
-				}
-			}
-		}
-
-		/* параграфы */
-		p,
-		figcaption {
-			/* hack for temporary disabling chrome font boosting */
-			max-height: 999999px;
-		}
-
-		& > p {
-			max-width: 95%;
-
-			@media (width <= 880) {
-				max-width: 100%;
-			}
-		}
-
-		& > p + p {
-			margin-block-start: 12px;
-
-			@media (width <= 880) {
-				margin-block-start: 8px;
-			}
-		}
-
-		& > ul + p,
-		& > ol + p {
-			margin-block-start: 16px;
-
-			@media (width <= 880) {
-				margin-block-start: 12px;
-			}
-		}
-
-		& > picture + *,
-		& > .video-container + *,
-		& > figure + * {
-			margin-block-start: 24px;
-
-			@media (width <= 880) {
-				margin-block-start: 16px;
-			}
-		}
-
-		& > * + figure,
-		& > * + picture,
-		& > * + .video-container {
-			margin-block-start: 16px;
-
-			@media (width <= 880) {
-				margin-block-start: 12px;
-			}
-		}
-
-		/* медиа-материалы */
-		& > picture + picture,
-		& > picture + .video-container,
-		& > picture + figure,
-		& > .video-container + .video-container,
-		& > .video-container + figure,
-		& > .video-container + picture,
-		& > figure + figure,
-		& > figure + picture,
-		& > figure + .video-container {
-			margin-block-start: 32px;
-
-			@media (width <= 880) {
-				margin-block-start: 24px;
-			}
-		}
-
-		figcaption {
-			--padding: 8px;
-
-			margin-block-start: 12px;
-			padding-inline: var(--padding);
-			max-width: calc(714px + 2 * var(--padding));
-			color: var(--text-secondary-0);
-			font-style: normal;
-			font-weight: 300;
-			font-size: var(--font-sm);
-			line-height: var(--lh-sm);
-
-			@media (width <= 880) {
-				--padding: 4px;
-			}
-		}
-
-		/* списки */
-		ul:not(.list-reset),
-		ol {
-			display: flex;
-			flex-direction: column;
-			gap: 12px;
-
-			@media (width <= 880) {
-				gap: 8px;
-			}
-		}
-
-		ul:not(.list-reset) {
-			padding-inline-start: 32px;
-		}
-
-		p + ul:not(.list-reset),
-		p + ol {
-			margin-block-start: 8px;
-
-			@media (width <= 880) {
-				margin-block-start: 4px;
-			}
-		}
-
-		/* заметки */
-		& > * + .note,
-		& > .note + * {
-			margin-block-start: 20px;
-
-			@media (width <= 880) {
-				margin-block-start: 16px;
-			}
-		}
-
-		/* остальное */
-		hr {
-			margin: 0;
-			border: 1px solid var(--border-secondary);
-		}
-
-		code {
-			border-radius: var(--br-sm);
-			background-color: var(--bg-tertiary);
-			padding-inline: 6px;
-			font-size: var(--font-sm);
-			font-family: var(--ff-secondary);
-		}
-
-		strong {
-			font-weight: 600;
+		& .content-section__chevron {
+			transform: rotate(180deg);
 		}
 	}
 </style>
