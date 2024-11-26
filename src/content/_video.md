@@ -2,7 +2,10 @@
 
 ## Обложка видео
 
-`ffmpeg -i ***.mp4 -vframes 1 -q:v 1 ***_cover.jpg`
+`
+ffmpeg -i ***.mp4 -vframes 1 -q:v 1 - ***_pre_cover.jpg
+magick.exe ***_pre_cover.jpg -quality 20 -resize 33% ***_cover.jpg
+`
 
 ## H264
 
