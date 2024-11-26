@@ -9,3 +9,11 @@ export interface TocItem {
 	title: string
 	slug: string
 }
+
+export interface Video extends HTMLAttributes<'video'> {
+	autoplay?: boolean
+	paused?: boolean
+	width?: number
+	height?: number
+	sources?: string[]
+}

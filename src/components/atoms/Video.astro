@@ -1,179 +1,25 @@
 ---
-import getVideo from '@/scripts/getters/get-video'
-import type { ImageMetadata } from 'astro'
-import { Icon } from 'astro-icon/components'
-import type { HTMLAttributes } from 'astro/types'
-import ButtonLink from './ButtonLink.astro'
+import type { Video } from '@/types'
+import VideoContainer from './VideoContainer.astro'
 
-interface Props extends HTMLAttributes<'video'> {
+interface Props extends Video {
 	title?: string
-	autoplay?: boolean
-	width?: number
-	height?: number
-	sources?: string[]
 }
 
-const { title, autoplay, width, height, sources, ...props } = Astro.props
-
-const preparedSources = sources ? getVideo(sources) : null
-
-const poster = (preparedSources?.[0] as unknown as ImageMetadata)?.src
-const h264 = preparedSources?.[1]
-const h265 = preparedSources?.[2]
+const { title, ...props } = Astro.props
 ---
-
-<script>
-	const videoPlayers = document.querySelectorAll('[data-autoplayer]')
-	if (videoPlayers) {
-		videoPlayers.forEach((videoPlayer: HTMLDivElement) => {
-			const video = videoPlayer.querySelector('video') as HTMLVideoElement
-			const playButton = videoPlayer.querySelector('.btn__play') as HTMLButtonElement
-
-			video.addEventListener('play', () => togglePlay(playButton, videoPlayer))
-			video.addEventListener('pause', () => togglePause(playButton, videoPlayer))
-			video.addEventListener('ended', () => togglePause(playButton, videoPlayer))
-			video.addEventListener('waiting', () => showSpinner(videoPlayer))
-			video.addEventListener('playing', () => removeSpinner(videoPlayer))
-
-			playButton.addEventListener('click', () => {
-				if (video.paused) video.play()
-				else video.pause()
-			})
-		})
-
-		const togglePlay = (btn: HTMLButtonElement, player: HTMLDivElement) => {
-			player.dataset.autoplayer = 'played'
-			btn.setAttribute('aria-label', 'Поставить видео на паузу')
-
-			removeSpinner(player)
-		}
-
-		const togglePause = (btn: HTMLButtonElement, player: HTMLDivElement) => {
-			player.dataset.autoplayer = 'paused'
-			btn.setAttribute('aria-label', 'Включить видео')
-
-			removeSpinner(player)
-		}
-
-		const showSpinner = (player: HTMLDivElement) => {
-			const spinner = player.querySelector('.spinner')
-			if (spinner) return
-
-			const newSpinner = document.createElement('div')
-			newSpinner.classList.add('spinner')
-			player.appendChild(newSpinner)
-		}
-
-		const removeSpinner = (player: HTMLDivElement) => {
-			const spinner = player.querySelector('.spinner')
-			if (spinner) spinner.remove()
-		}
-	}
-</script>
 
 {
 	title ? (
 		<figure>
-			<div class="video-container" data-autoplayer="played">
-				<video
-					{...props}
-					{autoplay}
-					{poster}
-					muted={autoplay}
-					loop={autoplay}
-					playsinline={autoplay}
-					style={'aspect-ratio: ' + width + '/' + height}
-				>
-					<slot />
-					{h265 && <source src={h265} type="video/mp4" />}
-					{h264 && <source src={h264} type="video/mp4" />}> Ваш браузер не поддерживает встроенные видео :(
-				</video>
-
-				{autoplay && (
-					<ButtonLink class="btn btn--secondary btn--only-icon btn__play" aria-label="Поставить видео на паузу">
-						<Icon name="play-icon" class="icon icon--play" aria-hidden="true" />
-						<Icon name="pause-icon" class="icon icon--pause" aria-hidden="true" />
-					</ButtonLink>
-				)}
-			</div>
+			<VideoContainer {...props}>
+				<slot />
+			</VideoContainer>
 			<figcaption>{title}</figcaption>
 		</figure>
 	) : (
-		<div class="video-container" data-autoplayer="played">
-			<video
-				{...props}
-				{autoplay}
-				{poster}
-				muted={autoplay}
-				loop={autoplay}
-				playsinline={autoplay}
-				style={'aspect-ratio: ' + width + '/' + height}
-			>
-				<slot />
-				{h265 && <source src={h265} type="video/mp4" />}
-				{h264 && <source src={h264} type="video/mp4" />}
-				Ваш браузер не поддерживает встроенные видео :(
-			</video>
-
-			{autoplay && (
-				<ButtonLink class="btn btn--secondary btn--only-icon btn__play" aria-label="Поставить видео на паузу">
-					<Icon name="play-icon" class="icon icon--play" aria-hidden="true" />
-					<Icon name="pause-icon" class="icon icon--pause" aria-hidden="true" />
-				</ButtonLink>
-			)}
-		</div>
+		<VideoContainer {...props}>
+			<slot />
+		</VideoContainer>
 	)
 }
-
-<style>
-	.video-container {
-		display: flex;
-		position: relative;
-		justify-content: center;
-		align-items: center;
-		border-radius: var(--br-md);
-		overflow: hidden;
-
-		&::after {
-			position: absolute;
-			inset: 0;
-			box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.03);
-			border-radius: inherit;
-			pointer-events: none;
-			content: '';
-		}
-
-		&[data-autoplayer='paused'] .icon--play {
-			display: block;
-		}
-
-		&[data-autoplayer='played'] .icon--pause {
-			display: block;
-		}
-
-		@media (width <= 880) {
-			border-radius: var(--br-primary);
-		}
-	}
-
-	.btn__play {
-		--margin: 16px;
-
-		position: absolute;
-		right: var(--margin);
-		bottom: var(--margin);
-		z-index: 1;
-
-		.icon {
-			display: none;
-		}
-	}
-
-	video {
-		display: flex;
-		/* black border fix  */
-		scale: 1.01;
-		background-color: var(--bg-placeholder);
-		width: 100%;
-	}
-</style>

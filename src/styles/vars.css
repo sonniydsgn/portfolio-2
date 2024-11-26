@@ -29,7 +29,7 @@
 
 	/* EFFECTS */
 	--blur-sm: blur(3px);
-	--shadow-sm: 0px 4px 12px rgba(124, 124, 124, 0.15);
+	--shadow-sm: 0px 2px 8px rgba(54 54 49 / 0.5);
 
 	/* TRANSITIONS */
 	@media (prefers-reduced-motion: no-preference) {
