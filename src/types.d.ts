@@ -15,5 +15,6 @@ export interface Video extends HTMLAttributes<'video'> {
 	paused?: boolean
 	width?: number
 	height?: number
+	lazy?: boolean
 	sources?: string[]
 }

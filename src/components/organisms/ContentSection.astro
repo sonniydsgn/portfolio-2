@@ -70,7 +70,7 @@ const slug = title && slugify(transliterate(title))
 						{title}
 
 						<span class="content-section__chevron">
-							<Icon name="chevron-down-icon" class="icon icon--16" />
+							<Icon name="chevron-down-icon" class="icon" />
 						</span>
 					</button>
 				) : (
@@ -213,6 +213,12 @@ const slug = title && slugify(transliterate(title))
 		display: flex;
 		transition: transform var(--tr-primary);
 		pointer-events: none;
+
+		@media (width <= 880) {
+			& .icon {
+				--size: 20px;
+			}
+		}
 	}
 
 	[data-wrap-section] .content-section__body {
