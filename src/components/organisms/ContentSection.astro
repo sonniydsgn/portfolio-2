@@ -1,8 +1,8 @@
 ---
 import '@/styles/page-content.css'
 
+import { slugify } from '@/scripts/libs/slugify'
 import { Icon } from 'astro-icon/components'
-import { slugify, transliterate } from 'transliteration'
 
 interface Props {
 	title: string
@@ -14,7 +14,7 @@ interface Props {
 
 const { title, icon = '◌', size = 'md', wrapped = false, class: className, ...props } = Astro.props
 
-const slug = title && slugify(transliterate(title))
+const slug = title && slugify(title)
 ---
 
 <script>

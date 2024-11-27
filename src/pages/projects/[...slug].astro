@@ -18,7 +18,7 @@ import getProjects from '@/scripts/getters/get-projects'
 import getImage from '@/scripts/getters/get-image'
 import type { TocItem } from '@/types'
 import type { ImageMetadata } from 'astro'
-import { slugify, transliterate } from 'transliteration'
+import { slugify } from '@/scripts/libs/slugify'
 import Ol from '@/components/atoms/Ol.astro'
 
 export async function getStaticPaths() {
@@ -42,9 +42,9 @@ const headings: TocItem[] = project.body
 	.split('\n')
 	.filter(line => line.includes(':::Section['))
 	.map(line => line.match(/:::Section\[(.*?)\]/)![1])
-	.map(title => ({ title, slug: '#' + slugify(transliterate(title)) }))
+	.map(title => ({ title, slug: '#' + slugify(title) }))
 
-headings.unshift({ title: 'О проекте', slug: '#' + slugify(transliterate('О проекте'))}, { title: 'Хайлайты', slug: '#' + slugify(transliterate('Хайлайты'))})
+headings.unshift({ title: 'О проекте', slug: '#' + slugify('О проекте')}, { title: 'Хайлайты', slug: '#' + slugify('Хайлайты')})
 
 const needToc = (headings.length > 3 && !draft) || (headings.length > 3 && import.meta.env.DEV)
 
