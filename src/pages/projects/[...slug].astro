@@ -129,6 +129,9 @@ const Card = InfoCard
 
 							<H3>Время работы</H3>
 							<Card name={timeline.period} desc={timeline.status} icon="clock-icon" tag="div" />
+
+							<H3>Результат</H3>
+							{result && <InfoCard name="Посмотреть сайт" href={result} />}
 						</ContentSection>
 
 						{

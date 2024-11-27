@@ -16,11 +16,49 @@ interface Props {
 const { cover, width, height, loading, fetchpriority, containerClass, class: className, ...props } = Astro.props
 ---
 
+<script>
+	const lazyVideos = document.querySelectorAll('.cover-container video')
+
+	const options = {
+		rootMargin: '-50% 0%',
+		threshold: 0,
+	}
+
+	const observer = new IntersectionObserver(function (entries) {
+		entries.forEach(entry => {
+			const video = entry.target as HTMLVideoElement
+
+			if (entry.isIntersecting) {
+				video.play()
+			} else {
+				video.pause()
+			}
+		})
+	}, options)
+
+	// initial loading
+	const observerinit = new IntersectionObserver(function (entries, observerinit) {
+		entries.forEach(entry => {
+			if (entry.isIntersecting) {
+				const video = entry.target as HTMLVideoElement
+				video.load()
+
+				observerinit.unobserve(video)
+				observer.observe(video)
+			}
+		})
+	}, options)
+
+	lazyVideos.forEach(video => {
+		observerinit.observe(video)
+	})
+</script>
+
 <div class:list={['cover-container', containerClass]} {...props}>
 	{
 		cover?.mp4?.length > 0 ? (
 			<video
-				autoplay
+				preload="none"
 				loop
 				muted
 				playsinline
