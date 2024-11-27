@@ -24,7 +24,7 @@ let { desc, icon } = Astro.props
 // link handler
 if (type === 'link') {
 	!icon && (icon = 'external-link-icon')
-	desc = href.replace(/(^\w+:|^)\/\//, '')
+	desc = href.replace(/(^\w+:)?\/\//, '').replace(/(^\w+:)/, '')
 }
 
 if (type === 'file') {
@@ -140,6 +140,7 @@ if (type === 'file') {
 		display: flex;
 		flex-direction: column;
 		gap: 2px;
+		overflow: hidden;
 	}
 
 	.info-card__name {
