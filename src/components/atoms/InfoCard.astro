@@ -94,12 +94,12 @@ if (type === 'file') {
 	.info-card--link {
 		transition: background-color var(--tr-primary);
 		background-color: var(--bg-secondary);
+		overflow-x: hidden;
 
 		.info-card__desc {
-			width: 100%;
 			overflow-x: hidden;
 			text-overflow: ellipsis;
-			text-wrap: nowrap;
+			white-space: nowrap;
 		}
 
 		@media (hover) {
@@ -140,7 +140,8 @@ if (type === 'file') {
 		display: flex;
 		flex-direction: column;
 		gap: 2px;
-		overflow: hidden;
+		width: 100%;
+		overflow-x: hidden;
 	}
 
 	.info-card__name {
