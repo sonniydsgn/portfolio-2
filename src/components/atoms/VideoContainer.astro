@@ -123,6 +123,9 @@ const h265 = preparedSources?.[2]
 >
 	<video
 		{poster}
+		{controls}
+		controlslist="nodownload"
+		disablepictureinpicture
 		autoplay={autoplay && !lazy}
 		muted={autoplay}
 		loop={autoplay}
