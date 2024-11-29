@@ -51,6 +51,11 @@ const { icon, class: className, ...props } = Astro.props
 			color: var(--note-text-secondary);
 		}
 
+		ul + p,
+		ol + p {
+			margin-top: 6px;
+		}
+
 		strong {
 			color: var(--note-text-primary);
 		}

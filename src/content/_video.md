@@ -1,23 +1,32 @@
 # Гайд по подготовке видео для портфолио
 
+## Шаблон скрипта для подготовки видео без звука
+
+`
+ffmpeg -i ***_pre.mp4 -vframes 1 -q:v 1 ***.jpg
+magick.exe ***.jpg -quality 20 -resize 33% ***.jpg
+ffmpeg -i ***_pre.mp4 -vcodec h264 -crf 27 -profile:v main -level:v 4.0 -pix_fmt yuv420p -filter:v fps=30 -an -movflags faststart -tag:v avc1 ***.mp4
+ffmpeg -i ***_pre.mp4 -vcodec libx265 -crf 32 -pix_fmt yuv420p -filter:v fps=30 -an -movflags faststart -tag:v hvc1 ***_h265.mp4
+`
+
 ## Обложка видео
 
 `
-ffmpeg -i ***.mp4 -vframes 1 -q:v 1 - ***_pre_cover.jpg
-magick.exe ***_pre_cover.jpg -quality 20 -resize 33% ***_cover.jpg
+ffmpeg -i ***.mp4 -vframes 1 -q:v 1 ***.jpg
+magick.exe ***.jpg -quality 20 -resize 33% ***.jpg
 `
 
 ## H264
 
-`ffmpeg -i ***.mp4 -vcodec h264 -crf 27 -profile:v main -level:v 4.* -pix_fmt yuv420p -movflags faststart -tag:v avc1 ***_video.mp4`
+`ffmpeg -i ***.mp4 -vcodec h264 -crf 27 -profile:v main -level:v 4.* -pix_fmt yuv420p -movflags faststart -tag:v avc1 ***.mp4`
 
 ## H265
 
-`ffmpeg -i ***.mp4 -vcodec libx265 -crf 32 -pix_fmt yuv420p -movflags faststart -tag:v hvc1 ***_video_h265.mp4`
+`ffmpeg -i ***.mp4 -vcodec libx265 -crf 32 -pix_fmt yuv420p -movflags faststart -tag:v hvc1 ***_h265.mp4`
 
 ## WEBM (VP9)
 
-`ffmpeg -i ***.mp4 -vcodec libvpx-vp9 -crf 40 -pix_fmt yuv420p -b:v 1M -acodec libvorbis -deadline best ***_video_vp9.webm`
+`ffmpeg -i ***.mp4 -vcodec libvpx-vp9 -crf 40 -pix_fmt yuv420p -b:v 1M -acodec libvorbis -deadline best ***_vp9.webm`
 
 ## Объяснение флагов
 

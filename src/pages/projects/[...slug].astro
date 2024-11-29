@@ -1,8 +1,12 @@
 ---
 import Link from '@/components/atoms/ButtonLink.astro'
+import Cover from '@/components/atoms/Cover.astro'
 import H3 from '@/components/atoms/H3.astro'
 import Image from '@/components/atoms/Image.astro'
 import InfoCard from '@/components/atoms/InfoCard.astro'
+import Note from '@/components/atoms/Note.astro'
+import Ol from '@/components/atoms/Ol.astro'
+import Video from '@/components/atoms/Video.astro'
 import ContentList from '@/components/molecules/ContentList.astro'
 import InfoList from '@/components/molecules/InfoList.astro'
 import Meta from '@/components/molecules/Meta.astro'
@@ -11,15 +15,12 @@ import ContentSection from '@/components/organisms/ContentSection.astro'
 import Hero from '@/components/organisms/Hero.astro'
 import NextCard from '@/components/organisms/NextCard.astro'
 import Toc from '@/components/organisms/Toc.astro'
-import Video from '@/components/atoms/Video.astro'
 import ProjectLayout from '@/layouts/ProjectLayout.astro'
-import Cover from '@/components/atoms/Cover.astro'
-import getProjects from '@/scripts/getters/get-projects'
 import getImage from '@/scripts/getters/get-image'
+import getProjects from '@/scripts/getters/get-projects'
+import { slugify } from '@/scripts/libs/slugify'
 import type { TocItem } from '@/types'
 import type { ImageMetadata } from 'astro'
-import { slugify } from '@/scripts/libs/slugify'
-import Ol from '@/components/atoms/Ol.astro'
 
 export async function getStaticPaths() {
 	const projects = await getProjects()
@@ -31,24 +32,28 @@ const { Content } = await project.render()
 
 const { name: title, desc, place_work, color, cover, roles, team, timeline, highlights, result, draft } = project.data
 
-// select next page
+// GET NEXT PROJECT
 const projects = await getProjects()
 const currentIndex = projects.findIndex(p => p.slug === project.slug)
 const nextProject = projects[currentIndex + 1] || projects[0]
 
-
-// toc
+// GENERATE TOC
 const headings: TocItem[] = project.body
 	.split('\n')
-	.filter(line => line.includes(':::Section['))
-	.map(line => line.match(/:::Section\[(.*?)\]/)![1])
+	.filter(line => line.includes(':Section['))
+	.map(line => line.match(/:Section\[(.*?)\]/)![1])
 	.map(title => ({ title, slug: '#' + slugify(title) }))
 
-headings.unshift({ title: 'О проекте', slug: '#' + slugify('О проекте')}, { title: 'Хайлайты', slug: '#' + slugify('Хайлайты')})
+const additionalHeadings: TocItem[] = [
+	{ title: 'О проекте', slug: '#' + slugify('О проекте') },
+	{ title: 'Хайлайты', slug: '#' + slugify('Хайлайты') },
+]
 
-const needToc = (headings.length > 3 && !draft) || (headings.length > 3 && import.meta.env.DEV)
+headings.unshift(...additionalHeadings)
 
-// highlights
+const needToc = headings.length > 3 && !draft
+
+// PREPARE HIGHLIGHTS
 const highlightsPrepared = highlights?.map(highlight => {
 	return {
 		...highlight,
@@ -56,14 +61,34 @@ const highlightsPrepared = highlights?.map(highlight => {
 	}
 })
 
-// cover
+// SET COVER PROPS
 const coverWidth = 1440
 const coverHeight = 952
 
-// components
-const Section = ContentSection
+// SET COMPONENTS
 const List = InfoList
 const Card = InfoCard
+const components = { img: Image, h3: H3, a: Link, ol: Ol, Video, Card, List, Note }
+
+// GET RESULT SECTION
+import { getContainerRenderer as mdxContainerRenderer } from '@astrojs/mdx'
+import { experimental_AstroContainer as AstroContainer } from 'astro/container'
+import { loadRenderers } from 'astro:container'
+import jsdom from 'jsdom'
+
+// setup astro container and mdx renderer
+const renderers = await loadRenderers([mdxContainerRenderer()])
+const container = await AstroContainer.create({ renderers })
+
+// render all content in page
+const renderedContent = await container.renderToString(Content, {
+	props: { components },
+})
+
+// get result section
+const { JSDOM } = jsdom
+const doc = new JSDOM(renderedContent).window.document
+const renderedResult = doc.querySelector('#rezultaty')?.outerHTML
 ---
 
 <ProjectLayout title={title + ' — Алексей Калинин'} {desc} image={cover?.img?.src}>
@@ -80,30 +105,28 @@ const Card = InfoCard
 				slot="header"
 			/>
 
-			<Cover {cover} width={coverWidth} height={coverHeight} containerClass="article__cover-container" class='article__cover' loading='eager' fetchpriority='high'  />
+			<Cover
+				{cover}
+				width={coverWidth}
+				height={coverHeight}
+				containerClass="article__cover-container"
+				class="article__cover"
+				loading="eager"
+				fetchpriority="high"
+			/>
 		</Hero>
 
 		<ContentList tag="div" class="article__list">
 			<div class="container">
 				<div class="article__inner grid grid--page">
 					<!-- desktop toc -->
-					{
-						needToc && (
-							<Toc class="article__toc article__toc--desktop" list={headings} />
-						)
-					}
+					{needToc && <Toc class="article__toc article__toc--desktop" list={headings} />}
 
 					<ContentList tag="div" class="article__content">
 						<!-- mobile toc -->
 						{
 							needToc && (
-								<ContentSection
-									class="article__toc article__toc--mobile"
-									title="Содержание"
-									icon="§"
-									size="sm"
-									wrapped
-								>
+								<ContentSection class="article__toc article__toc--mobile" title="Содержание" icon="§" size="sm" wrapped>
 									<Toc list={headings} mobile />
 								</ContentSection>
 							)
@@ -116,16 +139,18 @@ const Card = InfoCard
 								{roles.map(role => <Card name={role.name} desc={role.desc} icon={role.icon} />)}
 							</List>
 
-							{team && (
-								<H3>Команда</H3>
-								<List>
-									{
-										team.map(people => (
-											<Card name={people.name} desc={people.desc} image={people.image as ImageMetadata} />
-										))
-									}
-								</List>
-							)}
+							{
+								team && (
+									<>
+										<H3>Команда</H3>
+										<List>
+											{team.map(people => (
+												<Card name={people.name} desc={people.desc} image={people.image as ImageMetadata} />
+											))}
+										</List>
+									</>
+								)
+							}
 
 							<H3>Время работы</H3>
 							<Card name={timeline.period} desc={timeline.status} icon="clock-icon" tag="div" />
@@ -136,30 +161,43 @@ const Card = InfoCard
 
 						{
 							highlights && (
-								<ContentSection title="Хайлайты" size='sm'>
-									{highlightsPrepared.map(highlight => (
+								<ContentSection title="Хайлайты" size="sm">
+									{highlightsPrepared.map(highlight =>
 										highlight.type === 'image' ? (
-											<Image src={highlight.src[0] as unknown as ImageMetadata} alt={highlight.alt} title={highlight.title} />
+											<Image
+												src={highlight.src[0] as unknown as ImageMetadata}
+												alt={highlight.alt}
+												title={highlight.title}
+											/>
 										) : (
-											<Video title={highlight.title} width={1440} height={1000} sources={(highlight.src as string[])} autoplay lazy/>
-										)
-									))}
+											<Video
+												title={highlight.title}
+												width={1440}
+												height={1000}
+												sources={highlight.src as string[]}
+												autoplay
+												lazy
+											/>
+										),
+									)}
 								</ContentSection>
 							)
 						}
 
 						<!-- case sections & pre-result -->
 						{
-							draft && import.meta.env.PROD ? (
-								<ContentPlaceholder data-toc-section>
-									{result && <InfoCard name="Посмотреть сайт" href={result} />}
-									<InfoCard name="Обсудить проект" href="https://t.me/sonniyboii" icon="message-text-icon" />
-								</ContentPlaceholder>
+							draft ? (
+								<>
+									<Fragment set:html={renderedResult} />
+									<ContentPlaceholder data-toc-section>
+										<InfoCard name="Написать в Телеграм" href="https://t.me/sonniyboii" icon="telegram-icon" />
+										<InfoCard name="Написать на почту" href="mailto:sonniy.design@gmail.com" icon="mail-icon" />
+									</ContentPlaceholder>
+								</>
 							) : (
-								<Content components={{ img: Image, h3: H3, a: Link, ol: Ol, Video, Section, Card, List }} />
+								<Content {components} />
 							)
 						}
-
 					</ContentList>
 				</div>
 			</div>
@@ -255,5 +293,4 @@ const Card = InfoCard
 			}
 		}
 	}
-
 </style>
