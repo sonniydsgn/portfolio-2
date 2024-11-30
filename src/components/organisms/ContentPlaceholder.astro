@@ -52,6 +52,8 @@ const { ...props } = Astro.props
 	.content-placeholder__desc {
 		margin-block-end: 24px;
 		max-width: 400px;
+		/* hack for temporary disabling chrome font boosting */
+		max-height: 999999px;
 		text-align: center;
 
 		@media (width <= 880) {

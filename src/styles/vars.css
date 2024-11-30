@@ -57,6 +57,7 @@
 
 	/* tokens */
 	--bg-primary: rgb(255 255 255);
+	--bg-primary-elevate: rgb(251 251 249);
 	--bg-secondary: rgb(247 247 245);
 	--bg-tertiary: rgb(232 232 227);
 	--bg-placeholder: rgb(247 247 245);
@@ -79,7 +80,10 @@
 	--button-secondary-bg: var(--bg-tertiary);
 	--button-secondary-border: var(--border-primary);
 	--button-secondary-text: var(--text-primary-0);
-	--note-bg: var(--bg-secondary);
+	--card-bg: var(--bg-primary);
+	--card-bg-hover: var(--bg-primary-elevate);
+	--card-bg-active: rgb(247 247 245);
+	--note-bg: var(--bg-primary-elevate);
 	--note-text-primary: var(--text-primary-0);
 	--note-text-secondary: var(--text-primary-20);
 }
@@ -91,6 +95,7 @@
 	--bg-elevate: rgb(53 53 49 / 0.9);
 	--bg-elevate-secondary: rgb(75 75 68 / 0.8);
 	--bg-primary: rgb(53 53 49);
+	--bg-primary-elevate: rgb(60 60 55);
 	--bg-secondary: rgb(43 43 39);
 	--bg-tertiary: rgb(75 75 68);
 	--bg-placeholder: rgb(247 247 245);
@@ -113,7 +118,10 @@
 	--button-secondary-bg: var(--bg-elevate-secondary);
 	--button-secondary-border: var(--border-primary);
 	--button-secondary-text: var(--text-primary-0);
-	--note-bg: var(--bg-tertiary);
+	--card-bg: var(--bg-primary);
+	--card-bg-hover: var(--bg-primary-elevate);
+	--card-bg-active: rgb(63 63 58);
+	--note-bg: var(--bg-primary-elevate);
 	--note-text-primary: var(--text-primary-0);
 	--note-text-secondary: var(--text-primary-20);
 }

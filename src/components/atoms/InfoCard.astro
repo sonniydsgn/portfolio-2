@@ -76,6 +76,7 @@ if (type === 'file') {
 		gap: 16px;
 		border: 1px solid var(--border-primary);
 		border-radius: var(--br-lg);
+		background-color: var(--card-bg);
 		padding: 24px 20px;
 		font-size: calc(var(--font-primary) - 1px);
 		font-family: var(--ff-secondary);
@@ -93,7 +94,6 @@ if (type === 'file') {
 
 	.info-card--link {
 		transition: background-color var(--tr-primary);
-		background-color: var(--bg-secondary);
 		overflow-x: hidden;
 
 		.info-card__desc {
@@ -104,8 +104,12 @@ if (type === 'file') {
 
 		@media (hover) {
 			&:hover {
-				background-color: transparent;
+				background-color: var(--card-bg-hover);
 			}
+		}
+
+		&:active {
+			background-color: var(--card-bg-active);
 		}
 	}
 
