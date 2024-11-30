@@ -18,43 +18,46 @@ const h265 = preparedSources?.[2]
 
 <script>
 	const videoPlayers = document.querySelectorAll('[data-videoplayer]')
-	const lazyVideos = document.querySelectorAll('[data-lazy-video] video')
+	const lazyVideos = document.querySelectorAll('[data-videoplayer-lazy] video')
 
 	if (videoPlayers) {
 		videoPlayers.forEach((player: HTMLDivElement) => {
 			const video = player.querySelector('video') as HTMLVideoElement
-			const playButton = player?.querySelector('.btn__play') as HTMLButtonElement
+			const btn = player?.querySelector('[data-videoplayer-btn]') as HTMLButtonElement
 
 			video.addEventListener('waiting', () => showSpinner(player))
 			video.addEventListener('playing', () => removeSpinner(player))
 
-			if (playButton) {
-				video.addEventListener('play', () => togglePlay(playButton, player))
-				video.addEventListener('pause', () => togglePause(playButton, player))
-				video.addEventListener('ended', () => togglePause(playButton, player))
+			if (btn) {
+				video.addEventListener('play', () => togglePlay(player, btn))
+				video.addEventListener('pause', () => togglePause(player, btn))
+				video.addEventListener('ended', () => togglePause(player, btn))
 
-				playButton.addEventListener('click', () => {
-					if (video.paused) {
-						video.play()
-					} else {
-						video.pause()
-
-						setTimeout(() => {
-							player.dataset.videoplayer = 'forced-paused'
-						}, 10)
-					}
-				})
+				video.addEventListener('click', () => changeStatus(player, video))
+				btn.addEventListener('click', () => changeStatus(player, video))
 			}
 		})
 
-		const togglePlay = (btn: HTMLButtonElement, player: HTMLDivElement) => {
+		const changeStatus = (player: HTMLDivElement, video: HTMLVideoElement) => {
+			if (video.paused) {
+				video.play()
+			} else {
+				video.pause()
+
+				setTimeout(() => {
+					player.dataset.videoplayer = 'forced-paused'
+				}, 10)
+			}
+		}
+
+		const togglePlay = (player: HTMLDivElement, btn: HTMLButtonElement) => {
 			player.dataset.videoplayer = 'played'
 			btn.setAttribute('aria-label', 'Поставить видео на паузу')
 
 			removeSpinner(player)
 		}
 
-		const togglePause = (btn: HTMLButtonElement, player: HTMLDivElement) => {
+		const togglePause = (player: HTMLDivElement, btn: HTMLButtonElement) => {
 			player.dataset.videoplayer = 'paused'
 			btn.setAttribute('aria-label', 'Включить видео')
 
@@ -119,7 +122,7 @@ const h265 = preparedSources?.[2]
 <div
 	class="video-container"
 	data-videoplayer={lazy ? 'paused' : paused ? 'forced-paused' : 'played'}
-	data-lazy-video={lazy}
+	data-videoplayer-lazy={lazy}
 >
 	<video
 		{poster}
@@ -143,8 +146,10 @@ const h265 = preparedSources?.[2]
 	{
 		!controls && (
 			<ButtonLink
-				class="btn btn--secondary btn--only-icon btn__play"
+				class="btn btn--secondary btn--only-icon video-container__play"
 				aria-label={paused || lazy ? 'Включить видео' : 'Поставить видео на паузу'}
+				aria-live="polite"
+				data-videoplayer-btn
 			>
 				<Icon name="play-icon" class="icon icon--play" aria-hidden="true" />
 				<Icon name="pause-icon" class="icon icon--pause" aria-hidden="true" />
@@ -185,7 +190,15 @@ const h265 = preparedSources?.[2]
 		}
 	}
 
-	.btn__play {
+	video {
+		display: flex;
+		cursor: pointer;
+		border-radius: var(--br-md);
+		background-color: var(--bg-placeholder);
+		width: 100%;
+	}
+
+	.video-container__play {
 		--margin: 16px;
 
 		position: absolute;
@@ -203,12 +216,5 @@ const h265 = preparedSources?.[2]
 
 			padding: 16px !important;
 		}
-	}
-
-	video {
-		display: flex;
-		border-radius: var(--br-md);
-		background-color: var(--bg-placeholder);
-		width: 100%;
 	}
 </style>

@@ -9,27 +9,36 @@ import videoWEBM from '@/assets/about/about_video_vp9.webm'
 ---
 
 <script>
-	const videoPlayer = document.querySelector('[data-about-player]') as HTMLDivElement
-	if (videoPlayer) {
-		const video = videoPlayer.querySelector('[data-about-video]') as HTMLVideoElement
-		const videoButton = videoPlayer.querySelector('[data-about-btn]') as HTMLButtonElement
-		const playButton = videoPlayer.querySelector('[data-about-play]') as HTMLButtonElement
+	const player = document.querySelector('[data-videoplayer]') as HTMLDivElement
+	if (player) {
+		const video = player.querySelector('video') as HTMLVideoElement
+		const btn = player.querySelector('[data-videoplayer-btn]') as HTMLButtonElement
 
-		const togglePlay = (player: HTMLDivElement) => {
-			playButton.classList.add('about-card__play--hidden')
-			videoButton.setAttribute('aria-label', 'Поставить видео на паузу')
-
-			removeSpinner(player)
+		const changeStatus = () => {
+			if (video.paused) {
+				video.play()
+			} else {
+				video.pause()
+			}
 		}
 
-		const togglePause = (player: HTMLDivElement) => {
-			playButton.classList.remove('about-card__play--hidden')
-			videoButton.setAttribute('aria-label', 'Включить видео')
+		const togglePlay = () => {
+			btn.classList.add('about-card__play--hidden')
+			btn.setAttribute('aria-label', 'Поставить видео на паузу')
+			player.dataset.videoplayer = 'played'
 
-			removeSpinner(player)
+			removeSpinner()
 		}
 
-		const showSpinner = (player: HTMLDivElement) => {
+		const togglePause = () => {
+			btn.classList.remove('about-card__play--hidden')
+			btn.setAttribute('aria-label', 'Включить видео')
+			player.dataset.videoplayer = 'paused'
+
+			removeSpinner()
+		}
+
+		const showSpinner = () => {
 			const spinner = player.querySelector('.spinner')
 			if (spinner) return
 
@@ -38,48 +47,38 @@ import videoWEBM from '@/assets/about/about_video_vp9.webm'
 			player.appendChild(newSpinner)
 		}
 
-		const removeSpinner = (player: HTMLDivElement) => {
+		const removeSpinner = () => {
 			const spinner = player.querySelector('.spinner')
 			if (spinner) spinner.remove()
 		}
 
-		videoButton.addEventListener('click', () => {
-			if (video.paused) video.play()
-			else video.pause()
-		})
+		video.addEventListener('play', togglePlay)
+		video.addEventListener('pause', togglePause)
+		video.addEventListener('ended', togglePause)
+		video.addEventListener('waiting', showSpinner)
+		video.addEventListener('playing', removeSpinner)
 
-		video.addEventListener('play', () => togglePlay(videoPlayer))
-		video.addEventListener('pause', () => togglePause(videoPlayer))
-		video.addEventListener('ended', () => togglePause(videoPlayer))
-		video.addEventListener('waiting', () => showSpinner(videoPlayer))
-		video.addEventListener('playing', () => removeSpinner(videoPlayer))
+		btn.addEventListener('click', changeStatus)
+		video.addEventListener('click', changeStatus)
 	}
 </script>
 
 <div class="about-card">
-	<figure class="about-card__video-player" data-about-player>
-		<video
-			class="about-card__video"
-			width="100%"
-			height="100%"
-			poster={videoCover.src}
-			preload="metadata"
-			playsinline
-			data-about-video
-		>
+	<figure class="about-card__videoplayer" data-videoplayer="paused">
+		<video width="100%" height="100%" poster={videoCover.src} preload="metadata" playsinline>
 			<source src={videoH265} type="video/mp4" />
 			<source src={videoMP4} type="video/mp4" />
 			<source src={videoWEBM} type="video/webm" />
 			Ваш браузер не поддерживает встроенные видео :(
 		</video>
-		<ButtonLink class="about-card__btn" aria-label="Включить видео" aria-live="polite" data-about-btn />
 		<ButtonLink
 			class="btn btn--secondary btn--only-icon about-card__play"
-			aria-hidden="true"
-			tabindex="-1"
-			data-about-play
+			aria-label="Включить видео"
+			aria-live="polite"
+			data-videoplayer-btn
 		>
-			<Icon name="play-icon" class="icon" />
+			<Icon name="play-icon" class="icon icon--play" aria-hidden="true" />
+			<Icon name="pause-icon" class="icon icon--pause" aria-hidden="true" />
 		</ButtonLink>
 		<figcaption class="visually-hidden">Видео обо мне</figcaption>
 	</figure>
@@ -103,31 +102,46 @@ import videoWEBM from '@/assets/about/about_video_vp9.webm'
 		}
 	}
 
-	.about-card__video-player {
+	.about-card__videoplayer {
 		display: flex;
 		position: relative;
 		justify-content: center;
 		align-items: center;
 		transition: background-color var(--tr-primary);
-	}
 
-	.about-card__video {
-		--size: 250px;
+		&[data-videoplayer='paused'] .icon--play {
+			display: block;
+		}
 
-		border-radius: 100%;
-		background-color: var(--bg-placeholder);
-		aspect-ratio: 1 / 1;
-		width: var(--size);
-		pointer-events: none;
-
-		@media (width <= 880) {
-			--size: 100%;
+		&[data-videoplayer='played'] .icon--pause {
+			display: block;
 		}
 	}
 
-	.about-card__btn {
+	video {
+		--size: 250px;
+
+		cursor: pointer;
+		border-radius: 100%;
+		background-color: var(--bg-placeholder);
+		aspect-ratio: 1 / 1;
+		width: 100%;
+		max-width: var(--size);
+
+		@media (width <= 880) {
+			--size: 320px;
+		}
+	}
+
+	.about-card__play {
 		position: absolute;
-		inset: 0;
+		right: 0;
+		bottom: 0;
+		transition: transform var(--tr-bounce);
+
+		.icon {
+			display: none;
+		}
 
 		@media (hover) {
 			&:hover + .about-card__play {
@@ -139,28 +153,6 @@ import videoWEBM from '@/assets/about/about_video_vp9.webm'
 			&:hover + .about-card__play {
 				transform: scale(1.15);
 			}
-		}
-	}
-
-	.about-card__play {
-		position: absolute;
-		right: 0;
-		bottom: 0;
-		transition:
-			transform var(--tr-bounce),
-			scale var(--tr-bounce);
-		pointer-events: none;
-
-		&.about-card__play--hidden {
-			scale: 0;
-			transition:
-				transform var(--tr-bounce),
-				scale var(--tr-sm);
-		}
-
-		@media (width <= 880) {
-			right: unset;
-			bottom: unset;
 		}
 	}
 
