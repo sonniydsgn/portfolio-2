@@ -97,7 +97,15 @@ if (type === 'file') {
 		overflow-x: hidden;
 
 		.info-card__desc {
+			transition:
+				text-decoration-color var(--tr-sm),
+				opacity var(--tr-primary);
 			overflow-x: hidden;
+			text-decoration: underline;
+			text-decoration-color: var(--border-primary);
+			text-decoration-thickness: 1px;
+			text-underline-position: auto;
+			text-underline-offset: 0.2em;
 			text-overflow: ellipsis;
 			white-space: nowrap;
 		}
@@ -105,6 +113,10 @@ if (type === 'file') {
 		@media (hover) {
 			&:hover {
 				background-color: var(--card-bg-hover);
+
+				.info-card__desc {
+					text-decoration-color: transparent;
+				}
 			}
 		}
 
