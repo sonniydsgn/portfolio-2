@@ -31,7 +31,7 @@ const projects = async () => {
 			}
 		})
 		.toSorted((a, b) => {
-			return b.data.year - a.data.year
+			return a.data.order - b.data.order
 		})
 }
 
