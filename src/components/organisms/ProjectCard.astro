@@ -151,12 +151,14 @@ const coverHeight = 598
 
 	.project-card__description {
 		margin-block-end: 16px;
-		max-width: 580px;
+		max-width: 560px;
 		/* hack for temporary disabling chrome font boosting */
 		max-height: 999999px;
+		letter-spacing: -0.01em;
 
 		@media (width <= 880) {
 			max-width: 520px;
+			letter-spacing: unset;
 		}
 	}
 

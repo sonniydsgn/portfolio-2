@@ -55,11 +55,16 @@
 		max-height: 999999px;
 	}
 
-	& > p {
+	& > p,
+	& > ul:not(.list-reset),
+	& > ol {
 		max-width: 95%;
+		line-height: 1.5;
+		letter-spacing: -0.01em;
 
 		@media (width <= 880) {
 			max-width: 100%;
+			letter-spacing: unset;
 		}
 	}
 
