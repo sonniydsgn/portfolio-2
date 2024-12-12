@@ -20,9 +20,9 @@ const { title, desc, image } = Astro.props
 		<div class="site-container">
 			<SkipLink />
 			<Header>
-				<a href="/" class="btn-reset btn btn--primary btn--icon" data-btn-back>
+				<a href="/" class="btn-reset btn btn--primary btn--icon" aria-label="Вернуться на главную" data-btn-back>
 					<Icon class="icon icon--16" name="arrow-left-icon" aria-hidden="true" />
-					Назад
+					<span aria-hidden="true">На главную</span>
 				</a>
 			</Header>
 			<div class="project">
