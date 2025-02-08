@@ -77,7 +77,6 @@
 	height: var(--size);
 	fill: currentcolor;
 	transition:
-		color var(--tr-primary),
 		opacity var(--tr-primary),
 		transform var(--tr-bounce);
 	pointer-events: none;
