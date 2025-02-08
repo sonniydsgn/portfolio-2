@@ -30,6 +30,8 @@
 	& > figure + h3,
 	& > .video-container + h3,
 	& > .note + h3 {
+		margin-block-start: 40px;
+
 		@media (width <= 880) {
 			margin-block-start: 32px;
 		}
