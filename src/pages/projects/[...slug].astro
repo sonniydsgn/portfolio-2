@@ -143,11 +143,15 @@ const renderedResult = doc.querySelector('#rezultaty')?.outerHTML
 								team && (
 									<>
 										<H3>Команда</H3>
-										<List>
-											{team.map(people => (
-												<Card name={people.name} desc={people.desc} image={people.image as ImageMetadata} />
-											))}
-										</List>
+										{team.length > 1 ? (
+											<List>
+												{team.map(people => (
+													<Card name={people.name} desc={people.desc} image={people.image as ImageMetadata} />
+												))}
+											</List>
+										) : (
+											<Card name={team[0].name} desc={team[0].desc} image={team[0].image as ImageMetadata} tag="div" />
+										)}
 									</>
 								)
 							}
