@@ -77,9 +77,9 @@
 	height: var(--size);
 	fill: currentcolor;
 	transition:
-		color var(--tr-primary) ease,
-		opacity var(--tr-primary) ease,
-		transform var(--tr-primary) ease;
+		color var(--tr-primary),
+		opacity var(--tr-primary),
+		transform var(--tr-bounce);
 	pointer-events: none;
 
 	&.icon--16 {
