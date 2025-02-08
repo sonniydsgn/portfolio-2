@@ -25,6 +25,7 @@ const { ...props } = Astro.props
 		padding: 48px 24px;
 
 		@media (width <= 880) {
+			align-items: start;
 			padding: 32px 16px;
 		}
 	}
@@ -46,6 +47,7 @@ const { ...props } = Astro.props
 
 		@media (width <= 880) {
 			margin-block-end: 8px;
+			text-align: left;
 		}
 	}
 
@@ -58,10 +60,19 @@ const { ...props } = Astro.props
 
 		@media (width <= 880) {
 			margin-block-end: 20px;
+			text-align: left;
 		}
 	}
 
 	.content-placeholder__list {
-		width: 100%;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		column-gap: 16px;
+		justify-content: center;
+
+		@media (width <= 880) {
+			grid-template-columns: 1fr;
+			width: 100%;
+		}
 	}
 </style>

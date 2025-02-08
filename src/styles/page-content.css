@@ -11,15 +11,15 @@
 
 	& > h3 + .info-list,
 	& > h3 + .info-card {
-		margin-block-start: 12px;
+		margin-block-start: 16px;
 
 		@media (width <= 880) {
-			margin-block-start: 8px;
+			margin-block-start: 12px;
 		}
 	}
 
 	& > * + h3 {
-		margin-block-start: 32px;
+		margin-block-start: 40px;
 
 		@media (width <= 880) {
 			margin-block-start: 24px;
@@ -30,8 +30,6 @@
 	& > figure + h3,
 	& > .video-container + h3,
 	& > .note + h3 {
-		margin-block-start: 40px;
-
 		@media (width <= 880) {
 			margin-block-start: 32px;
 		}
