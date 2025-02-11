@@ -138,9 +138,7 @@ const h265 = preparedSources?.[2]
 		{...props}
 	>
 		<slot />
-		{/* добавил для h265 видео подпись кодека, чтобы исправить зависания в firefox-based браузерах */}
-		{/* https://github.com/sonniydsgn/portfolio-2/issues/9 */}
-		{h265 && <source src={h265} type="video/mp4; codecs=hev1.1.6.L120.B0" />}
+		{h265 && <source src={h265} type="video/mp4" />}
 		{h264 && <source src={h264} type="video/mp4" />}
 		Ваш браузер не поддерживает встроенные видео :(
 	</video>

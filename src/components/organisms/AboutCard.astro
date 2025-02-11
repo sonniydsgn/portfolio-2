@@ -66,9 +66,7 @@ import videoWEBM from '@/assets/about/about_video_vp9.webm'
 <div class="about-card">
 	<figure class="about-card__videoplayer" data-videoplayer="paused">
 		<video width="100%" height="100%" poster={videoCover.src} preload="metadata" playsinline>
-			{/* добавил для h265 видео подпись кодека, чтобы исправить зависания в firefox-based браузерах */}
-			{/* https://github.com/sonniydsgn/portfolio-2/issues/9 */}
-			<source src={videoH265} type="video/mp4; codecs=hev1.1.6.L120.B0" />
+			<source src={videoH265} type="video/mp4" />
 			<source src={videoMP4} type="video/mp4" />
 			<source src={videoWEBM} type="video/webm" />
 			Ваш браузер не поддерживает встроенные видео :(

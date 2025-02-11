@@ -32,9 +32,7 @@ const { cover, width, height, loading, fetchpriority, containerClass, class: cla
 				class:list={['cover', className]}
 				{...props}
 			>
-				{/* добавил для h265 видео подпись кодека, чтобы исправить зависания в firefox-based браузерах */}
-				{/* https://github.com/sonniydsgn/portfolio-2/issues/9 */}
-				<source src={cover.h265} type="video/mp4; codecs=hev1.1.6.L120.B0" />
+				<source src={cover.h265} type="video/mp4" />
 				<source src={cover.mp4} type="video/mp4" />
 				Ваш браузер не поддерживает встроенные видео :(
 			</video>
