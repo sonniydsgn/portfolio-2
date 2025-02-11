@@ -25,14 +25,16 @@ const { cover, width, height, loading, fetchpriority, containerClass, class: cla
 				muted
 				playsinline
 				tabindex="-1"
-				width={width}
-				height={height}
+				{width}
+				{height}
 				poster={cover.img.src}
 				style={'aspect-ratio: ' + width + '/' + height}
 				class:list={['cover', className]}
 				{...props}
 			>
-				<source src={cover.h265} type="video/mp4" />
+				{/* добавил для h265 видео подпись кодека, чтобы исправить зависания в firefox-based браузерах */}
+				{/* https://github.com/sonniydsgn/portfolio-2/issues/9 */}
+				<source src={cover.h265} type="video/mp4; codecs=hev1.1.6.L120.B0" />
 				<source src={cover.mp4} type="video/mp4" />
 				Ваш браузер не поддерживает встроенные видео :(
 			</video>
@@ -43,8 +45,8 @@ const { cover, width, height, loading, fetchpriority, containerClass, class: cla
 				{loading}
 				{fetchpriority}
 				formats={['avif', 'webp']}
-				width={width}
-				height={height}
+				{width}
+				{height}
 				class:list={['cover', className]}
 				{...props}
 			/>
