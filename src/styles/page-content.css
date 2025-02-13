@@ -85,6 +85,11 @@
 		}
 	}
 
+	/* медиа-материалы */
+	& > picture img {
+		width: 100%;
+	}
+
 	& > picture + *,
 	& > .video-container + *,
 	& > figure + * {
@@ -105,7 +110,6 @@
 		}
 	}
 
-	/* медиа-материалы */
 	& > picture + picture,
 	& > picture + .video-container,
 	& > picture + figure,
