@@ -1,14 +1,16 @@
 ---
-import { Icon } from 'astro-icon/components'
-import ButtonLink from '../atoms/ButtonLink.astro'
+import { Picture } from 'astro:assets'
+import Avatar from '@/assets/avatar/me-large.jpg'
+// import { Icon } from 'astro-icon/components'
+// import ButtonLink from '../atoms/ButtonLink.astro'
 
-import videoMP4 from '@/assets/about/about_video.mp4'
-import videoCover from '@/assets/about/about_video_cover.jpg'
-import videoH265 from '@/assets/about/about_video_h265.mp4'
-import videoWEBM from '@/assets/about/about_video_vp9.webm'
+// import videoMP4 from '@/assets/about/about_video.mp4'
+// import videoH265 from '@/assets/about/about_video_h265.mp4'
+// import videoWEBM from '@/assets/about/about_video_vp9.webm'
+// import videoCover from '@/assets/about/about_video_cover.jpg'
 ---
 
-<script>
+<!-- <script>
 	const player = document.querySelector('[data-videoplayer]') as HTMLDivElement
 	if (player) {
 		const video = player.querySelector('video') as HTMLVideoElement
@@ -61,10 +63,19 @@ import videoWEBM from '@/assets/about/about_video_vp9.webm'
 		btn.addEventListener('click', changeStatus)
 		video.addEventListener('click', changeStatus)
 	}
-</script>
+</script> -->
 
 <div class="about-card">
-	<figure class="about-card__videoplayer" data-videoplayer="paused">
+	<Picture
+		class='about-card__avatar'
+		src={Avatar}
+		alt="Кудрявый молодой человек с улыбкой на лице"
+		width="250"
+		height="250"
+		loading="eager"
+		formats={['avif', 'webp']}
+	/>
+	<!-- <figure class="about-card__videoplayer" data-videoplayer="paused">
 		<video width="100%" height="100%" poster={videoCover.src} preload="metadata" playsinline>
 			<source src={videoH265} type="video/mp4" />
 			<source src={videoMP4} type="video/mp4" />
@@ -81,7 +92,7 @@ import videoWEBM from '@/assets/about/about_video_vp9.webm'
 			<Icon name="pause-icon" class="icon icon--pause" aria-hidden="true" />
 		</ButtonLink>
 		<figcaption class="visually-hidden">Видео обо мне</figcaption>
-	</figure>
+	</figure> -->
 	<div class="about-card__content">
 		<h3 class="text-h3 about-card__title">Лёша, 20 лет</h3>
 		<p class="about-card__desc">Проактивный и быстро обучаюсь новому, обожаю системность. Живу в Перми, Россия</p>
@@ -102,7 +113,7 @@ import videoWEBM from '@/assets/about/about_video_vp9.webm'
 		}
 	}
 
-	.about-card__videoplayer {
+	/* .about-card__videoplayer {
 		display: flex;
 		position: relative;
 		justify-content: center;
@@ -116,9 +127,9 @@ import videoWEBM from '@/assets/about/about_video_vp9.webm'
 		&[data-videoplayer='played'] .icon--pause {
 			display: block;
 		}
-	}
+	} */
 
-	video {
+	/* video {
 		--size: 250px;
 
 		cursor: pointer;
@@ -127,6 +138,17 @@ import videoWEBM from '@/assets/about/about_video_vp9.webm'
 		aspect-ratio: 1 / 1;
 		width: 100%;
 		max-width: var(--size);
+
+		@media (width <= 880) {
+			--size: 320px;
+		}
+	} */
+
+	.about-card__avatar {
+		--size: 250px;
+
+		border-radius: 100%;
+		aspect-ratio: 1 / 1;
 
 		@media (width <= 880) {
 			--size: 320px;
