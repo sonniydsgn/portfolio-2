@@ -52,7 +52,7 @@
 }
 
 /* COLORS */
-@mixin light {
+:root[data-theme='light'] {
 	color-scheme: light;
 
 	/* tokens */
@@ -83,9 +83,19 @@
 	--note-bg: var(--bg-primary-elevate);
 	--note-text-primary: var(--text-primary-0);
 	--note-text-secondary: var(--text-primary-20);
+
+	img,
+	video {
+		filter: none;
+	}
+
+	[data-theme-icon='light'] {
+		display: block;
+		color: var(--button-primary-text-primary);
+	}
 }
 
-@mixin dark {
+:root[data-theme='dark'] {
 	color-scheme: dark;
 
 	/* tokens */
@@ -118,24 +128,6 @@
 	--note-bg: var(--bg-primary-elevate);
 	--note-text-primary: var(--text-primary-0);
 	--note-text-secondary: var(--text-primary-20);
-}
-
-:root[data-theme='light'] {
-	@apply light;
-
-	img,
-	video {
-		filter: none;
-	}
-
-	[data-theme-icon='light'] {
-		display: block;
-		color: var(--button-primary-text-primary);
-	}
-}
-
-:root[data-theme='dark'] {
-	@apply dark;
 
 	img,
 	video {
@@ -149,7 +141,38 @@
 }
 
 @media (prefers-color-scheme: light) {
-	@apply light;
+	:root {
+		color-scheme: light;
+
+		/* tokens */
+		--bg-primary: rgb(255 255 255);
+		--bg-primary-elevate: rgb(251 251 249);
+		--bg-secondary: rgb(247 247 245);
+		--bg-tertiary: rgb(232 232 227);
+		--bg-placeholder: rgb(247 247 245);
+		--border-accent: rgb(54 54 49);
+		--border-primary: rgb(219 219 215);
+		--border-secondary: rgb(232 232 227);
+		--text-primary-0: rgb(54 54 49);
+		--text-primary-20: rgb(102 102 97);
+		--text-secondary-0: rgb(131 131 117);
+		--text-secondary-20: rgb(163 163 159);
+		--text-tertiary: rgb(204 204 199);
+
+		/* aliases */
+		--button-primary-blur: unset;
+		--button-primary-bg: var(--bg-primary);
+		--button-primary-border: var(--border-secondary);
+		--button-primary-text-primary: var(--text-primary-0);
+		--button-primary-text-secondary: var(--text-tertiary);
+		--button-secondary-blur: unset;
+		--button-secondary-bg: var(--bg-tertiary);
+		--button-secondary-border: var(--border-primary);
+		--button-secondary-text: var(--text-primary-0);
+		--note-bg: var(--bg-primary-elevate);
+		--note-text-primary: var(--text-primary-0);
+		--note-text-secondary: var(--text-primary-20);
+	}
 
 	img,
 	video {
@@ -163,7 +186,40 @@
 }
 
 @media (prefers-color-scheme: dark) {
-	@apply dark;
+	:root {
+		color-scheme: dark;
+
+		/* tokens */
+		--bg-elevate: rgb(53 53 49 / 0.9);
+		--bg-elevate-secondary: rgb(75 75 68 / 0.8);
+		--bg-primary: rgb(53 53 49);
+		--bg-primary-elevate: rgb(60 60 55);
+		--bg-secondary: rgb(43 43 39);
+		--bg-tertiary: rgb(75 75 68);
+		--bg-placeholder: rgb(247 247 245);
+		--border-accent: rgb(32 32 29);
+		--border-primary: rgb(93 93 85);
+		--border-secondary: rgb(75 75 68);
+		--text-primary-0: rgb(231 231 228);
+		--text-primary-20: rgb(211 211 207);
+		--text-secondary-0: rgb(171 171 160);
+		--text-secondary-20: rgb(125 125 120);
+		--text-tertiary: rgb(115 115 105);
+
+		/* aliases */
+		--button-primary-blur: var(--blur-sm);
+		--button-primary-bg: var(--bg-elevate);
+		--button-primary-border: var(--border-secondary);
+		--button-primary-text-primary: var(--text-primary-0);
+		--button-primary-text-secondary: var(--text-secondary-0);
+		--button-secondary-blur: var(--blur-sm);
+		--button-secondary-bg: var(--bg-elevate-secondary);
+		--button-secondary-border: var(--border-primary);
+		--button-secondary-text: var(--text-primary-0);
+		--note-bg: var(--bg-primary-elevate);
+		--note-text-primary: var(--text-primary-0);
+		--note-text-secondary: var(--text-primary-20);
+	}
 
 	img,
 	video {
