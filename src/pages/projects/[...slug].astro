@@ -174,14 +174,7 @@ const renderedResult = doc.querySelector('#rezultaty')?.outerHTML
 												title={highlight.title}
 											/>
 										) : (
-											<Video
-												title={highlight.title}
-												width={1440}
-												height={1000}
-												sources={highlight.src as string[]}
-												autoplay
-												lazy
-											/>
+											<Video title={highlight.title} width={1440} height={1000} sources={highlight.src as string[]} />
 										),
 									)}
 								</ContentSection>
