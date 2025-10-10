@@ -17,6 +17,7 @@ const { href, active = false, class: className, ...rest } = Astro.props
 
 <style>
 	.link-item {
+		--link-stroke-color: var(--border-primary);
 		--padding-inline: 6px;
 		--padding-block: 4px;
 		--link-opacity: 0.6;
@@ -28,6 +29,8 @@ const { href, active = false, class: className, ...rest } = Astro.props
 		border-radius: var(--br-primary);
 
 		.link {
+			--stroke-color: var(--link-stroke-color);
+
 			padding-inline: var(--padding-inline);
 			padding-block: var(--padding-block);
 			width: 100%;
