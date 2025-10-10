@@ -15,7 +15,6 @@ const projectsCollection = defineCollection({
 			additional_image: z
 				.object({
 					img: image(),
-					alt: z.string(),
 				})
 				.optional(),
 			color: z.string(),

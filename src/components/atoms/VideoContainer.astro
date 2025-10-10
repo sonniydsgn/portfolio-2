@@ -25,8 +25,10 @@ const h265 = preparedSources?.[2]
 			const video = player.querySelector('video') as HTMLVideoElement
 			const btn = player?.querySelector('[data-videoplayer-btn]') as HTMLButtonElement
 
-			video.addEventListener('waiting', () => showSpinner(player))
-			video.addEventListener('playing', () => removeSpinner(player))
+			if (!video.controls) {
+				video.addEventListener('waiting', () => showSpinner(player))
+				video.addEventListener('playing', () => removeSpinner(player))
+			}
 
 			if (btn) {
 				video.addEventListener('play', () => togglePlay(player, btn))
@@ -65,6 +67,9 @@ const h265 = preparedSources?.[2]
 		}
 
 		const showSpinner = (player: HTMLDivElement) => {
+			const video = player.querySelector('video')
+			if (video.controls) return
+
 			const spinner = player.querySelector('.spinner')
 			if (spinner) return
 
