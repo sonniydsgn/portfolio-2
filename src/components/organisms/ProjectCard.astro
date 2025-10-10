@@ -21,11 +21,12 @@ const coverHeight = 598
 <article class="project-card" style={'--cover-color: ' + '#' + color}>
 	<Cover
 		{cover}
+		order={project.data?.order}
 		width={coverWidth}
 		height={coverHeight}
 		containerClass="project-card__cover-container"
 		class="project-card__cover"
-		loading="eager"
+		loading={project.data.order === 1 ? 'eager' : 'lazy'}
 		fetchpriority="high"
 	/>
 
@@ -38,6 +39,7 @@ const coverHeight = 598
 				formats={['avif', 'webp']}
 				width={additional_image.img.width}
 				height={additional_image.img.height}
+				loading={project.data.order === 1 ? 'eager' : 'lazy'}
 			/>
 		)
 	}

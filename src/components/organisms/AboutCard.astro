@@ -1,6 +1,6 @@
 ---
-import { Picture } from 'astro:assets'
 import Avatar from '@/assets/avatar/me-large.jpg'
+import { Picture } from 'astro:assets'
 // import { Icon } from 'astro-icon/components'
 // import ButtonLink from '../atoms/ButtonLink.astro'
 
@@ -64,15 +64,15 @@ import Avatar from '@/assets/avatar/me-large.jpg'
 		video.addEventListener('click', changeStatus)
 	}
 </script> -->
-
 <div class="about-card">
 	<Picture
-		class='about-card__avatar'
+		class="about-card__avatar"
 		src={Avatar}
 		alt="Кудрявый молодой человек с улыбкой на лице"
 		width="250"
 		height="250"
 		loading="eager"
+		fetchpriority="high"
 		formats={['avif', 'webp']}
 	/>
 	<!-- <figure class="about-card__videoplayer" data-videoplayer="paused">
